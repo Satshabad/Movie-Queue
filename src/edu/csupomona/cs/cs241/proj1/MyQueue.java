@@ -60,7 +60,7 @@ public class MyQueue<E> implements Queue<E>
     * @return whether the item has  been added to the queue or not
     */
    public boolean enqueue(E item){
-      if ((tail + 1) % size == head){
+      if (isFull()){
          return false;
       }   
       tail = (tail + 1) % size;
@@ -78,7 +78,7 @@ public class MyQueue<E> implements Queue<E>
     * @return the item removed from the queue or null if the queue is empty
     */
    public E dequeue(){
-      if (head == tail){
+      if (isEmpty()){
          return null;
       }
       head = (head +1) % size;
@@ -107,15 +107,6 @@ public class MyQueue<E> implements Queue<E>
       return (tail +1) % size == head;
    }
    
-   /**
-    * Sets the size of the queue to a new size
-    * 
-    * @pre The queue is empty 
-    * @post the size has been set to the new size
-    * @param newSize the new size to make the queue
-    */
-   protected void setSize(int newSize){
-      if (head == tail)
-      size = newSize;
-   }
+   
+   
 }

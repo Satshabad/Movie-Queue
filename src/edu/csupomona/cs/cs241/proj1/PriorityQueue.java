@@ -18,14 +18,15 @@ package edu.csupomona.cs.cs241.proj1;
 public class PriorityQueue<E>
 {
    private MyQueue<E> array[];
+   private int priorities;
    
    @SuppressWarnings("unchecked")
    public PriorityQueue(int priorities, int size)
    {
-      array = (MyQueue<E>[]) new Object[priorities];
+      array = (MyQueue<E>[]) new MyQueue[priorities];
       for (int i=0; i < array.length; i++){
-         array[i] = (MyQueue<E>) new Object();
-         array[i].setSize(size);
+         array[i] = (MyQueue<E>) new MyQueue(size);
+         this.priorities = priorities;
       }
    }    
    
@@ -40,8 +41,20 @@ public class PriorityQueue<E>
 
    public E dequeue()
    {
-      // TODO Auto-generated method stub
+      E  temp;
+      for(int i=0; i < array.length; i++){
+        if ((temp = array[i].dequeue()) != null)
+           return temp;
+      }
       return null;
    }
-
+   
+   public boolean isEmpty(){
+      for(int i=0; i < array.length; i++){
+         if (!array[i].isEmpty()){
+            return false;
+         }
+      }
+      return true;
+   } 
 }
