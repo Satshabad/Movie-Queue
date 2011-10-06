@@ -1,0 +1,299 @@
+Citizen Kane
+Drama
+Orson Welles
+Joseph Cotten
+Dorothy Comingore
+
+Casablanca
+Drama
+Humphrey Bogart
+Ingrid Bergman
+Paul Henreid
+
+The Godfather
+Crime
+Marlon Brando
+Al Pacino
+James Caan
+
+Gone with the Wind
+Drama
+Clark Gable
+Vivien Leigh
+Leslie Howard
+
+Lawrence of Arabia
+Drama
+Peter O'Toole
+Alec Guinness
+Anthony Quinn
+
+The Wizard of Oz
+Musical
+Judy Garland
+Frank Morgan
+Ray Bolger
+
+The Graduate
+Comedy
+Anne Bancroft
+Dustin Hoffman
+Katharine Ross
+
+On the Waterfront
+Drama
+Marlon Brando
+Karl Malden
+Lee J. Cobb
+
+Schindler's List
+Drama
+Liam Neeson
+Ben Kingsley
+Ralph Fiennes
+
+Singin' in the Rain
+Musical
+Gene Kelly
+Donald O'Connor
+Debbie Reynolds
+
+It's a Wonderful Life
+Comedy
+James Stewart
+Donna Reed
+Lionel Barrymore
+
+Sunset Boulevard
+Film Noir
+William Holden
+Gloria Swanson
+Erich von Stroheim
+
+The Bridge on the River Kwai
+War
+William Holden
+Alec Guinness
+Jack Hawkins
+
+Some Like It Hot
+Comedy
+Marilyn Monroe
+Tony Curtis
+
+Star Wars Episode IV: A New Hope
+Action
+Mark Hamill
+Harrison Ford
+Carrie Fisher
+
+All About Eve
+drama
+Bette Davis
+Anne Baxter
+George Sanders
+
+The African Queen
+Adventure
+Humphrey Bogart
+Katharine Hepburn
+Robert Morley
+
+Psycho
+Thriller
+Anthony Perkins
+Vera Miles
+John Gavin
+
+The General
+Comedy
+Al Boasberg
+Clyde Bruckman
+Buster Keaton
+
+Chinatown
+Film Noir
+Jack Nicholson
+Faye Dunaway
+John Huston
+
+One Flew Over the Cuckoo's Nest
+Drama
+Jack Nicholson
+Louise Fletcher
+William Redfield
+Jack Lemmon
+
+The Grapes of Wrath
+Drama
+Henry Fonda
+Jane Darwell
+John Carradine
+
+2001: A Space Odyssey
+Science Fiction
+Keir Dullea
+Gary Lockwood
+William Sylvester
+
+The Maltese Falcon
+Action
+Humphrey Bogart
+Mary Astor
+Gladys George
+
+Raging Bull
+Drama
+Robert De Niro
+Cathy Moriarty
+Joe Pesci
+
+Plan 9 from Outer Space
+Science Fiction
+Gregory Walcott
+Mona McKinnon
+Tom Keene
+
+The Creeping Terror
+Science Fiction
+Vic Savage
+Shannon O'Neil
+William Thourlby
+
+Manos: The Hands of Fate
+Horror
+Harold P. Warren
+Diane Mahree
+Jackie Neyman
+
+Troll 2
+Horror
+Michael Stephenson
+George Hardy
+Margo Prey
+
+Glen or Glenda
+Explotation Film
+Daniel Davis
+Dolores Fuller
+Bela Lugosi
+
+Robot Monster
+Science Fiction
+George Nader
+Claudia Barrett
+Selena Royle
+
+The Conqueror
+Action
+John Wayne
+Susan Hayward
+Agnes Moorehead
+
+The Beast of Yucca Flats
+Horror
+Tor Johnson
+Douglas Mellor
+Barbara Francis
+
+Eegah! The Name Written in Blood
+Horror
+Richard Kiel
+Marilyn Manning
+Arch Hall, Jr.
+
+Santa Claus Conquers the Martians
+Science Fiction
+John Call
+Leonard Hicks
+Vincent Beck
+
+E.T. the Extra-Terrestrial
+Science Fiction
+Dee Wallace
+Peter Coyote
+Drew Barrymore
+
+A Clockwork Orange
+Science Fiction
+Malcolm McDowell
+Godfrey Quigley
+Anthony Sharp
+
+The Day the Earth Stood Still
+Science Fiction
+Michael Rennie
+Patricia Neal
+Billy Gray
+
+Blade Runner
+Science Fiction
+Harrison Ford
+Rutger Hauer
+Sean Young
+
+Alien
+Science Fiction
+Tom Skerritt
+Sigourney Weaver
+Veronica Cartwright
+
+Terminator 2: Judgment Day
+Scence Fiction
+Arnold Schwarzenegger
+Linda Hamilton
+Robert Patrick
+
+Invasion of the Body Snatchers
+Science Fiction
+Kevin McCarthy
+Dana Wynter
+King Donovan
+
+Back to the Future
+Science Fiction
+Michael J. Fox
+Christopher Lloyd
+Crispin Glover
+
+Monster A Go-Go
+Science Fiction
+Henry Hite
+Phil Morton
+June Travis
+
+Myra Breckinridge
+Comedy
+Raquel Welch
+Mae West
+John Huston
+
+Wild Target
+Comedy
+Bill Nighy
+Emily Blunt
+Rupert Grint
+
+Oldboy
+Revenge Film
+Choi Min-sik
+Yu Ji-tae
+Kang Hye-jeong
+
+In Bruges
+Black Comedy
+Colin Farrell
+Brendan Gleeson
+Ralph Fiennes
+
+Star Wars Episode V: The Empire Strikes Back
+Science Fiction
+Mark Hamill
+Harrison Ford
+Carrie Fisher
+
+Star Wars Episode VI: Return of the Jedi
+Science Fiction
+Mark Hamill
+Harrison Ford
+Carrie Fisher
