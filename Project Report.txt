@@ -1,0 +1,56 @@
+Description
+
+Approach
+
+	Queue and MyQueue: I wanted to make my queues as simple as possible to implement so I 
+	could get started on the bigger project so I implemented it as a bounded circular array.
+	I know that it will never have to hold more than a certain number of movies of which it 
+	will know how many before hand so I figured no harm in making it bounded. Even when the 
+	user can add movies to the list, the file will keep track of the # of movies. I can always
+	make it unbounded later too.
+	
+	PriorityQueue: I implemented this as simply as I could as well. It's just an array of queues. 
+	I did have some problems with generic type casting but I suppressed the warnings. The queue is 
+	built so that it's size is actually the size the user gives it multiplied by the number of priorities
+	that the user wants. That way the user can add all the elements to the queue even if they all have the 
+	same priority. 
+	
+	
+
+Test Cases
+Key: Working As Expected = WAE
+	 Unknown Bug = UB
+	 Known Bug = KB
+
+	Individual Class Tests (Modular Testing):
+	
+		MyQueue: Completely functional. 10/06/2011. WAE
+		
+			Case 1: tested enqueue operation, 
+					filled up queue until it was full and then tried to add another element,
+					element was not added, false was returned. 10/06/2011. WAE.
+			
+			Case 2: tested dequeue operation,
+					dequeued a full queue until it was empty and then tried to dequeue again
+					null was returned and no element was removed. 10/06.2011 WAE.
+					
+			Case 3: tested circular array functionality
+					enqueued several elements, dequeued several elements, enqueued several more
+					to ensure wrap around. No problems occurred, all elements accounted for. 10/06/2011 WAE.
+		
+		PriorityQueue:
+			
+			Case 1: tested enqueue operation,
+				    enqueued elements until full with various priorities then enqueued one more
+				    new element was not added false was returned. enqueued elements with all the 
+				    same priorities until full and tried to add one more, element was not added
+				    false was returned. 10/06/2010. WAE.
+				    
+			Case 2: tested dequeue operation,
+					tried to dequeue an empty queue, null was returned. filled up a queue and removed
+					all elements, then tried to remove one more, null was returned. Added elements of 
+					different priorities in different orders, when dequeued all elements came out in 
+					order of priority and then by FIFO style. 10/06/2011 WAE.
+				
+
+Conclusions

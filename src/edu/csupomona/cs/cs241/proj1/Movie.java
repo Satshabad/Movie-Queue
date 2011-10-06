@@ -22,7 +22,27 @@ public class Movie
    private String actorOne;
    private String actorTwo;
    private String actorThree;
+   private String director;
    
+   /**
+    * Constructs a movie consisting of the passes attributes
+    * 
+    * @param name the name of the film
+    * @param genre the genre of the film
+    * @param actorOne the main actor of the film
+    * @param actorTwo another actor in the film
+    * @param actorThree yet another actor in  the film
+    * @param director the director of the film
+    */
+   Movie(String name, String genre, String actorOne,
+         String actorTwo, String actorThree, String director){
+      this.name = name;
+      this.genre = genre;
+      this.actorOne = actorOne;
+      this.actorTwo = actorTwo;
+      this.actorThree = actorThree;
+      this.director = director;
+   }
    
    /**
     * Gets the name of the movie
@@ -74,6 +94,14 @@ public class Movie
       return actorThree;
    }
 
+   /**
+    * Gets the name of the director of this movie
+    * 
+    * @return director name
+    */
+   public String getDirector(){
+      return director;
+   }
    
    
 }

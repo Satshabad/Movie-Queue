@@ -11,6 +11,8 @@
 package edu.csupomona.cs.cs241.proj1;
 
 /**
+ * This is a Queue interface 
+ * 
  * @author Satshabad
  *
  */

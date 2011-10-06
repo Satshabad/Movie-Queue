@@ -12,6 +12,8 @@
 package edu.csupomona.cs.cs241.proj1;
 
 /**
+ * This is a bounded queue implemented with a circular array.
+ * 
  * @author Satshabad Khalsa
  *
  * @param <E> The type of {@link java.lang.Object} to be used in this queue
@@ -46,6 +48,8 @@ public class MyQueue<E> implements Queue<E>
     */
    @SuppressWarnings("unchecked")
    public MyQueue(int size){
+      // Due to indexing problem the first spot in the queue is never filled, 
+      // so we just increase the users size by one so the user never notices
       size = size + 1;
       array = (E[]) new Object[size];
       this.size = size;

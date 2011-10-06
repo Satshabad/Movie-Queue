@@ -1,121 +1,143 @@
+50
 Citizen Kane
 Drama
 Orson Welles
 Joseph Cotten
 Dorothy Comingore
+Orson Welles
 
 Casablanca
 Drama
 Humphrey Bogart
 Ingrid Bergman
 Paul Henreid
-
+Michael Curtiz
+	
 The Godfather
 Crime
 Marlon Brando
 Al Pacino
 James Caan
+Francis Ford Coppola
 
 Gone with the Wind
 Drama
 Clark Gable
 Vivien Leigh
 Leslie Howard
+Victor Fleming
 
 Lawrence of Arabia
 Drama
 Peter O'Toole
 Alec Guinness
 Anthony Quinn
+David Lean
 
 The Wizard of Oz
 Musical
 Judy Garland
 Frank Morgan
 Ray Bolger
+Victor Fleming
 
 The Graduate
 Comedy
 Anne Bancroft
 Dustin Hoffman
 Katharine Ross
+Mike Nichols
 
 On the Waterfront
 Drama
 Marlon Brando
 Karl Malden
 Lee J. Cobb
+Elia Kazan
 
 Schindler's List
 Drama
 Liam Neeson
 Ben Kingsley
 Ralph Fiennes
+Steven Spielberg
 
 Singin' in the Rain
 Musical
 Gene Kelly
 Donald O'Connor
 Debbie Reynolds
+Gene Kelly
 
 It's a Wonderful Life
 Comedy
 James Stewart
 Donna Reed
 Lionel Barrymore
+Frank Capra
 
 Sunset Boulevard
 Film Noir
 William Holden
 Gloria Swanson
 Erich von Stroheim
+Billy Wilder
 
 The Bridge on the River Kwai
 War
 William Holden
 Alec Guinness
 Jack Hawkins
+David Lean
 
 Some Like It Hot
 Comedy
 Marilyn Monroe
 Tony Curtis
+Jack Lemmon
+Billy Wilder
 
 Star Wars Episode IV: A New Hope
 Action
 Mark Hamill
 Harrison Ford
 Carrie Fisher
+George Lucas
 
 All About Eve
 drama
 Bette Davis
 Anne Baxter
 George Sanders
+Joseph L. Mankiewicz
 
 The African Queen
 Adventure
 Humphrey Bogart
 Katharine Hepburn
 Robert Morley
+John Huston
 
 Psycho
 Thriller
 Anthony Perkins
 Vera Miles
 John Gavin
+Alfred Hitchcock
 
 The General
 Comedy
 Al Boasberg
 Clyde Bruckman
 Buster Keaton
+Clyde Bruckman
 
 Chinatown
 Film Noir
 Jack Nicholson
 Faye Dunaway
 John Huston
+Roman Polanski
 
 One Flew Over the Cuckoo's Nest
 Drama
@@ -123,177 +145,207 @@ Jack Nicholson
 Louise Fletcher
 William Redfield
 Jack Lemmon
+Miloš Forman
 
 The Grapes of Wrath
 Drama
 Henry Fonda
 Jane Darwell
 John Carradine
+John Ford
 
 2001: A Space Odyssey
 Science Fiction
 Keir Dullea
 Gary Lockwood
 William Sylvester
+Stanley Kubrick
 
 The Maltese Falcon
 Action
 Humphrey Bogart
 Mary Astor
 Gladys George
+John Huston
 
 Raging Bull
 Drama
 Robert De Niro
 Cathy Moriarty
 Joe Pesci
+Martin Scorsese
 
 Plan 9 from Outer Space
 Science Fiction
 Gregory Walcott
 Mona McKinnon
 Tom Keene
+Ed Wood
 
 The Creeping Terror
 Science Fiction
 Vic Savage
 Shannon O'Neil
 William Thourlby
+Vic Savage
 
 Manos: The Hands of Fate
 Horror
 Harold P. Warren
 Diane Mahree
 Jackie Neyman
+Harold P. Warren
 
 Troll 2
 Horror
 Michael Stephenson
 George Hardy
 Margo Prey
+Drake Floyd
 
 Glen or Glenda
 Explotation Film
 Daniel Davis
 Dolores Fuller
 Bela Lugosi
+Ed Wood
 
 Robot Monster
 Science Fiction
 George Nader
 Claudia Barrett
 Selena Royle
+Phil Tucker
 
 The Conqueror
 Action
 John Wayne
 Susan Hayward
 Agnes Moorehead
+Dick Powell
 
 The Beast of Yucca Flats
 Horror
 Tor Johnson
 Douglas Mellor
 Barbara Francis
+Coleman Francis
 
 Eegah! The Name Written in Blood
 Horror
 Richard Kiel
 Marilyn Manning
 Arch Hall, Jr.
+Nicholas Merriweather
 
 Santa Claus Conquers the Martians
 Science Fiction
 John Call
 Leonard Hicks
 Vincent Beck
+Nicholas Webster
 
 E.T. the Extra-Terrestrial
 Science Fiction
 Dee Wallace
 Peter Coyote
 Drew Barrymore
+Steven Spielberg
 
 A Clockwork Orange
 Science Fiction
 Malcolm McDowell
 Godfrey Quigley
 Anthony Sharp
+Stanley Kubrick
 
 The Day the Earth Stood Still
 Science Fiction
 Michael Rennie
 Patricia Neal
 Billy Gray
+Robert Wise
 
 Blade Runner
 Science Fiction
 Harrison Ford
 Rutger Hauer
 Sean Young
+Ridley Scott
 
 Alien
 Science Fiction
 Tom Skerritt
 Sigourney Weaver
 Veronica Cartwright
+Ridley Scott
 
 Terminator 2: Judgment Day
 Scence Fiction
 Arnold Schwarzenegger
 Linda Hamilton
 Robert Patrick
+James Cameron
 
 Invasion of the Body Snatchers
 Science Fiction
 Kevin McCarthy
 Dana Wynter
 King Donovan
+Don Siegel
 
 Back to the Future
 Science Fiction
 Michael J. Fox
 Christopher Lloyd
 Crispin Glover
+Robert Zemeckis
 
 Monster A Go-Go
 Science Fiction
 Henry Hite
 Phil Morton
 June Travis
+Herschell Gordon Lewis
 
 Myra Breckinridge
 Comedy
 Raquel Welch
 Mae West
 John Huston
+Michael Sarne
 
 Wild Target
 Comedy
 Bill Nighy
 Emily Blunt
 Rupert Grint
+Jonathan Lynn
 
 Oldboy
 Revenge Film
 Choi Min-sik
 Yu Ji-tae
 Kang Hye-jeong
+Park Chan-wook
 
 In Bruges
 Black Comedy
 Colin Farrell
 Brendan Gleeson
 Ralph Fiennes
+Martin McDonagh
 
 Star Wars Episode V: The Empire Strikes Back
 Science Fiction
 Mark Hamill
 Harrison Ford
 Carrie Fisher
+Irvin Kershner
 
 Star Wars Episode VI: Return of the Jedi
 Science Fiction
 Mark Hamill
 Harrison Ford
 Carrie Fisher
+Richard Marquand

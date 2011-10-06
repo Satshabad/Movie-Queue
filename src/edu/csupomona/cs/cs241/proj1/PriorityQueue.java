@@ -12,7 +12,7 @@
 package edu.csupomona.cs.cs241.proj1;
 
 /**
- * This is a queue with priority dequeuing. The lower the priority the higher the number.
+ * This is a bounded queue with priority dequeuing. The lower the priority the higher the number.
  * 
  * @author Satshabad Khalsa
  *
@@ -30,20 +30,25 @@ public class PriorityQueue<E>
     * @pre priorities and size must be greater than {@code 0}
     * @post a priority queue is created
     * @param priorities The number of priorities to use in your queue
-    * @param size The max number of elements that the queue will hold
+    * @param size The max number of elements that there can be of each priority
     */
    @SuppressWarnings("unchecked")
-   public PriorityQueue(int priorities, int size)
+   public PriorityQueue(int size, int priorities)
    {
+      
       array = (MyQueue<E>[]) new MyQueue[priorities];
+      
+      // Makes an array of queues
       for (int i=0; i < array.length; i++){
-         array[i] = (MyQueue<E>) new MyQueue(size/priorities);
+         array[i] = (MyQueue<E>) new MyQueue(size);
       }
    }    
    
 
    /**
-    * This adds the item passed to the queue with a specific priority. Low is high
+    * This adds the item passed to the queue with a specific priority. Low is high.
+    * if the priority passed is less than 1 or greater than the greatest priorities, 
+    * it is truncated to 1 and the highest priority respectively. 
     * 
     * @pre the {@code item} is not null and the queue is not full
     * @post {@code item} is enqueued
@@ -53,8 +58,8 @@ public class PriorityQueue<E>
     */
    public boolean enqueue(E item, int priority)
    {
-      if (priority  < array.length ) priority = array.length;
-      if (priority > 0) priority = 0;
+      if (priority  > array.length ) {priority = array.length;}
+      if (priority < 1) { priority = 1;}
       
       if (array[priority - 1].isFull()){
          return false;
@@ -63,7 +68,9 @@ public class PriorityQueue<E>
    }
 
    /**
-    * This removes and returns the item in order of priority. Low is high
+    * This removes and returns the item in order of priority. Low is high.
+    * First it returns item by priority, if two elements are of the same priority 
+    * the one that was added first is removed first (FIFO)
     * 
     * @pre the queue must not be empty
     * @post the item is removed and returned to caller
@@ -72,10 +79,15 @@ public class PriorityQueue<E>
    public E dequeue()
    {
       E  temp;
+      // Runs through the queues starting with the highest priority and tries 
+      // to dequeue any element. When it does it returns
       for(int i=0; i < array.length; i++){
         if ((temp = array[i].dequeue()) != null)
            return temp;
       }
+      
+      // Just in case the caller doesn't fulfill the contract this gives it 
+      // lee way by returning null of the queue is empty.
       return null;
    }
    
