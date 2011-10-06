@@ -3,8 +3,10 @@ package edu.csupomona.cs.cs241.proj1;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
-public class TestDriver
+public class TestDriver extends JFrame
 {
 
    /**
@@ -15,26 +17,26 @@ public class TestDriver
    {
     File movieFileList = new File("res" +File.separator +"movies.txt");  
      Scanner scan = new Scanner(movieFileList);
+     TestDriver td = new TestDriver();
+     td.TestFrame();
      
-     PriorityQueue<String> q = new PriorityQueue<String>(5, 3);
-     System.err.println(q.enqueue("one", 3));
-     System.err.println(q.enqueue("two", 1));
-     System.err.println(q.enqueue("three", 1));
-     System.err.println(q.enqueue("four", 2));
-     System.err.println(q.enqueue("five", 2));
-     System.err.println(q.enqueue("six", 2));
-     System.err.println(q.dequeue());
-     System.err.println(q.dequeue());
-     System.err.println(q.dequeue());
-     System.err.println(q.enqueue("seven", 1));
-     System.err.println(q.enqueue("eight", 2));
-     System.err.println(q.enqueue("nine", 2));
-     System.err.println(q.enqueue("ten", 2));
-     System.err.println(q.enqueue("eleven", 2));
-     System.err.println(q.dequeue());
      
            
 
    }
 
+
+
+void TestFrame(){
+   PriorityQueue<String> q = new PriorityQueue<String>(5, 3);
+   System.err.println(q.enqueue("two", 1));
+   System.err.println(q.enqueue("three", 1));
+   System.err.println(q.enqueue("four", 2));
+   System.err.println(q.enqueue("five", 2));
+   System.err.println(q.enqueue("six", 2));
+   JLabel jlb = new JLabel(q.dequeue() + q.dequeue() + q.dequeue());
+   add(jlb);
+   this.setSize(1000, 1000);
+   setVisible(true);
+}
 }
