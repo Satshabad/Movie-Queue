@@ -2,7 +2,7 @@
  * CS 241: Data Structures and Algorithms II
  * Professor: Edwin Rodr&iacute;guez
  *
- * Programming Assignment #N
+ * Programming Assignment 1
  *
  * <description-of-assignment>
  *
