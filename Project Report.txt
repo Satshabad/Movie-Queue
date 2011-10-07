@@ -20,7 +20,11 @@ Approach
 	compared then pushed onto a stack one by one until a match is found) but my method is modular and 
 	does not violate the rule of demeter (no objects reach way into other objects they didn't create 
 	to call methods that have nothing to do with them). With my PriorityQueue switching between priority 
-	and normal mode is seamless. It's just a different view of the same data.
+	and normal mode is seamless. It's just a different view of the same data. I realize I probably could 
+	have made a regular Priority Queue and useed it in this class in combo with a normal queue but having 
+	direct access to the PriorityQueue's internal workings makes the dequeue operation a lot faster, instead 
+	of dumping all the elements out looking for the right one, we already know which sub-queue the element is 
+	in and can start looking directly there.
 	
 	
 

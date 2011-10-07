@@ -50,7 +50,10 @@ public class PriorityQueue<E>
    {
       
       array = (MyQueue<QueueItemShell<E>>[]) new MyQueue[priorities];
+      
+      // Makes a normal queue to hold elements in original order, regardless of priority
       normalQueue =  (MyQueue<QueueItemShell<E>>) new MyQueue<E>(size);
+      
       // Makes an array of queues
       for (int i=0; i < array.length; i++){
          array[i] = (MyQueue<QueueItemShell<E>>) new MyQueue<QueueItemShell<E>>(size);
@@ -72,14 +75,21 @@ public class PriorityQueue<E>
     */
    public boolean enqueue(E item, int priority)
    {
+      
+      // Makes sure that the priority given is in bounds of set priorty, if not changes it
       if (priority  > array.length ) {priority = array.length;}
       if (priority < 1) { priority = 1;}
+      
+      //makes sure there is room for the item in both queues
       if (normalQueue.isFull()){
          return false;
       }
       if (array[priority - 1].isFull()){
          return false;
       }
+      
+      // Wraps the item to be added in a wrapper class and 
+      // stores data about the items position in the wrapper class
       QueueItemShell<E> wrapper = new QueueItemShell<E>(item, priority, orderCounter++);
       if (!array[priority - 1].enqueue(wrapper)) {return false;}
       if (!normalQueue.enqueue(wrapper)) {return false;}
@@ -97,13 +107,18 @@ public class PriorityQueue<E>
     */
    public boolean enqueue(E item)
    {
+      // Makes sure that the priority given is in bounds of set priorty, if not changes it
       if (item == null) {return false;}
       if (normalQueue.isFull()){
          return false;
       }
+      
+      //makes sure there is room for the item
       if (array[array.length -1].isFull()){
          return false;
       }
+      // Wraps the item to be added in a wrapper class and 
+      // stores data about the items position in the wrapper class
       QueueItemShell<E> wrapper = new QueueItemShell<E>(item, array.length, orderCounter++);
       if (!array[array.length-1].enqueue(wrapper)) {return false;}
       if (!normalQueue.enqueue(wrapper)) {return false;}
@@ -123,11 +138,15 @@ public class PriorityQueue<E>
       if (isEmpty()){return null;}
       QueueItemShell<E>  temp = null;
       // Runs through the queues starting with the highest priority and tries 
-      // to dequeue any element. When it does it returns
+      // to dequeue any element. When it breaks
       for(int i=0; i < array.length; i++){
         if ((temp = array[i].dequeue()) != null)
            break;
         }
+      
+      // Here it takes the item to be dequeued and returned and dumps out element into a 
+      // temporary stack until it finds a match then also dequeues the match from 
+      // the sister data set and returns the item to the caller
       Stack<QueueItemShell<E>> tempStack = new Stack<QueueItemShell<E>>();
       QueueItemShell<E> compareTemp;
       while(!normalQueue.isEmpty()){
@@ -156,6 +175,10 @@ public class PriorityQueue<E>
     */
    public E dequeue(){
       if (isEmpty()){return null;}
+      
+      // Here it takes the item to be dequeued and returned and dumps out element into a 
+      // temporary stack until it finds a match then also dequeues the match from 
+      // the sister data set and returns the item to the caller
       QueueItemShell<E> temp = normalQueue.dequeue();
       Stack<QueueItemShell<E>> tempStack = new Stack<QueueItemShell<E>>();
       QueueItemShell<E> compareTemp;
@@ -177,6 +200,12 @@ public class PriorityQueue<E>
       
    }
    
+   /**
+    * Checks whether the queue is empty or not
+    * 
+    * @post a {@code boolean} will be returns to the user
+    * @return where the queue is empty or not
+    */
    public boolean isEmpty(){
       for(int i=0; i < array.length; i++){
          if (!array[i].isEmpty()){
