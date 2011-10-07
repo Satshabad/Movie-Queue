@@ -9,11 +9,18 @@ Approach
 	user can add movies to the list, the file will keep track of the # of movies. I can always
 	make it unbounded later too.
 	
-	PriorityQueue: I implemented this as simply as I could as well. It's just an array of queues. 
-	I did have some problems with generic type casting but I suppressed the warnings. The queue is 
-	built so that it's size is actually the size the user gives it multiplied by the number of priorities
-	that the user wants. That way the user can add all the elements to the queue even if they all have the 
-	same priority. 
+	PriorityQueue: I decided to implement the mode function (normal queue and priority queue) both
+	in PriorityQueue for modular simplicity. I used a regular queue inside the PriorityQueue to help 
+	keep track of the normal order of elements. I also used a generic wrapper class QueueItemShell
+	to wrap the objects and hold data about their priority and the order in which they were added. 
+	this allowed me to compare the elements when I dequeued. I kept persistent sets of elements in 
+	both the normal queue and array of other queues assigned priorities. My method maybe inefficient 
+	in both memory space and time (to keep persistent data in two separate places every time an element 
+	is dequeued, either by priority mode or by normal mode, the element in a queue must be dequeued and 
+	compared then pushed onto a stack one by one until a match is found) but my method is modular and 
+	does not violate the rule of demeter (no objects reach way into other objects they didn't create 
+	to call methods that have nothing to do with them). With my PriorityQueue switching between priority 
+	and normal mode is seamless. It's just a different view of the same data.
 	
 	
 
@@ -40,17 +47,32 @@ Key: Working As Expected = WAE
 		
 		PriorityQueue:
 			
-			Case 1: tested enqueue operation,
+			Case 1: tested enqueue by priority operation,
 				    enqueued elements until full with various priorities then enqueued one more
 				    new element was not added false was returned. enqueued elements with all the 
 				    same priorities until full and tried to add one more, element was not added
 				    false was returned. 10/06/2010. WAE.
 				    
-			Case 2: tested dequeue operation,
+			Case 2: tested dequeue by priority operation,
 					tried to dequeue an empty queue, null was returned. filled up a queue and removed
 					all elements, then tried to remove one more, null was returned. Added elements of 
 					different priorities in different orders, when dequeued all elements came out in 
 					order of priority and then by FIFO style. 10/06/2011 WAE.
+					
+			Case 3: tested enqueue normal mode,
+					enqueued several elements until full, then enqueued one more,
+					it returned false and item was not enqueued. 10/06/2011. WAE.
+					
+			Case 4: tested dequeue normal mode,
+					tried to dequeue an empty queue, null was returned. 10/06/2011. WAE.
+					
+			Case 5. tested enqueue by priority and dequeue normally,
+					enqueued several elements by varying priorities and then dequeued normally
+					all elements came out in order stored regardless of priority. 10/06/2011. WAE
+					
+			Case 6. tested enqueue with no priority and then enqueued by priority and dequeued by priority,
+					enqueued several elements by priority and also without a specified priority then 
+					dequeued them all by priority. They call came out in correct order. 10/06/2011. WAE.
 				
 
 Conclusions

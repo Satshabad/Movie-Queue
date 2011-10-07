@@ -101,11 +101,11 @@ public class PriorityQueue<E>
       if (normalQueue.isFull()){
          return false;
       }
-      if (array[array.length].isFull()){
+      if (array[array.length -1].isFull()){
          return false;
       }
       QueueItemShell<E> wrapper = new QueueItemShell<E>(item, array.length, orderCounter++);
-      if (!array[array.length].enqueue(wrapper)) {return false;}
+      if (!array[array.length-1].enqueue(wrapper)) {return false;}
       if (!normalQueue.enqueue(wrapper)) {return false;}
       return true;
    }

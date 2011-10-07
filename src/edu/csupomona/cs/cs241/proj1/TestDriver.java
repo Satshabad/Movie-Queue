@@ -22,9 +22,13 @@ public class TestDriver extends JFrame
      PriorityQueue<String> q = new PriorityQueue<String>(5, 3);
      System.err.println(q.enqueue("two", 2));
      System.err.println(q.enqueue("three", 1));
-     System.err.println(q.enqueue("four", 3));
-     System.err.println(q.enqueue("five", 2));
-     System.err.println(q.enqueue("six", 1));
+     System.err.println(q.enqueue("four"));
+     System.err.println(q.enqueue("five"));
+     System.err.println(q.enqueue("six"));
+     System.err.println(q.enqueue("six"));
+     System.err.println(q.dequeueByPriority());
+     System.err.println(q.dequeueByPriority());
+     System.err.println(q.dequeueByPriority());
      System.err.println(q.dequeueByPriority());
      System.err.println(q.dequeueByPriority());
      System.err.println(q.dequeueByPriority());
@@ -37,6 +41,7 @@ public class TestDriver extends JFrame
      System.err.println(q.enqueue("four", 3));
      System.err.println(q.enqueue("five", 2));
      System.err.println(q.enqueue("six", 1));
+     System.err.println(q.dequeue());
      System.err.println(q.dequeue());
      System.err.println(q.dequeue());
      System.err.println(q.dequeue());
