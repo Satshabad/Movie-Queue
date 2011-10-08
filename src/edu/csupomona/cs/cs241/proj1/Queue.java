@@ -27,7 +27,7 @@ public interface Queue<E>
     * @param item The item to be added to the queue
     * @return whether the item has  been added to the queue or not
     */
-   boolean enqueue(E item);
+   void enqueue(E item);
    
    /**
     * Removes and returns the item from the beginning of the queue.

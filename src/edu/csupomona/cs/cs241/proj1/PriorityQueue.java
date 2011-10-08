@@ -67,62 +67,45 @@ public class PriorityQueue<E> implements Serializable
     * if the priority passed is less than 1 or greater than the greatest priorities, 
     * it is truncated to 1 and the highest priority respectively. 
     * 
-    * @pre the {@code item} is not null and the queue is not full
+    * @pre the {@code item} is not null
     * @post {@code item} is enqueued
     * @param item The item to be added
     * @param priority The priority to add the element at 
-    * @return whether the element was added or not
     */
-   public boolean enqueue(E item, int priority)
+   public void enqueue(E item, int priority)
    {
+      if (item == null){return;}
       
-      // Makes sure that the priority given is in bounds of set priorty, if not changes it
+      // Makes sure that the priority given is in bounds of set priority, if not changes it
       if (priority  > array.length ) {priority = array.length;}
       if (priority < 1) { priority = 1;}
-      
-      //makes sure there is room for the item in both queues
-      if (normalQueue.isFull()){
-         return false;
-      }
-      if (array[priority - 1].isFull()){
-         return false;
-      }
-      
+
       // Wraps the item to be added in a wrapper class and 
       // stores data about the items position in the wrapper class
       QueueItemShell<E> wrapper = new QueueItemShell<E>(item, priority, orderCounter++);
-      if (!array[priority - 1].enqueue(wrapper)) {return false;}
-      if (!normalQueue.enqueue(wrapper)) {return false;}
-      return true;
+      array[priority - 1].enqueue(wrapper);
+      normalQueue.enqueue(wrapper);
+
    }
 
    /**
     * This adds the item passed to the method to the end of the queue.
     * Internally it is automatically given the lowest priority. 
     * 
-    * @pre the item is not null and the queue is not full
+    * @pre the item is not null
     * @post the item is added to the end of queue
     * @param item the item to be added
-    * @return where the item has been added or not.
     */
-   public boolean enqueue(E item)
+   public void enqueue(E item)
    {
-      // Makes sure that the priority given is in bounds of set priorty, if not changes it
-      if (item == null) {return false;}
-      if (normalQueue.isFull()){
-         return false;
-      }
+      // Makes sure that the priority given is in bounds of set priority, if not changes it
+      if (item == null) {return;}
       
-      //makes sure there is room for the item
-      if (array[array.length -1].isFull()){
-         return false;
-      }
       // Wraps the item to be added in a wrapper class and 
       // stores data about the items position in the wrapper class
       QueueItemShell<E> wrapper = new QueueItemShell<E>(item, array.length, orderCounter++);
-      if (!array[array.length-1].enqueue(wrapper)) {return false;}
-      if (!normalQueue.enqueue(wrapper)) {return false;}
-      return true;
+      array[array.length-1].enqueue(wrapper);
+      normalQueue.enqueue(wrapper);
    }
    /**
     * This removes and returns the item in order of priority. Low is high.

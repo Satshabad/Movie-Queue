@@ -3,11 +3,8 @@ Description
 Approach
 
 	Queue and MyQueue: I wanted to make my queues as simple as possible to implement so I 
-	could get started on the bigger project so I implemented it as a bounded circular array.
-	I know that it will never have to hold more than a certain number of movies of which it 
-	will know how many before hand so I figured no harm in making it bounded. Even when the 
-	user can add movies to the list, the file will keep track of the # of movies. I can always
-	make it unbounded later too.
+	could get started on the bigger project so I implemented it as an unbounded circular array.
+	I let the caller specify the number of expected elements to cut down on queue expanding run time.
 	
 	PriorityQueue: I decided to implement the mode function (normal queue and priority queue) both
 	in PriorityQueue for modular simplicity. I used a regular queue inside the PriorityQueue to help 
@@ -28,7 +25,7 @@ Approach
 	
 	MovieQueue: I wanted the higher level functions of this project to be as simple as possible. if you take a 
 	look at the MovieQueue class you can see how simple it is. it push all logic to the work horse of the queues.
-	the methods in MovieQueue directly relate to the function of the end program but are completly de coupled from 
+	the methods in MovieQueue directly relate to the function of the end program but are completely decoupled from 
 	any view. All the methods are return queues for the caller to display.
 	
 	FileManager: I decided to create one place to have methods that deal with files, this is it. This class helps keep 
@@ -54,11 +51,11 @@ Key: Working As Expected = WAE
 
 	Individual Class Tests (Modular Testing):
 	
-		MyQueue: Completely functional. 10/06/2011. WAE
+		MyQueue:
 		
 			Case 1: tested enqueue operation, 
 					filled up queue until it was full and then tried to add another element,
-					element was not added, false was returned. 10/06/2011. WAE.
+					element was added 10/08/2011. WAE.
 			
 			Case 2: tested dequeue operation,
 					dequeued a full queue until it was empty and then tried to dequeue again
@@ -67,14 +64,15 @@ Key: Working As Expected = WAE
 			Case 3: tested circular array functionality
 					enqueued several elements, dequeued several elements, enqueued several more
 					to ensure wrap around. No problems occurred, all elements accounted for. 10/06/2011 WAE.
+					
 		
 		PriorityQueue:
 			
 			Case 1: tested enqueue by priority operation,
 				    enqueued elements until full with various priorities then enqueued one more
-				    new element was not added false was returned. enqueued elements with all the 
-				    same priorities until full and tried to add one more, element was not added
-				    false was returned. 10/06/2010. WAE.
+				    new element was added. enqueued elements with all the 
+				    same priorities until full and tried to add one more, element was added.
+				     10/08/2010. WAE.
 				    
 			Case 2: tested dequeue by priority operation,
 					tried to dequeue an empty queue, null was returned. filled up a queue and removed
@@ -84,7 +82,7 @@ Key: Working As Expected = WAE
 					
 			Case 3: tested enqueue normal mode,
 					enqueued several elements until full, then enqueued one more,
-					it returned false and item was not enqueued. 10/06/2011. WAE.
+					item not enqueued. 10/08/2011. WAE.
 					
 			Case 4: tested dequeue normal mode,
 					tried to dequeue an empty queue, null was returned. 10/06/2011. WAE.

@@ -27,20 +27,48 @@ public class TestDriver extends JFrame
     */
    public static void main(String[] args) throws IOException, ClassNotFoundException
    {
-      FileManager fm = new FileManager();
-      MyQueue<Movie> p = fm.getSavedHomeQueue();
-      if ( p == null){
-         p = new MyQueue<Movie>(5);
-         p.enqueue(new Movie("the1movie", "war", "blah", "blahtwo", "blahthree", "whateve"));
-         p.enqueue(new Movie("the2movie", "war", "blah", "blahtwo", "blahthree", "whateve"));
-         p.enqueue(new Movie("the3movie", "war", "blah", "blahtwo", "blahthree", "whateve"));
-         p.enqueue(new Movie("the4movie", "war", "blah", "blahtwo", "blahthree", "whateve"));
-         fm.saveHomeQueue(p);
-      }else
-         System.err.println(p.enqueue(new Movie("the5movie", "war", "blah", "blahtwo", "blahthree", "whateve")));
+//      FileManager fm = new FileManager();
+//      MyQueue<Movie> p = fm.getSavedHomeQueue();
+//      if ( p == null){
+//         p = new MyQueue<Movie>(5);
+//         p.enqueue(new Movie("the1movie", "war", "blah", "blahtwo", "blahthree", "whateve"));
+//         p.enqueue(new Movie("the2movie", "war", "blah", "blahtwo", "blahthree", "whateve"));
+//         p.enqueue(new Movie("the3movie", "war", "blah", "blahtwo", "blahthree", "whateve"));
+//         p.enqueue(new Movie("the4movie", "war", "blah", "blahtwo", "blahthree", "whateve"));
+//         fm.saveHomeQueue(p);
+//      }else{
+//         System.err.println(p.enqueue(new Movie("the5movie", "war", "blah", "blahtwo", "blahthree", "whateve")));
+//      }
+//      while (!p.isEmpty()){
+//         System.out.println(p.dequeue());
+//      }
+      MyQueue<String> q = new MyQueue<String>(4);
+      q.enqueue("hi");
+      q.enqueue("threr");
+      q.enqueue("hg");
+      q.enqueue("hif");
+      q.enqueue("hdi");
+      q.enqueue("hsi");
+      q.enqueue("hai");
+      q.enqueue("hai");
+      q.enqueue("hai");
+ 
+      q.dequeue();
+      q.dequeue();
+      q.dequeue();
+      q.dequeue();
+      q.dequeue();
+      q.dequeue();
+      q.enqueue("hif");
+      q.enqueue("hdi");
+      q.enqueue("hsi");
+      q.enqueue("hai");
+      q.enqueue("hai");
+      q.enqueue("hai");
       
-      while (!p.isEmpty()){
-         System.out.println(p.dequeue());
+      while (!q.isEmpty())
+      {
+         System.out.println(q.dequeue());
       }
       
    }

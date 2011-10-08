@@ -14,7 +14,7 @@ package edu.csupomona.cs.cs241.proj1;
 import java.io.Serializable;
 
 /**
- * This is a bounded queue implemented with a circular array.
+ * This is a unbounded queue implemented with a circular array.
  * 
  * @author Satshabad Khalsa
  *
@@ -60,19 +60,16 @@ public class MyQueue<E> implements Queue<E>, Serializable
    /**
     * Adds the given item to the end of the queue. 
     * 
-    * @pre The queue is not full and the item to be added is not null
+    * @pre the item to be added is not null
     * @post The item is added at the end of the queue
     * @param item The item to be added to the queue
-    * @return whether the item has  been added to the queue or not
     */
-   public boolean enqueue(E item){
+   public void enqueue(E item){
       if (isFull()){
-         return false;
+         increaseQueueSize();
       }   
       tail = (tail + 1) % size;
       array[tail] = item;
-      
-      return true;
    }
    
    
@@ -113,6 +110,19 @@ public class MyQueue<E> implements Queue<E>, Serializable
       return (tail +1) % size == head;
    }
    
-   
+   private void increaseQueueSize()
+   {
+      @SuppressWarnings("unchecked")
+      Object theNewArray[] = (E[]) new Object[(int) (size*2)];
+      size = size*2;
+      head = 0;
+      int i;
+      for (i = 0; i < array.length; i++)
+         {
+            theNewArray[i] = array[i];
+         }
+      tail = i - 1;
+      array = theNewArray;
+   }
    
 }
