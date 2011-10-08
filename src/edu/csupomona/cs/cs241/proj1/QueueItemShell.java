@@ -1,5 +1,7 @@
 package edu.csupomona.cs.cs241.proj1;
 
+import java.io.Serializable;
+
 /**
  * This class wraps an object and holds information about it's priority and place in a queue.
  * 
@@ -8,7 +10,7 @@ package edu.csupomona.cs.cs241.proj1;
  *
  * @param <E> the type of object to be wrapped
  */
-public class QueueItemShell<E>
+public class QueueItemShell<E> implements Serializable
 {
    /**
     * The items priority in the queue

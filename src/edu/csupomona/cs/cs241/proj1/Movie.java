@@ -11,13 +11,15 @@
 
 package edu.csupomona.cs.cs241.proj1;
 
+import java.io.Serializable;
+
 
 
 /**
  * @author Satshabad Khalsa
  *
  */
-public class Movie
+public class Movie implements Serializable
 {
    private String name;
    private String genre;
@@ -105,5 +107,12 @@ public class Movie
       return director;
    }
    
+   public String toString(){
+      return ""+ name +"\n" 
+               + "Director: "+director + "\n"
+               +"Actors: " + actorOne + ", " + actorTwo + ", " + actorThree + "\n"
+               + "Genre: " + genre + "\n";
+      
+   }
    
 }

@@ -2,6 +2,7 @@ package edu.csupomona.cs.cs241.proj1;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -11,48 +12,28 @@ public class TestDriver extends JFrame
 
    /**
     * @param args
-    * @throws FileNotFoundException 
+    * @throws IOException 
+    * @throws ClassNotFoundException 
     */
-   public static void main(String[] args) throws FileNotFoundException
+   public static void main(String[] args) throws IOException, ClassNotFoundException
    {
-    File movieFileList = new File("res" +File.separator +"movies.txt");  
-     Scanner scan = new Scanner(movieFileList);
-     TestDriver td = new TestDriver();
-     //td.TestFrame(); 
-     PriorityQueue<String> q = new PriorityQueue<String>(5, 3);
-     System.err.println(q.enqueue("two", 2));
-     System.err.println(q.enqueue("three", 1));
-     System.err.println(q.enqueue("four"));
-     System.err.println(q.enqueue("five"));
-     System.err.println(q.enqueue("six"));
-     System.err.println(q.enqueue("six"));
-     System.err.println(q.dequeueByPriority());
-     System.err.println(q.dequeueByPriority());
-     System.err.println(q.dequeueByPriority());
-     System.err.println(q.dequeueByPriority());
-     System.err.println(q.dequeueByPriority());
-     System.err.println(q.dequeueByPriority());
-     System.err.println(q.dequeueByPriority());
-     System.err.println(q.dequeueByPriority());
-     System.err.println(q.dequeueByPriority());
-     
-     System.err.println(q.enqueue("two", 2));
-     System.err.println(q.enqueue("three", 1));
-     System.err.println(q.enqueue("four", 3));
-     System.err.println(q.enqueue("five", 2));
-     System.err.println(q.enqueue("six", 1));
-     System.err.println(q.dequeue());
-     System.err.println(q.dequeue());
-     System.err.println(q.dequeue());
-     System.err.println(q.dequeue());
-     System.err.println(q.dequeue());
-     System.err.println(q.dequeue());
-     System.err.println(q.dequeue());
-           
-
+      FileManager fm = new FileManager();
+      MyQueue<Movie> p = fm.getSavedHomeQueue();
+      if ( p == null){
+         p = new MyQueue<Movie>(5);
+         p.enqueue(new Movie("the1movie", "war", "blah", "blahtwo", "blahthree", "whateve"));
+         p.enqueue(new Movie("the2movie", "war", "blah", "blahtwo", "blahthree", "whateve"));
+         p.enqueue(new Movie("the3movie", "war", "blah", "blahtwo", "blahthree", "whateve"));
+         p.enqueue(new Movie("the4movie", "war", "blah", "blahtwo", "blahthree", "whateve"));
+         fm.saveHomeQueue(p);
+      }else
+         System.err.println(p.enqueue(new Movie("the5movie", "war", "blah", "blahtwo", "blahthree", "whateve")));
+      
+      while (!p.isEmpty()){
+         System.out.println(p.dequeue());
+      }
+      
    }
-
-
 
 void TestFrame(){
   

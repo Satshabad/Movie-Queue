@@ -21,10 +21,29 @@ Approach
 	does not violate the rule of demeter (no objects reach way into other objects they didn't create 
 	to call methods that have nothing to do with them). With my PriorityQueue switching between priority 
 	and normal mode is seamless. It's just a different view of the same data. I realize I probably could 
-	have made a regular Priority Queue and useed it in this class in combo with a normal queue but having 
+	have made a regular Priority Queue and used it in this class in combo with a normal queue but having 
 	direct access to the PriorityQueue's internal workings makes the dequeue operation a lot faster, instead 
 	of dumping all the elements out looking for the right one, we already know which sub-queue the element is 
 	in and can start looking directly there.
+	
+	MovieQueue: I wanted the higher level functions of this project to be as simple as possible. if you take a 
+	look at the MovieQueue class you can see how simple it is. it push all logic to the work horse of the queues.
+	the methods in MovieQueue directly relate to the function of the end program but are completly de coupled from 
+	any view. All the methods are return queues for the caller to display.
+	
+	FileManager: I decided to create one place to have methods that deal with files, this is it. This class helps keep 
+	the tedious file writing and reading from the main parts of the program and it ensures that that any files opened 
+	will be closed. All saved states of objects also go through here to make it easier to keep persistent data. also having
+	one place that writes to files keeps the files from being corrupted. I decided to add the persistent data functionality 
+	through Serializable. I learned it this summer while working on programming android phones, so I believe it's fair game. I 
+	am not using it like a black box but I also don't fully understand it's implementation, though I would love to learn about it.
+	We stand on the shoulders of giants, if we must understand  every little detail of the things we use in order to justify 
+	using them then I would never get to school in the morning because I would still be trying to understand exactly how my 
+	car can use tiny explosions to move me forward. All code was written by me. Anyway, for simplicity's sake I have created very 
+	specific methods for saving the exact thing I want to save rather than adhering to more modular code. This allows the upper 
+	classes that use this to know nothing of file names and such thing, it just allows the caller to store and retrieve it's 
+	specific object. It may not be pretty but it's for the case of security and simplicity.
+	
 	
 	
 
@@ -78,5 +97,15 @@ Key: Working As Expected = WAE
 					enqueued several elements by priority and also without a specified priority then 
 					dequeued them all by priority. They call came out in correct order. 10/06/2011. WAE.
 				
+		MovieQueue:
+		
+		FileManager:
+			
+			Case 1: tested ability to read movies.txt file and create list of movies
+					All movies were read in and displayed correctly. 10/07/2011. WAE
+					
+			Case 2: tested ability to append movies to the movies.txt file
+					movies all added correctly and correctly turned into movie objects when called to.
+					10/07/2011. WAE.
 
 Conclusions

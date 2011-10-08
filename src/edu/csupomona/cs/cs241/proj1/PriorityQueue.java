@@ -11,6 +11,7 @@
 
 package edu.csupomona.cs.cs241.proj1;
 
+import java.io.Serializable;
 import java.util.Stack;
 
 /**
@@ -19,7 +20,7 @@ import java.util.Stack;
  * @author Satshabad Khalsa
  *
  */
-public class PriorityQueue<E>
+public class PriorityQueue<E> implements Serializable
 {
    /**
     * The array that holds the queues of different priorities

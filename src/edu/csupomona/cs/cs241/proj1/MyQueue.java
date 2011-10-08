@@ -11,6 +11,8 @@
 
 package edu.csupomona.cs.cs241.proj1;
 
+import java.io.Serializable;
+
 /**
  * This is a bounded queue implemented with a circular array.
  * 
@@ -18,7 +20,7 @@ package edu.csupomona.cs.cs241.proj1;
  *
  * @param <E> The type of {@link java.lang.Object} to be used in this queue
  */
-public class MyQueue<E> implements Queue<E>
+public class MyQueue<E> implements Queue<E>, Serializable
 {
    /**
     * The array to hold the queue elements
