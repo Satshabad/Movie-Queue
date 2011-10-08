@@ -106,6 +106,9 @@ public class Movie implements Serializable
       return director;
    }
    
+   /* (non-Javadoc)
+    * @see java.lang.Object#toString()
+    */
    public String toString(){
       return ""+ name +"\n" 
                + "Director: "+director + "\n"
