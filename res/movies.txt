@@ -1,4 +1,3 @@
-50
 Citizen Kane
 Drama
 Orson Welles
@@ -144,7 +143,6 @@ Drama
 Jack Nicholson
 Louise Fletcher
 William Redfield
-Jack Lemmon
 Miloš Forman
 
 The Grapes of Wrath
