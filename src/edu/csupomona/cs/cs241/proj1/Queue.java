@@ -4,9 +4,9 @@
  *
  * Programming Assignment 1
  *
- * <description-of-assignment>
+ * This assignment is to create a netflix like movie queue and give it added functionality
  *
- * Satshbaad Khalsa
+ * Satshabad Khalsa  
  */
 package edu.csupomona.cs.cs241.proj1;
 

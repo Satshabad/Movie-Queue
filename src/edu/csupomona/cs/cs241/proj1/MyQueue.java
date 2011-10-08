@@ -4,7 +4,7 @@
  *
  * Programming Assignment 1
  *
- * <description-of-assignment>
+ * This assignmemnt is to create a netflix like movie queue and give it added functionality
  *
  * Satshabad Khalsa  
  */

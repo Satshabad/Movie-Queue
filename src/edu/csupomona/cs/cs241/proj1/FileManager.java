@@ -1,3 +1,13 @@
+/**
+ * CS 241: Data Structures and Algorithms II
+ * Professor: Edwin Rodr&iacute;guez
+ *
+ * Programming Assignment 1
+ *
+ * This assignment is to create a netflix like movie queue and give it added functionality
+ *
+ * Satshabad Khalsa  
+ */
 package edu.csupomona.cs.cs241.proj1;
 
 import java.io.File;
