@@ -107,5 +107,11 @@ Key: Working As Expected = WAE
 			Case 2: tested ability to append movies to the movies.txt file
 					movies all added correctly and correctly turned into movie objects when called to.
 					10/07/2011. WAE.
+					
+			Case 3: tested save and retrieve methods,
+					created a queue and saved it, ended the program, opened the queue and appended it.
+					10/07/2011. WAE.
+					
+					
 
 Conclusions
