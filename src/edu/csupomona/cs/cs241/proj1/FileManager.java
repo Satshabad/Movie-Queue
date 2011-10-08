@@ -126,12 +126,8 @@ public class FileManager
     * @throws IOException
     */
    public void saveWaitingQueue(PriorityQueue<Movie> p) throws IOException{
-      File newFile = new File("sav" + File.separator + "waitingQueue.txt");
-      FileOutputStream theFileOutPutStream = new FileOutputStream(newFile, false);
-      ObjectOutputStream theObjectOutputStream = new ObjectOutputStream(theFileOutPutStream);
-      theObjectOutputStream.writeObject(p);
-      theObjectOutputStream.close();
-      theFileOutPutStream.close();
+      fileWrite("sav" + File.separator + "waitingQueue.txt", p);
+      
    }
 
    /**
@@ -169,12 +165,8 @@ public class FileManager
     * @throws IOException
     */
    public void saveHomeQueue(MyQueue<Movie> p) throws IOException{
-      File newFile = new File("sav" + File.separator + "homeQueue.txt");
-      FileOutputStream theFileOutPutStream = new FileOutputStream(newFile, false);
-      ObjectOutputStream theObjectOutputStream = new ObjectOutputStream(theFileOutPutStream);
-      theObjectOutputStream.writeObject(p);
-      theObjectOutputStream.close();
-      theFileOutPutStream.close();
+      fileWrite("sav" + File.separator + "homeQueue.txt", p);
+      
    }
    
    /**
@@ -188,7 +180,7 @@ public class FileManager
     * @throws ClassNotFoundException
     */
    public MyQueue<Movie> getSavedHomeQueue() throws IOException, ClassNotFoundException{
-      File newFile = new File("sav" + File.separator + "waitingQueue.txt");
+      File newFile = new File("sav" + File.separator + "homeQueue.txt");
       FileInputStream theFileInputStream;
       try
       {
@@ -202,5 +194,25 @@ public class FileManager
       MyQueue<Movie> p = (MyQueue<Movie>) theObjectInputStream.readObject();
       return p;
    }
+   
+   /**
+    * This internal method handles the writing to the passed file
+    * @pre the fileName and path must be valid and the object must be not be {@code null}
+    * @post the specific file will be over written or created and it will contain the object passed
+    * @param fileName the name and path of the file to be written to
+    * @param p the object to be written out
+    * @throws IOException
+    */
+   private <E> void fileWrite(String fileName, E p) throws IOException
+   {
+      File newFile = new File(fileName);
+      FileOutputStream theFileOutPutStream = new FileOutputStream(newFile, false);
+      ObjectOutputStream theObjectOutputStream = new ObjectOutputStream(theFileOutPutStream);
+      theObjectOutputStream.writeObject(p);
+      theObjectOutputStream.close();
+      theFileOutPutStream.close();
+   }
+
 }
+
 
