@@ -32,6 +32,8 @@ import java.util.Stack;
  */
 public class FileManager
 {
+   private final int NUM_OF_LINES_IN_MOVIE = 7;
+   
    /**
     * This method reads from the standard list of movies (res\movies.txt) inflated the {@link Movie} Objects.
     * 
@@ -52,33 +54,41 @@ public class FileManager
          System.err.println("Error movies file missing. Find movies.txt and place in the res folder!");
          e.printStackTrace();
       }
-      
-      /* I know this is a very inefficient and backwards way of doing things 
-      * but you said we couldn't use java's implementation of a queue, and my
-      * implementation is bounded. You did say however that I could use a Java 
-      * Stack for some things, and so THAT is why I am doing this. If I could 
-      * I would use an unbounded list. The main problem is that I don't know 
-      * how many movie I will read before I read them in. */
-      
-      Stack<Movie> tempStack = new Stack<Movie>();
-      
+      // this finds out how many line are in the file
+      int numOfLines = 0;
       while (scan.hasNext()){
+         scan.nextLine();
+         numOfLines++;
+      }
+      // Increments this again for the last unread line in the file
+      numOfLines++;
+      
+      // this closes the scanner so that it can opened again and read from the top
+      scan.close();
+      
+      // Reopens the scanner so it can read from the top
+      try
+      {
+          scan = new Scanner(movieFileList);
+      } catch (FileNotFoundException e)
+      {
+         // the file will always exists so this will never happen. even if it didn't exist it was created by our File object
+         System.err.println("Error movies file missing. Find movies.txt and place in the res folder!");
+         e.printStackTrace();
+      }
+      
+      // this create an array of the right size, the number of lines making up a movie into the number of lines in the file
+      movies = new Movie[(numOfLines)/NUM_OF_LINES_IN_MOVIE];
+      for (int i = 0; i < movies.length; i++)
+      {
          String title = scan.nextLine(); 
          String genre = scan.nextLine();
          String actorOne = scan.nextLine();
          String actorTwo = scan.nextLine();
          String actorThree = scan.nextLine();
          String director = scan.nextLine();
-         if (scan.hasNext()) { scan.nextLine(); } 
-         tempStack.push(new Movie(title, genre, actorOne, actorTwo, actorThree, director));
-         
-      }
-      movies = new Movie[tempStack.size()];
-      int i = 0;
-      while (!tempStack.isEmpty())
-      {
-         movies[i] = tempStack.pop();
-         i++;
+         if (scan.hasNext()) { scan.nextLine(); }
+         movies[i] = new Movie(title, genre, actorOne, actorTwo, actorThree, director);
       }
       scan.close();
       return movies;
