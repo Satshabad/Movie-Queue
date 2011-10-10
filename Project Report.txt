@@ -41,7 +41,11 @@ Approach
 	classes that use this to know nothing of file names and such thing, it just allows the caller to store and retrieve it's 
 	specific object. It may not be pretty but it's for the case of security and simplicity.
 	
-	
+	HeapSorter: I decide to use an entire object for heap sort just to keep all the relevant code in once place even though technically
+	since it only has one function it should probably go in a method. I implemented heap sort using both siftUp and siftDown methods. 
+	I used siftUp to build the heap out of the given array and the siftDown method to re-bring the largest element to the top after 
+	putting the leaf there. I implemented it without in an in-place algorithm style so it takes no extra memory. What else can I say?
+	It's heap sort, it's pretty awesome in and of it's self. 
 	
 
 Test Cases
