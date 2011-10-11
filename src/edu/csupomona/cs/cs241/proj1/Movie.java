@@ -20,6 +20,10 @@ import java.io.Serializable;
  */
 public class Movie implements Serializable
 {
+   /**
+    * 
+    */
+   private static final long serialVersionUID = 6214120954635819543L;
    private String name;
    private String genre;
    private String actorOne;

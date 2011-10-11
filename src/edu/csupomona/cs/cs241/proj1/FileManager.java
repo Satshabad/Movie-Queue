@@ -20,7 +20,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.util.Scanner;
-import java.util.Stack;
 
 /**
  * This class manages all of the file reading and writing operations. 
@@ -102,6 +101,7 @@ public class FileManager
     * @post the new movie will be appended to the end of the movies.txt file in the form of it's components
     * @param m the movie to be added
     * @throws IOException
+    * @{@link Deprecated}
     */
    public void addMovietoFile(Movie m) throws IOException{
       File movieFileList = new File("res" +File.separator +"movies.txt");

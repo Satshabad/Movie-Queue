@@ -22,6 +22,13 @@ import java.io.Serializable;
  */
 public class MyQueue<E> implements Queue<E>, Serializable
 {
+  
+
+   /**
+    * 
+    */
+   private static final long serialVersionUID = 8083605114660050629L;
+
    /**
     * The array to hold the queue elements
     */
@@ -30,7 +37,7 @@ public class MyQueue<E> implements Queue<E>, Serializable
    /**
     * The size of the the array
     */
-   private int size;
+   private int capacity;
    
    /**
     * Points to the last element of the queue 
@@ -41,6 +48,8 @@ public class MyQueue<E> implements Queue<E>, Serializable
     * Points to the first element of the queue
     */
    private int head = 0;
+   
+   private int size = 0;
    
    
    /**
@@ -54,9 +63,18 @@ public class MyQueue<E> implements Queue<E>, Serializable
       // so we just increase the users size by one so the user never notices
       size = size + 1;
       array = (E[]) new Object[size];
-      this.size = size;
+      this.capacity = size;
    }
    
+   public MyQueue(MyQueue<Movie> q)
+   {
+      this.array = q.array;
+      this.capacity = q.capacity;
+      this.head = q.head;
+      this.tail = q.tail;
+      this.size = q.size;
+   }
+
    /**
     * Adds the given item to the end of the queue. 
     * 
@@ -68,8 +86,9 @@ public class MyQueue<E> implements Queue<E>, Serializable
       if (isFull()){
          increaseQueueSize();
       }   
-      tail = (tail + 1) % size;
+      tail = (tail + 1) % capacity;
       array[tail] = item;
+      size++;
    }
    
    
@@ -84,13 +103,24 @@ public class MyQueue<E> implements Queue<E>, Serializable
       if (isEmpty()){
          return null;
       }
-      head = (head +1) % size;
+      head = (head +1) % capacity;
       @SuppressWarnings("unchecked")
       E temp = (E) array[head];
+      size--;
       return temp;
    }
    
    
+   /**
+    * Finds out the number of elements in the queue.
+    * 
+    * @return the size
+    */
+   public int getSize()
+   {
+      return size;
+   }
+
    /**
     * Finds out if the queue is empty
     * 
@@ -107,14 +137,14 @@ public class MyQueue<E> implements Queue<E>, Serializable
     */
    public boolean isFull()
    {
-      return (tail +1) % size == head;
+      return (tail +1) % capacity == head;
    }
    
    private void increaseQueueSize()
    {
       @SuppressWarnings("unchecked")
-      Object theNewArray[] = (E[]) new Object[(int) (size*2)];
-      size = size*2;
+      Object theNewArray[] = (E[]) new Object[(int) (capacity*2)];
+      capacity = capacity*2;
       head = 0;
       int i;
       for (i = 0; i < array.length; i++)

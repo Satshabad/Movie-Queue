@@ -127,5 +127,39 @@ public class MovieQueue
          }
          return movieList;
       }
+
+      
+      /**
+       * Dequeues from the atHome queue in FIFO order and returns the movie.
+       * 
+       * @return the movie dequeued
+       */
+      public Movie returnMovie()
+      {
+         return atHomeQueue.dequeue();
+         
+      }
+
+      public Movie[] displayMoviesAtHome()
+      {
+         MyQueue<Movie> cloneOfP = new MyQueue<Movie>(atHomeQueue);
+         
+         Movie[] movieList = new Movie[cloneOfP.getSize()];
+         int i = 0;
+         while(!cloneOfP.isEmpty()){
+            movieList[i] = cloneOfP.dequeue();
+            i++;        
+         }
+         return movieList;
+      }
+
+      public void save() throws IOException
+      {
+
+         FileManager fm = new FileManager();
+         fm.saveHomeQueue(atHomeQueue);
+         fm.saveWaitingQueue(waitingQueue);
+         
+      }
       
 }

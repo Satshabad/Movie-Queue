@@ -19,8 +19,13 @@ import java.util.Stack;
  * @author Satshabad Khalsa
  *
  */
-public class PriorityQueue<E> implements Serializable
+public class PriorityQueue<E extends Serializable> implements Serializable
 {
+   /**
+    * 
+    */
+   private static final long serialVersionUID = 3773878027018179872L;
+
    /**
     * The array that holds the queues of different priorities
     */
@@ -92,7 +97,6 @@ public class PriorityQueue<E> implements Serializable
    public void enqueue(E item, int priority)
    {
       if (item == null){return;}
-      
       // Makes sure that the priority given is in bounds of set priority, if not changes it
       if (priority  > array.length ) {priority = array.length;}
       if (priority < 1) { priority = 1;}

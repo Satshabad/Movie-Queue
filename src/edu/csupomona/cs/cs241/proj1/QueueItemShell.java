@@ -18,8 +18,13 @@ import java.io.Serializable;
  * @author Satshabad
  * @param <E> the type of object to be wrapped
  */
-public class QueueItemShell<E> implements Serializable
+public class QueueItemShell<E extends Serializable> implements Serializable
 {
+   /**
+    * 
+    */
+   private static final long serialVersionUID = -1334304355784814880L;
+
    /**
     * The items priority in the queue
     */

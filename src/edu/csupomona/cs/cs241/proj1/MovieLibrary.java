@@ -39,7 +39,8 @@ public class MovieLibrary
     * and the pointer points to the movie in {@link #movieList}
     */
    private StringPointerPair[] mainActorList;
-       
+   
+   int numberOfMovies;
    /**
     * This constructor creates the MovieLibrary object and populates it with the list of movies.
     */
@@ -47,17 +48,28 @@ public class MovieLibrary
       FileManager fm = new FileManager();
       movieList = fm.getMoviesFromFile();
       
-      int size = movieList.length;
+      numberOfMovies = movieList.length;
       
-      titleList = new StringPointerPair[size];
-      genreList = new StringPointerPair[size];
-      actorList = new StringPointerPair[size*3];
-      directorList = new StringPointerPair[size];
-      mainActorList = new StringPointerPair[size];
+      titleList = new StringPointerPair[numberOfMovies];
+      genreList = new StringPointerPair[numberOfMovies];
+      actorList = new StringPointerPair[numberOfMovies*3];
+      directorList = new StringPointerPair[numberOfMovies];
+      mainActorList = new StringPointerPair[numberOfMovies];
       populateReferenceList();
       
    }
     
+
+   /**
+    * Returns the number of movies in the file
+    * 
+    * @return the numberOfMovies
+    */
+   public int getNumberOfMovies()
+   {
+      return numberOfMovies;
+   }
+
 
    /**
     * This method puts together a string (either title, actor, director, or genre) and 
