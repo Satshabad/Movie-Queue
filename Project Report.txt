@@ -32,20 +32,28 @@ Approach
 	the tedious file writing and reading from the main parts of the program and it ensures that that any files opened 
 	will be closed. All saved states of objects also go through here to make it easier to keep persistent data. also having
 	one place that writes to files keeps the files from being corrupted. I decided to add the persistent data functionality 
-	through Serializable. I learned it this summer while working on programming android phones, so I believe it's fair game. I 
-	am not using it like a black box but I also don't fully understand it's implementation, though I would love to learn about it.
-	We stand on the shoulders of giants, if we must understand  every little detail of the things we use in order to justify 
-	using them then I would never get to school in the morning because I would still be trying to understand exactly how my 
-	car can use tiny explosions to move me forward. All code was written by me. Anyway, for simplicity's sake I have created very 
-	specific methods for saving the exact thing I want to save rather than adhering to more modular code. This allows the upper 
-	classes that use this to know nothing of file names and such thing, it just allows the caller to store and retrieve it's 
-	specific object. It may not be pretty but it's for the case of security and simplicity.
+	through Serializable. For simplicity's sake I have created very specific methods for saving the exact thing I want to save 
+	rather than adhering to more modular code. This allows the upper classes that use this to know nothing of file names and such 
+	thing, it just allows the caller to store and retrieve it's specific object. It may not be pretty but it's for the case of security 
+	and simplicity.
 	
 	HeapSorter: I decide to use an entire object for heap sort just to keep all the relevant code in once place even though technically
 	since it only has one function it should probably go in a method. I implemented heap sort using both siftUp and siftDown methods. 
 	I used siftUp to build the heap out of the given array and the siftDown method to re-bring the largest element to the top after 
 	putting the leaf there. I implemented it without in an in-place algorithm style so it takes no extra memory. What else can I say?
-	It's heap sort, it's pretty awesome in and of it's self. 
+	It's heap sort, it's pretty awesome in and of it's self. I could not implement the fast version. :(
+	
+	MovieLibrary: It might be a little heavy but the MovieLibray contains the list of all movies AND the methods involving the searching 
+	of them. The uniqueness of my project is that i abstracted the search feature by making a new class called StringPointerPair which 
+	has member variables a String and a pointer to it's relevant movie. for instance the directorList contains an array of StringPointerPairs
+	which all contain as a field the name of the director and a link to the movie they directed. I did this at first so I could search for 
+	actors and bring up all the movies they had stared in at once instead of just one by putting on StringPointerPair instance for each actor 
+	credit in all the movies in one array and then search that list for the actor, that way when several instances of the actors name came up it
+	meant that each of the instances pointed to different movies. After a bit of though though I figured to do this will all relevant tags 
+	(actor, director genre ect) that way i could abstract the search function and make it generic instead of having to repeat it once just 
+	for actors and once for everything else. All of the sort and search methods return an array of Movies so the caller never knows about the 
+	internal shellclass that wraps the movie and tag. I plan for my UI to be a series of constantly refreshing displays of Movie arrays, that is why
+	I return an array of Movies.
 	
 
 Test Cases

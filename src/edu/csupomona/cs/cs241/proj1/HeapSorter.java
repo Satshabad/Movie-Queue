@@ -40,8 +40,8 @@ public class HeapSorter<E extends Comparable<E>>
     */
    private void heapify(E[] array){
          
-      for (int firstLeafAndForward = ((array.length+1)/2); firstLeafAndForward < array.length; firstLeafAndForward++){
-         siftUp(firstLeafAndForward, array);
+      for (int i = array.length-1; i > 0; i--){
+         siftUp(i, array);
       }
       
       
@@ -75,9 +75,7 @@ public class HeapSorter<E extends Comparable<E>>
          }else{
             maxChild = childTwo;
          }
-         System.out.println( node + " : " +maxChild);
          if (array[node].compareTo(array[maxChild]) < 0){
-            System.out.println("here");
             swap(array, maxChild, node);
             node = maxChild;
          }else{done = true;}
@@ -114,10 +112,7 @@ public class HeapSorter<E extends Comparable<E>>
                node = sibiling;
             }   
          }
-         System.out.println(parent + ":" + node);
          if (array[parent].compareTo(array[node]) < 0){
-            
-            System.out.println("here");
             swap(array, parent, node);
             node = parent;
          }

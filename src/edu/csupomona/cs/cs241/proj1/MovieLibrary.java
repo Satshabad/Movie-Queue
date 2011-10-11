@@ -1,5 +1,7 @@
 package edu.csupomona.cs.cs241.proj1;
 
+import java.lang.reflect.Method;
+
 public class MovieLibrary
 {
    
@@ -30,8 +32,13 @@ public class MovieLibrary
     * This holds a list of strings and pointers where the string is the name of the director of the film 
     * and the pointer points to the movie in {@link #movieList}
     */
-   private StringPointerPair[] DirectorList;
+   private StringPointerPair[] directorList;
    
+   /**
+    * This holds a list of strings and pointers where the string is the name of the main actor in the film 
+    * and the pointer points to the movie in {@link #movieList}
+    */
+   private StringPointerPair[] mainActorList;
        
    /**
     * This constructor creates the MovieLibrary object and populates it with the list of movies.
@@ -45,7 +52,8 @@ public class MovieLibrary
       titleList = new StringPointerPair[size];
       genreList = new StringPointerPair[size];
       actorList = new StringPointerPair[size*3];
-      DirectorList = new StringPointerPair[size];
+      directorList = new StringPointerPair[size];
+      mainActorList = new StringPointerPair[size];
       populateReferenceList();
       
    }
@@ -69,7 +77,8 @@ public class MovieLibrary
          actorList[j] = new StringPointerPair(m.getActorOne(), m);
          actorList[j+1] = new StringPointerPair(m.getActorTwo(), m);
          actorList[j+2] = new StringPointerPair(m.getActorThree(), m);
-         DirectorList[i] = new StringPointerPair(m.getDirector(), m);
+         directorList[i] = new StringPointerPair(m.getDirector(), m);
+         mainActorList[i] = new StringPointerPair(m.getActorOne(), m);
       }
       
        
@@ -77,11 +86,13 @@ public class MovieLibrary
       
    
    /**
-    * This method implements binary search for a full matching string in the given array. It will find all instances of that string
+    * This method has been replaced by linear search to add partial search functionality. 
+    * it used to be a beautiful binary search method
     * 
     * @param array
     * @param target
-    * @return
+    * @return 
+    * @deprecated
     */
    public StringPointerPair[] binarySearch(StringPointerPair[] array, String target){
         StringPointerPair[] instances = new StringPointerPair[array.length];
@@ -124,4 +135,108 @@ public class MovieLibrary
        }
        return instances;
     }
+
+   /**
+    * This {@link Method} searched linearly for partial matches to the {@link String} passes in the field of the the array of {@link StringPointerPair} objects
+    * 
+    * @pre the array of {@link StringPointerPair} objects must be non null 
+    * @post an array of {@link Movie} objects which have the matched in there respected fields is returned
+    * @param array the array of {@link StringPointerPair} objects to search
+    * @param target the string being search for
+    * @return an array of {@link Movie} objects which have a field that match the passed {@link String}
+    */
+   private Movie[] search(StringPointerPair[] array, String target){
+      Movie[] instances = new Movie[array.length];
+      int j = 0;
+      for (int i = 0; i < array.length; i++)
+      {
+         if(contains(target, array[i].getTheField())){instances[j++] = array[i].getTheMovie();}
+      }
+      return instances;
+   }
+   
+   /**
+    * This method searches movies by a criteria: Title, Actor, Genre, Director. It returns the matching movies in an array.
+    * 
+    * @pre the {@link #titleList}, {@link #directorList}, {@link #genreList}, {@link #actorList} must all be non null
+    * @post the array of {@link Movie} objects will be returned or null if the {@code char} passed is not {@code t} {@code d} {@code g} or {@code a}
+    * @param c a char which is the first letter of the criteria to be searched for: {@code t} {@code d} {@code g} or {@code a} for Title, Director, Genre or Actor respectively
+    * @param target the {@link String} that is being searched for
+    * @return the array of {@link Movie} objects or null if {@code char} was not valid, if array is empty then no matches were found.
+    */
+   public Movie[] searchBy(char c, String target)
+   {
+      switch (c)
+         {
+            case 't':
+               return search(titleList, target);
+            case 'd':
+               return search(directorList, target);
+            case 'g':
+               return search(genreList, target);
+            case 'a':
+               return search(actorList, target);               
+            default:
+               return null;
+         }
+   }
+   
+   /**
+    * This internal method finds out if a {@link String} is a subset of another {@link String}
+    * 
+    * @pre 
+    * @post the boolean will be returned indicating if the string is a subset or not
+    * @param target the potential subset {@link String} 
+    * @param containedIn the potential superset {@link String}
+    * @return true if {@code target} is a subset of {@code containedIn}
+    */
+   private boolean contains(String target, String containedIn)
+   {
+      if (containedIn == null || target == null) {return false;}
+      
+      if (containedIn.indexOf(target) < 0){ return false;}
+      
+      return true;
+   }
+
+   /**
+    * This method sorts movies by a criteria: Title, Main actor, Genre, Director. It returns the matching movies in an array.
+    * 
+    * @pre the {@link #titleList}, {@link #directorList}, {@link #genreList}, {@link #mainActorListList} must all be non null
+    * @post the array of {@link Movie} objects will be returned or null if the {@code char} passed is not {@code t} {@code d} {@code g} or {@code m}
+    * @param c a char which is the first letter of the criteria to be searched for: {@code t} {@code d} {@code g} or {@code m} for Title, Director, Genre or Main actor respectively
+    * @return the array of {@link Movie} objects or null if {@code char} was not valid, if array is empty then no matches were found.
+    */
+   public Movie[] movieListBy(char c)
+   {
+      HeapSorter<StringPointerPair> heapSorter = new HeapSorter<StringPointerPair>();
+      switch (c)
+         {
+            case 't':
+               heapSorter.sort(titleList);
+               return stringPointersToMovies(titleList);
+            case 'd':
+               heapSorter.sort(directorList);
+               return stringPointersToMovies(directorList);
+            case 'g':
+               heapSorter.sort(genreList);
+               return stringPointersToMovies(genreList);
+            case 'm':
+               heapSorter.sort(mainActorList);
+               return stringPointersToMovies(mainActorList);
+            default:
+               return null;
+         }
+   }
+
+
+   private Movie[] stringPointersToMovies(StringPointerPair[] array)
+   {
+      Movie[] movieArray = new Movie[array.length];
+      for (int i = 0; i < array.length; i++)
+      {
+         movieArray[i] = array[i].getTheMovie();
+      }
+      return movieArray;
+   }
 }
