@@ -26,7 +26,8 @@ Approach
 	MovieQueue: I wanted the higher level functions of this project to be as simple as possible. if you take a 
 	look at the MovieQueue class you can see how simple it is. it push all logic to the work horse of the queues.
 	the methods in MovieQueue directly relate to the function of the end program but are completely decoupled from 
-	any view. All the methods are return queues for the caller to display.
+	any view. There are methods for displaying the queues that turn the queues into array form for simplicity in the GUI.
+	The caller is expected to call the display methods right after enqueueing or dequeueing elements
 	
 	FileManager: I decided to create one place to have methods that deal with files, this is it. This class helps keep 
 	the tedious file writing and reading from the main parts of the program and it ensures that that any files opened 
