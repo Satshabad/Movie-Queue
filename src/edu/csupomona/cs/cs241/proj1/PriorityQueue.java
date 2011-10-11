@@ -36,6 +36,8 @@ public class PriorityQueue<E> implements Serializable
     * it also acts as a unique id passed to the wrapper class 
     */
    private int orderCounter;
+   
+   private int size;
 
    /**
     * This constructor creates a priority queue. 
@@ -59,8 +61,23 @@ public class PriorityQueue<E> implements Serializable
          array[i] = (MyQueue<QueueItemShell<E>>) new MyQueue<QueueItemShell<E>>(size);
       }
       orderCounter = 0;
+      size = 0;
    }    
    
+   /**
+    * This is a cloning constructor which takes a param of the {@link PriorityQueue} to be cloned from.
+    * 
+    * @pre p must not be null
+    * @post the fields of p are now the fields of {@code this}
+    * @param p the {@link PriorityQueue} to be cloned from
+    */
+   public PriorityQueue(PriorityQueue<E> p)
+   {
+      this.array = p.array;
+      this.normalQueue = p.normalQueue;
+      this.orderCounter = p.orderCounter;
+      this.size = p.size;
+   }
 
    /**
     * This adds the item passed to the queue with a specific priority. Low is high.
@@ -85,6 +102,7 @@ public class PriorityQueue<E> implements Serializable
       QueueItemShell<E> wrapper = new QueueItemShell<E>(item, priority, orderCounter++);
       array[priority - 1].enqueue(wrapper);
       normalQueue.enqueue(wrapper);
+      size++;
 
    }
 
@@ -106,6 +124,7 @@ public class PriorityQueue<E> implements Serializable
       QueueItemShell<E> wrapper = new QueueItemShell<E>(item, array.length, orderCounter++);
       array[array.length-1].enqueue(wrapper);
       normalQueue.enqueue(wrapper);
+      size++;
    }
    /**
     * This removes and returns the item in order of priority. Low is high.
@@ -139,6 +158,7 @@ public class PriorityQueue<E> implements Serializable
             {
                normalQueue.enqueue(tempStack.pop());
             }
+            size--;
             return compareTemp.getItem();
          }
          tempStack.push(compareTemp);
@@ -174,6 +194,7 @@ public class PriorityQueue<E> implements Serializable
             {
                normalQueue.enqueue(tempStack.pop());
             }
+            size--;
             return compareTemp.getItem();
          }
          tempStack.push(compareTemp);
@@ -196,5 +217,10 @@ public class PriorityQueue<E> implements Serializable
          }
       }
       return true;
+   }
+
+   public int getSize()
+   {
+      return size;
    } 
 }

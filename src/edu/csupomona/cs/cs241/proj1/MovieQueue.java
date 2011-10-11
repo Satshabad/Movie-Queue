@@ -89,28 +89,43 @@ public class MovieQueue
          atHomeQueue.enqueue(m);
        }
 
-      
-      
       /**
-       * This allows the UI direct access to the waiting queue to display it
+       * This method is used for the UI to display the list of movies in normal FIFO order.
        * 
-       * @return the waitingQueue
+       * @pre 
+       * @post the movies will be in the order the user queued them
+       * @return an array of {@link Movie} objects that are in FIFO order 
        */
-      public PriorityQueue<Movie> getWaitingQueue()
+      public Movie[] displayWaitingMovies()
       {
-         return waitingQueue;
+         PriorityQueue<Movie> cloneOfP = new PriorityQueue<Movie>(waitingQueue);
+         Movie[] movieList = new Movie[cloneOfP.getSize()];
+         int i = 0;
+         while(!cloneOfP.isEmpty()){
+            movieList[i] = cloneOfP.dequeue();
+            i++;        
+         }
+         return movieList;
       }
       
-
       /**
-       * This allows the UI direct access to the home queue to display it
+       * This method is used for the UI to display the list of movies in priority order. 
        * 
-       * @return the homeQueue
+       * 
+       * @pre 
+       * @post the movies will be in the order of the priority the user queued them in, if two movies have the same priority then they appear in FIFO order
+       * @return an array of {@link Movie} objects that are in priority order 
        */
-      public MyQueue<Movie> getAtHomeQueue()
+      public Movie[] displayWaitingMoviesByPriority()
       {
-         return atHomeQueue;
+         PriorityQueue<Movie> cloneOfP = new PriorityQueue<Movie>(waitingQueue);
+         Movie[] movieList = new Movie[cloneOfP.getSize()];
+         int i = 0;
+         while(!cloneOfP.isEmpty()){
+            movieList[i] = cloneOfP.dequeueByPriority();
+            i++;        
+         }
+         return movieList;
       }
-      
       
 }
