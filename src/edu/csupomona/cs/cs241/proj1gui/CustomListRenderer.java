@@ -6,7 +6,10 @@
 package edu.csupomona.cs.cs241.proj1gui;
 
 import edu.csupomona.cs.cs241.proj1.Movie;
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.JList;
 import javax.swing.JTextArea;
 import javax.swing.ListCellRenderer;
@@ -32,8 +35,12 @@ public class CustomListRenderer implements ListCellRenderer {
                         + theMovie.getActorTwo() + ", "
                         + theMovie.getActorThree() + "\n");
         renderer.append("Genre: " + theMovie.getGenre()+ "\n");
-        renderer.append("----------------------------------------------");
+        renderer.append("-----------------------------------------------------");
         renderer.setLineWrap(true);
+        if (isSelected){renderer.setBackground(Color.LIGHT_GRAY);}
+
+         
+
         return renderer;
    }
 }

@@ -82,7 +82,7 @@ public class GuiFrame extends javax.swing.JFrame {
       jScrollPane3 = new javax.swing.JScrollPane();
       waitingQueueList = new javax.swing.JList();
       normalOrderRadioButton = new javax.swing.JRadioButton();
-      prioirtyOrderRadioButton = new javax.swing.JRadioButton();
+      priorityOrderRadioButton = new javax.swing.JRadioButton();
       jPanel7 = new javax.swing.JPanel();
       jLabel4 = new javax.swing.JLabel();
       sendBackButton = new javax.swing.JButton();
@@ -335,12 +335,17 @@ public class GuiFrame extends javax.swing.JFrame {
 
       waitingQueueDisplayRadioGroup.add(normalOrderRadioButton);
       normalOrderRadioButton.setText("Show in Normal Order");
+      normalOrderRadioButton.addMouseListener(new java.awt.event.MouseAdapter() {
+         public void mouseClicked(java.awt.event.MouseEvent evt) {
+            normalOrderRadioButtonMouseClicked(evt);
+         }
+      });
 
-      waitingQueueDisplayRadioGroup.add(prioirtyOrderRadioButton);
-      prioirtyOrderRadioButton.setText("Show by Priority");
-      prioirtyOrderRadioButton.addActionListener(new java.awt.event.ActionListener() {
+      waitingQueueDisplayRadioGroup.add(priorityOrderRadioButton);
+      priorityOrderRadioButton.setText("Show by Priority");
+      priorityOrderRadioButton.addActionListener(new java.awt.event.ActionListener() {
          public void actionPerformed(java.awt.event.ActionEvent evt) {
-            prioirtyOrderRadioButtonActionPerformed(evt);
+            priorityOrderRadioButtonActionPerformed(evt);
          }
       });
 
@@ -355,7 +360,7 @@ public class GuiFrame extends javax.swing.JFrame {
                .addComponent(normalOrderRadioButton))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-               .addComponent(prioirtyOrderRadioButton)
+               .addComponent(priorityOrderRadioButton)
                .addComponent(deliverByPriorityButton, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
          .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
       );
@@ -370,7 +375,7 @@ public class GuiFrame extends javax.swing.JFrame {
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                .addComponent(normalOrderRadioButton)
-               .addComponent(prioirtyOrderRadioButton))
+               .addComponent(priorityOrderRadioButton))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
             .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE))
       );
@@ -492,320 +497,72 @@ public class GuiFrame extends javax.swing.JFrame {
        }
     }//GEN-LAST:event_sortByGenreRadioButtonActionPerformed
 
+    private void updateLibraryListView(){
+        if (normalOrderRadioButton.isSelected()){
+                  //This displays the data change
+                  waitingQueueListModel.clear();
+                  Movie[] waitingQueueArray = backEndManager.getWaitingQueue();
+
+                  for(int i = 0; i < waitingQueueArray.length; i++)
+                  {
+                     waitingQueueListModel.add(i, waitingQueueArray[i]);
+                  }
+               }
+               else if (priorityOrderRadioButton.isSelected()){
+                  //This displays the data change
+                  waitingQueueListModel.clear();
+                  Movie[] waitingQueueArray = backEndManager.getWaitingQueueByPriority();
+
+                  for(int i = 0; i < waitingQueueArray.length; i++)
+                  {
+                     waitingQueueListModel.add(i, waitingQueueArray[i]);
+                  }
+               }
+    }
+
+
     private void libraryListMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_libraryListMouseClicked
     {//GEN-HEADEREND:event_libraryListMouseClicked
        JList list = (JList)evt.getSource();
         if (evt.getClickCount() == 2){
             int index = list.locationToIndex(evt.getPoint());
             Movie movieToBeAdded;
+
+            int pri=0;
+            if(priorityLowRadioButton.isSelected()){pri = 3;}
+            else if(priorityMediumRadioButton.isSelected()){pri= 2;}
+            else if(priorityHighRadioButton.isSelected()){pri = 1;}
+
+
+
+
          if (sortByTitleRadioButton.isSelected() ){
             Movie[] moviesByTitle = backEndManager.getMoviesListedByTitle();
             movieToBeAdded = moviesByTitle[index];
-
-            if(priorityLowRadioButton.isSelected()){
-               backEndManager.addToMovieQueue(movieToBeAdded, 1);
-               if (normalOrderRadioButton.isSelected()){
-                  //This displays the data change
-                  waitingQueueListModel.clear();
-                  Movie[] waitingQueueArray = backEndManager.getWaitingQueue();
-
-                  for(int i = 0; i < waitingQueueArray.length; i++)
-                  {
-                     waitingQueueListModel.add(i, waitingQueueArray[i]);
-                  }
-               }
-               else if (prioirtyOrderRadioButton.isSelected()){
-                  //This displays the data change
-                  waitingQueueListModel.clear();
-                  Movie[] waitingQueueArray = backEndManager.getWaitingQueueByPriority();
-
-                  for(int i = 0; i < waitingQueueArray.length; i++)
-                  {
-                     waitingQueueListModel.add(i, waitingQueueArray[i]);
-                  }
-               }
-            }
-            else if(priorityMediumRadioButton.isSelected()){
-               backEndManager.addToMovieQueue(movieToBeAdded, 2);
-               if (normalOrderRadioButton.isSelected()){
-                  //This displays the data change
-                  waitingQueueListModel.clear();
-                  Movie[] waitingQueueArray = backEndManager.getWaitingQueue();
-
-//                  for (Movie movie : waitingQueueArray)
-//               {
-//                  System.err.println(movie);
-//               }
-               for(int i = 0; i < waitingQueueArray.length; i++)
-               {
-
-                  waitingQueueListModel.add(i, waitingQueueArray[i]);
-
-               }
-               }
-               else if (prioirtyOrderRadioButton.isSelected()){
-                  //This displays the data change
-                  waitingQueueListModel.clear();
-                  Movie[] waitingQueueArray = backEndManager.getWaitingQueueByPriority();
-
-                  for(int i = 0; i < waitingQueueArray.length; i++)
-                  {
-                     waitingQueueListModel.add(i, waitingQueueArray[i]);
-                  }
-               }
-            }
-             else if(priorityHighRadioButton.isSelected()){
-               backEndManager.addToMovieQueue(movieToBeAdded, 3);
-               if (normalOrderRadioButton.isSelected()){
-                  //This displays the data change
-                  waitingQueueListModel.clear();
-                  Movie[] waitingQueueArray = backEndManager.getWaitingQueue();
-
-                  for(int i = 0; i < waitingQueueArray.length; i++)
-                  {
-                     waitingQueueListModel.add(i, waitingQueueArray[i]);
-                  }
-               }
-               else if (prioirtyOrderRadioButton.isSelected()){
-                  //This displays the data change
-                  waitingQueueListModel.clear();
-                  Movie[] waitingQueueArray = backEndManager.getWaitingQueueByPriority();
-
-                  for(int i = 0; i < waitingQueueArray.length; i++)
-                  {
-                     waitingQueueListModel.add(i, waitingQueueArray[i]);
-                  }
-               }
-
-            }
+            backEndManager.addToMovieQueue(movieToBeAdded, pri);
+            updateLibraryListView();
             }
             else if(sortByActorRadioButton.isSelected())
             {
                Movie[] moviesByActor = backEndManager.getMoviesListedByMainActor();
                movieToBeAdded = moviesByActor[index];
-
-               if(priorityLowRadioButton.isSelected()){
-                  backEndManager.addToMovieQueue(movieToBeAdded, 1);
-                  if (normalOrderRadioButton.isSelected()){
-                  //This displays the data change
-                  waitingQueueListModel.clear();
-                  Movie[] waitingQueueArray = backEndManager.getWaitingQueue();
-
-                  for(int i = 0; i < waitingQueueArray.length; i++)
-                  {
-                     waitingQueueListModel.add(i, waitingQueueArray[i]);
-                  }
-               }
-               else if (prioirtyOrderRadioButton.isSelected()){
-                  //This displays the data change
-                  waitingQueueListModel.clear();
-                  Movie[] waitingQueueArray = backEndManager.getWaitingQueueByPriority();
-
-                  for(int i = 0; i < waitingQueueArray.length; i++)
-                  {
-                     waitingQueueListModel.add(i, waitingQueueArray[i]);
-                  }
-               }
-               }
-               else if(priorityMediumRadioButton.isSelected()){
-                  backEndManager.addToMovieQueue(movieToBeAdded, 2);
-                  if (normalOrderRadioButton.isSelected()){
-                  //This displays the data change
-                  waitingQueueListModel.clear();
-                  Movie[] waitingQueueArray = backEndManager.getWaitingQueue();
-
-                  for(int i = 0; i < waitingQueueArray.length; i++)
-                  {
-                     waitingQueueListModel.add(i, waitingQueueArray[i]);
-                  }
-               }
-               else if (prioirtyOrderRadioButton.isSelected()){
-                  //This displays the data change
-                  waitingQueueListModel.clear();
-                  Movie[] waitingQueueArray = backEndManager.getWaitingQueueByPriority();
-
-                  for(int i = 0; i < waitingQueueArray.length; i++)
-                  {
-                     waitingQueueListModel.add(i, waitingQueueArray[i]);
-                  }
-               }
-               }
-               else if(priorityHighRadioButton.isSelected()){
-                  backEndManager.addToMovieQueue(movieToBeAdded, 3);
-                  if (normalOrderRadioButton.isSelected()){
-                  //This displays the data change
-                  waitingQueueListModel.clear();
-                  Movie[] waitingQueueArray = backEndManager.getWaitingQueue();
-
-                  for(int i = 0; i < waitingQueueArray.length; i++)
-                  {
-                     waitingQueueListModel.add(i, waitingQueueArray[i]);
-                  }
-               }
-               else if (prioirtyOrderRadioButton.isSelected()){
-                  //This displays the data change
-                  waitingQueueListModel.clear();
-                  Movie[] waitingQueueArray = backEndManager.getWaitingQueueByPriority();
-
-                  for(int i = 0; i < waitingQueueArray.length; i++)
-                  {
-                     waitingQueueListModel.add(i, waitingQueueArray[i]);
-                  }
-               }
-
-               }
+               backEndManager.addToMovieQueue(movieToBeAdded, pri);
+               updateLibraryListView();
             }
             else if(sortByDirectorRadioButton.isSelected())
             {
                Movie[] moviesByDirector = backEndManager.getMoviesListedByDirector();
                movieToBeAdded = moviesByDirector[index];
-
-               if(priorityLowRadioButton.isSelected()){
-                  backEndManager.addToMovieQueue(movieToBeAdded, 1);
-                  if (normalOrderRadioButton.isSelected()){
-                  //This displays the data change
-                  waitingQueueListModel.clear();
-                  Movie[] waitingQueueArray = backEndManager.getWaitingQueue();
-
-                  for(int i = 0; i < waitingQueueArray.length; i++)
-                  {
-                     waitingQueueListModel.add(i, waitingQueueArray[i]);
-                  }
-               }
-               else if (prioirtyOrderRadioButton.isSelected()){
-                  //This displays the data change
-                  waitingQueueListModel.clear();
-                  Movie[] waitingQueueArray = backEndManager.getWaitingQueueByPriority();
-
-                  for(int i = 0; i < waitingQueueArray.length; i++)
-                  {
-                     waitingQueueListModel.add(i, waitingQueueArray[i]);
-                  }
-               }
-
-               }
-               else if(priorityMediumRadioButton.isSelected()){
-                  backEndManager.addToMovieQueue(movieToBeAdded, 2);
-                   if (normalOrderRadioButton.isSelected()){
-                  //This displays the data change
-                  waitingQueueListModel.clear();
-                  Movie[] waitingQueueArray = backEndManager.getWaitingQueue();
-
-                  for(int i = 0; i < waitingQueueArray.length; i++)
-                  {
-                     waitingQueueListModel.add(i, waitingQueueArray[i]);
-                  }
-               }
-               else if (prioirtyOrderRadioButton.isSelected()){
-                  //This displays the data change
-                  waitingQueueListModel.clear();
-                  Movie[] waitingQueueArray = backEndManager.getWaitingQueueByPriority();
-
-                  for(int i = 0; i < waitingQueueArray.length; i++)
-                  {
-                     waitingQueueListModel.add(i, waitingQueueArray[i]);
-                  }
-               }
-               }
-                else if(priorityHighRadioButton.isSelected()){
-                  backEndManager.addToMovieQueue(movieToBeAdded, 3);
-                  if (normalOrderRadioButton.isSelected()){
-                  //This displays the data change
-                  waitingQueueListModel.clear();
-                  Movie[] waitingQueueArray = backEndManager.getWaitingQueue();
-
-                  for(int i = 0; i < waitingQueueArray.length; i++)
-                  {
-                     waitingQueueListModel.add(i, waitingQueueArray[i]);
-                  }
-               }
-               else if (prioirtyOrderRadioButton.isSelected()){
-                  //This displays the data change
-                  waitingQueueListModel.clear();
-                  Movie[] waitingQueueArray = backEndManager.getWaitingQueueByPriority();
-
-                  for(int i = 0; i < waitingQueueArray.length; i++)
-                  {
-                     waitingQueueListModel.add(i, waitingQueueArray[i]);
-                  }
-               }
-               }
+               backEndManager.addToMovieQueue(movieToBeAdded, pri);
+               updateLibraryListView();
             }
             else if(sortByGenreRadioButton.isSelected())
             {
                Movie[] moviesByGenre = backEndManager.getMoviesListedByGenre();
                movieToBeAdded = moviesByGenre[index];
-
-               if(priorityLowRadioButton.isSelected()){
-                  backEndManager.addToMovieQueue(movieToBeAdded, 1);
-                   if (normalOrderRadioButton.isSelected()){
-                  //This displays the data change
-                  waitingQueueListModel.clear();
-                  Movie[] waitingQueueArray = backEndManager.getWaitingQueue();
-
-                  for(int i = 0; i < waitingQueueArray.length; i++)
-                  {
-                     waitingQueueListModel.add(i, waitingQueueArray[i]);
-                  }
-               }
-               else if (prioirtyOrderRadioButton.isSelected()){
-                  //This displays the data change
-                  waitingQueueListModel.clear();
-                  Movie[] waitingQueueArray = backEndManager.getWaitingQueueByPriority();
-
-                  for(int i = 0; i < waitingQueueArray.length; i++)
-                  {
-                     waitingQueueListModel.add(i, waitingQueueArray[i]);
-                  }
-               }
-               }
-               else if(priorityMediumRadioButton.isSelected()){
-                  backEndManager.addToMovieQueue(movieToBeAdded, 2);
-                   if (normalOrderRadioButton.isSelected()){
-                  //This displays the data change
-                  waitingQueueListModel.clear();
-                  Movie[] waitingQueueArray = backEndManager.getWaitingQueue();
-
-                  for(int i = 0; i < waitingQueueArray.length; i++)
-                  {
-                     waitingQueueListModel.add(i, waitingQueueArray[i]);
-                  }
-               }
-               else if (prioirtyOrderRadioButton.isSelected()){
-                  //This displays the data change
-                  waitingQueueListModel.clear();
-                  Movie[] waitingQueueArray = backEndManager.getWaitingQueueByPriority();
-
-                  for(int i = 0; i < waitingQueueArray.length; i++)
-                  {
-                     waitingQueueListModel.add(i, waitingQueueArray[i]);
-                  }
-               }
-               }
-                else if(priorityHighRadioButton.isSelected()){
-                  backEndManager.addToMovieQueue(movieToBeAdded, 3);
-                   //This displays the data change
-                  if (normalOrderRadioButton.isSelected()){
-                  //This displays the data change
-                  waitingQueueListModel.clear();
-                  Movie[] waitingQueueArray = backEndManager.getWaitingQueue();
-
-                  for(int i = 0; i < waitingQueueArray.length; i++)
-                  {
-                     waitingQueueListModel.add(i, waitingQueueArray[i]);
-                  }
-               }
-               else if (prioirtyOrderRadioButton.isSelected()){
-                  //This displays the data change
-                  waitingQueueListModel.clear();
-                  Movie[] waitingQueueArray = backEndManager.getWaitingQueueByPriority();
-
-                  for(int i = 0; i < waitingQueueArray.length; i++)
-                  {
-                     waitingQueueListModel.add(i, waitingQueueArray[i]);
-                  }
-               }
-               }
+               backEndManager.addToMovieQueue(movieToBeAdded, pri);
+               updateLibraryListView();
+            
             }
 
 
@@ -883,6 +640,16 @@ public class GuiFrame extends javax.swing.JFrame {
                      waitingQueueListModel.add(i, waitingList[i]);
                   }
                }
+               else if(priorityOrderRadioButton.isSelected()){
+                  waitingQueueListModel.clear();
+
+                  Movie[] waitingList = backEndManager.getWaitingQueueByPriority();
+
+                  for (int i = 0; i < waitingList.length; i++)
+                  {
+                     waitingQueueListModel.add(i, waitingList[i]);
+                  }
+               }
             }
         }
         
@@ -902,18 +669,18 @@ public class GuiFrame extends javax.swing.JFrame {
        }
     }//GEN-LAST:event_searchTextFieldKeyPressed
 
-    private void prioirtyOrderRadioButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_prioirtyOrderRadioButtonActionPerformed
-    {//GEN-HEADEREND:event_prioirtyOrderRadioButtonActionPerformed
+
+    private void priorityOrderRadioButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_priorityOrderRadioButtonActionPerformed
+    {//GEN-HEADEREND:event_priorityOrderRadioButtonActionPerformed
        waitingQueueListModel.clear();
        Movie[] movieList = backEndManager.getWaitingQueueByPriority();
 
 
        for (int i = 0; i < movieList.length; i++)
        {
-            System.out.println(movieList[i]);
             waitingQueueListModel.add(i, movieList[i]);
        }
-    }//GEN-LAST:event_prioirtyOrderRadioButtonActionPerformed
+    }//GEN-LAST:event_priorityOrderRadioButtonActionPerformed
 
     private void deliverButtonMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_deliverButtonMouseClicked
     {//GEN-HEADEREND:event_deliverButtonMouseClicked
@@ -969,7 +736,7 @@ public class GuiFrame extends javax.swing.JFrame {
 
     private void sendBackButtonMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_sendBackButtonMouseClicked
     {//GEN-HEADEREND:event_sendBackButtonMouseClicked
-          if (waitingQueueListModel.isEmpty()){return;}
+          if (atHomeListModel.isEmpty()){return;}
 
        backEndManager.sendMovieBack();
        atHomeListModel.clear();
@@ -980,6 +747,18 @@ public class GuiFrame extends javax.swing.JFrame {
             atHomeListModel.add(i, homeList[i]);
        }
     }//GEN-LAST:event_sendBackButtonMouseClicked
+
+    private void normalOrderRadioButtonMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_normalOrderRadioButtonMouseClicked
+    {//GEN-HEADEREND:event_normalOrderRadioButtonMouseClicked
+       waitingQueueListModel.clear();
+       Movie[] movieList = backEndManager.getWaitingQueue();
+
+
+       for (int i = 0; i < movieList.length; i++)
+       {
+            waitingQueueListModel.add(i, movieList[i]);
+       }
+    }//GEN-LAST:event_normalOrderRadioButtonMouseClicked
 
     /**
     * @param args the command line arguments
@@ -1027,11 +806,11 @@ public class GuiFrame extends javax.swing.JFrame {
    private javax.swing.JList libraryList;
    private javax.swing.ButtonGroup librarySortRadioGroup;
    private javax.swing.JRadioButton normalOrderRadioButton;
-   private javax.swing.JRadioButton prioirtyOrderRadioButton;
    private javax.swing.ButtonGroup priorityButtonGroup;
    private javax.swing.JRadioButton priorityHighRadioButton;
    private javax.swing.JRadioButton priorityLowRadioButton;
    private javax.swing.JRadioButton priorityMediumRadioButton;
+   private javax.swing.JRadioButton priorityOrderRadioButton;
    private javax.swing.JButton searchButton;
    private javax.swing.JComboBox searchByBox;
    private javax.swing.JList searchList;

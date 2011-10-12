@@ -72,20 +72,6 @@ public class PriorityQueue<E extends Serializable> implements Serializable
       size = 0;
    }    
    
-   /**
-    * This is a cloning constructor which takes a param of the {@link PriorityQueue} to be cloned from.
-    * 
-    * @pre p must not be null
-    * @post the fields of p are now the fields of {@code this}
-    * @param p the {@link PriorityQueue} to be cloned from
-    */
-   public PriorityQueue(PriorityQueue<E> p)
-   {
-      this.array = p.array;
-      this.normalQueue = p.normalQueue;
-      this.orderCounter = p.orderCounter;
-      this.size = p.size;
-   }
 
    /**
     * This adds the item passed to the queue with a specific priority. Low is high.

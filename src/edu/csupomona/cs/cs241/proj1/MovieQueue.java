@@ -102,7 +102,7 @@ public class MovieQueue
       public Movie[] displayWaitingMovies()
       {
          
-         PriorityQueue<Movie> cloneOfP = new PriorityQueue<Movie>(waitingQueue);
+         PriorityQueue<Movie> cloneOfP = (PriorityQueue<Movie>) DeepCopier.copy(waitingQueue);
          Movie[] movieList = new Movie[cloneOfP.getSize()];
 
          int i = 0;
@@ -124,7 +124,7 @@ public class MovieQueue
        */
       public Movie[] displayWaitingMoviesByPriority()
       {
-         PriorityQueue<Movie> cloneOfP = new PriorityQueue<Movie>(waitingQueue);
+         PriorityQueue<Movie> cloneOfP = (PriorityQueue<Movie>) DeepCopier.copy(waitingQueue);
          Movie[] movieList = new Movie[cloneOfP.getSize()];
          int i = 0;
          while(!cloneOfP.isEmpty()){
