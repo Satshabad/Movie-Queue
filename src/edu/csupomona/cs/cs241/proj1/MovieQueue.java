@@ -36,7 +36,7 @@ public class MovieQueue
          FileManager fm = new FileManager();
          MyQueue<Movie> q = fm.getSavedHomeQueue();
          PriorityQueue<Movie> p = fm.getSavedWaitingQueue();
-          if (p == null && q == null){
+          if (p == null || q == null){
              waitingQueue = new PriorityQueue<Movie>(numberOfMovies, numberOfPriortities);
              atHomeQueue = new MyQueue<Movie>(numberOfMovies);
           }
@@ -57,7 +57,10 @@ public class MovieQueue
        * @param priority the priority to add the movie at
        */
       public void addMovietoWaiting(Movie m, int priority){
-         if ( m == null) {return;} 
+         if ( m == null) {
+            return;
+         }
+         
          
          waitingQueue.enqueue(m, priority);
       }
@@ -100,6 +103,7 @@ public class MovieQueue
       {
          PriorityQueue<Movie> cloneOfP = new PriorityQueue<Movie>(waitingQueue);
          Movie[] movieList = new Movie[cloneOfP.getSize()];
+
          int i = 0;
          while(!cloneOfP.isEmpty()){
             movieList[i] = cloneOfP.dequeue();
@@ -161,5 +165,6 @@ public class MovieQueue
          fm.saveWaitingQueue(waitingQueue);
          
       }
+
       
 }

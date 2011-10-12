@@ -42,6 +42,9 @@ public class PriorityQueue<E extends Serializable> implements Serializable
     */
    private int orderCounter;
    
+   /**
+    * This variable keeps track of the number of elements in the queue
+    */
    private int size;
 
    /**
@@ -59,7 +62,7 @@ public class PriorityQueue<E extends Serializable> implements Serializable
       array = (MyQueue<QueueItemShell<E>>[]) new MyQueue[priorities];
       
       // Makes a normal queue to hold elements in original order, regardless of priority
-      normalQueue =  (MyQueue<QueueItemShell<E>>) new MyQueue<E>(size);
+      normalQueue =  (MyQueue<QueueItemShell<E>>) new MyQueue<QueueItemShell<E>>(size);
       
       // Makes an array of queues
       for (int i=0; i < array.length; i++){
@@ -117,6 +120,7 @@ public class PriorityQueue<E extends Serializable> implements Serializable
     * @pre the item is not null
     * @post the item is added to the end of queue
     * @param item the item to be added
+    * @deprecated
     */
    public void enqueue(E item)
    {
@@ -203,7 +207,7 @@ public class PriorityQueue<E extends Serializable> implements Serializable
          }
          tempStack.push(compareTemp);
       }
-      
+      System.out.println("here");
       return null;
       
    }

@@ -10,17 +10,33 @@
  */
 
 package edu.csupomona.cs.cs241.proj1gui;
-
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
+import edu.csupomona.cs.cs241.proj1.*;
+import javax.swing.JList;
 /**
  *
  * @author Satshabad
  */
 public class GuiFrame extends javax.swing.JFrame {
 
-    /** Creates new form MovieQueueUI */
-    public GuiFrame() {
-        initComponents();
+    
+    private DefaultListModel libraryListModel;
+    private DefaultListModel waitingQueueListModel;
+    private MovieSystemManager backEndManager;
+    int kk = 0;
+
+   /** Creates new form MovieQueueUI */
+    public GuiFrame() throws IOException, ClassNotFoundException {
+       backEndManager = new MovieSystemManager();
+       initComponents();
+       priorityMediumRadioButton.doClick();
+       sortByTitleRadioButton.doClick();
+       normalOrderRadioButton.setSelected(true);
     }
+   
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -31,17 +47,19 @@ public class GuiFrame extends javax.swing.JFrame {
    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
    private void initComponents() {
 
-      buttonGroup1 = new javax.swing.ButtonGroup();
+      librarySortRadioGroup = new javax.swing.ButtonGroup();
+      waitingQueueDisplayRadioGroup = new javax.swing.ButtonGroup();
+      priorityButtonGroup = new javax.swing.ButtonGroup();
       jPanel1 = new javax.swing.JPanel();
       jPanel3 = new javax.swing.JPanel();
       jLabel1 = new javax.swing.JLabel();
       jPanel4 = new javax.swing.JPanel();
-      jRadioButton4 = new javax.swing.JRadioButton();
-      jRadioButton2 = new javax.swing.JRadioButton();
-      jRadioButton3 = new javax.swing.JRadioButton();
-      jRadioButton1 = new javax.swing.JRadioButton();
+      sortByGenreRadioButton = new javax.swing.JRadioButton();
+      sortByDirectorRadioButton = new javax.swing.JRadioButton();
+      sortByActorRadioButton = new javax.swing.JRadioButton();
+      sortByTitleRadioButton = new javax.swing.JRadioButton();
       jScrollPane1 = new javax.swing.JScrollPane();
-      jList1 = new javax.swing.JList();
+      libraryList = new javax.swing.JList();
       jPanel5 = new javax.swing.JPanel();
       jLabel2 = new javax.swing.JLabel();
       jComboBox1 = new javax.swing.JComboBox();
@@ -49,13 +67,20 @@ public class GuiFrame extends javax.swing.JFrame {
       jButton1 = new javax.swing.JButton();
       jScrollPane2 = new javax.swing.JScrollPane();
       jList2 = new javax.swing.JList();
+      jLabel5 = new javax.swing.JLabel();
+      priorityLowRadioButton = new javax.swing.JRadioButton();
+      priorityMediumRadioButton = new javax.swing.JRadioButton();
+      priorityHighRadioButton = new javax.swing.JRadioButton();
+      jSeparator1 = new javax.swing.JSeparator();
       jPanel2 = new javax.swing.JPanel();
       jPanel6 = new javax.swing.JPanel();
       jLabel3 = new javax.swing.JLabel();
       jButton2 = new javax.swing.JButton();
       jButton3 = new javax.swing.JButton();
       jScrollPane3 = new javax.swing.JScrollPane();
-      jList3 = new javax.swing.JList();
+      waitingQueueList = new javax.swing.JList();
+      normalOrderRadioButton = new javax.swing.JRadioButton();
+      prioirtyOrderRadioButton = new javax.swing.JRadioButton();
       jPanel7 = new javax.swing.JPanel();
       jLabel4 = new javax.swing.JLabel();
       jButton4 = new javax.swing.JButton();
@@ -64,21 +89,45 @@ public class GuiFrame extends javax.swing.JFrame {
 
       setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-      jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+      jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 14));
       jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       jLabel1.setText("MovieLibrary");
 
-      jRadioButton4.setText("Sort by Genre");
-      jRadioButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+      librarySortRadioGroup.add(sortByGenreRadioButton);
+      sortByGenreRadioButton.setText("Sort by Genre");
+      sortByGenreRadioButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+      sortByGenreRadioButton.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            sortByGenreRadioButtonActionPerformed(evt);
+         }
+      });
 
-      jRadioButton2.setText("Sort by Director");
-      jRadioButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+      librarySortRadioGroup.add(sortByDirectorRadioButton);
+      sortByDirectorRadioButton.setText("Sort by Director");
+      sortByDirectorRadioButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+      sortByDirectorRadioButton.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            sortByDirectorRadioButtonActionPerformed(evt);
+         }
+      });
 
-      jRadioButton3.setText("Sort by Actor");
-      jRadioButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+      librarySortRadioGroup.add(sortByActorRadioButton);
+      sortByActorRadioButton.setText("Sort by Main Actor");
+      sortByActorRadioButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+      sortByActorRadioButton.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            sortByActorRadioButtonActionPerformed(evt);
+         }
+      });
 
-      jRadioButton1.setText("Sort by Title");
-      jRadioButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+      librarySortRadioGroup.add(sortByTitleRadioButton);
+      sortByTitleRadioButton.setText("Sort by Title");
+      sortByTitleRadioButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+      sortByTitleRadioButton.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            sortByTitleRadioButtonActionPerformed(evt);
+         }
+      });
 
       javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
       jPanel4.setLayout(jPanel4Layout);
@@ -86,40 +135,43 @@ public class GuiFrame extends javax.swing.JFrame {
          jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
          .addGroup(jPanel4Layout.createSequentialGroup()
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-               .addComponent(jRadioButton3)
-               .addComponent(jRadioButton1))
+               .addComponent(sortByActorRadioButton)
+               .addComponent(sortByTitleRadioButton))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-               .addComponent(jRadioButton2)
-               .addComponent(jRadioButton4))
+               .addComponent(sortByDirectorRadioButton)
+               .addComponent(sortByGenreRadioButton))
             .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
       );
       jPanel4Layout.setVerticalGroup(
          jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
          .addGroup(jPanel4Layout.createSequentialGroup()
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-               .addComponent(jRadioButton1)
-               .addComponent(jRadioButton2))
+               .addComponent(sortByTitleRadioButton)
+               .addComponent(sortByDirectorRadioButton))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-               .addComponent(jRadioButton3)
-               .addComponent(jRadioButton4)))
+               .addComponent(sortByActorRadioButton)
+               .addComponent(sortByGenreRadioButton)))
       );
 
-      jList1.setModel(new javax.swing.AbstractListModel() {
-         String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-         public int getSize() { return strings.length; }
-         public Object getElementAt(int i) { return strings[i]; }
+      libraryList.setCellRenderer(new CustomListRenderer());
+      libraryListModel = new DefaultListModel();
+      libraryList.setModel(libraryListModel);
+      libraryList.addMouseListener(new java.awt.event.MouseAdapter() {
+         public void mouseClicked(java.awt.event.MouseEvent evt) {
+            libraryListMouseClicked(evt);
+         }
       });
-      jScrollPane1.setViewportView(jList1);
+      jScrollPane1.setViewportView(libraryList);
 
       javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
       jPanel3.setLayout(jPanel3Layout);
       jPanel3Layout.setHorizontalGroup(
          jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
          .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
       );
       jPanel3Layout.setVerticalGroup(
          jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,13 +183,11 @@ public class GuiFrame extends javax.swing.JFrame {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE))
       );
 
-      jLabel2.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+      jLabel2.setFont(new java.awt.Font("Comic Sans MS", 1, 14));
       jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       jLabel2.setText("Search Library");
 
       jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Title", "Actor", "Director", "Genre" }));
-
-      jTextField1.setText("jTextField1");
 
       jButton1.setText("Search");
 
@@ -148,18 +198,50 @@ public class GuiFrame extends javax.swing.JFrame {
       });
       jScrollPane2.setViewportView(jList2);
 
+      jLabel5.setText("Add by Priority:");
+
+      priorityButtonGroup.add(priorityLowRadioButton);
+      priorityLowRadioButton.setText("LOW");
+      priorityLowRadioButton.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            priorityLowRadioButtonActionPerformed(evt);
+         }
+      });
+
+      priorityButtonGroup.add(priorityMediumRadioButton);
+      priorityMediumRadioButton.setText("MEDIUM");
+      priorityMediumRadioButton.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            priorityMediumRadioButtonActionPerformed(evt);
+         }
+      });
+
+      priorityButtonGroup.add(priorityHighRadioButton);
+      priorityHighRadioButton.setText("HIGH");
+
       javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
       jPanel5.setLayout(jPanel5Layout);
       jPanel5Layout.setHorizontalGroup(
          jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE)
+         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE)
+         .addGroup(jPanel5Layout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(jLabel5)
+            .addGap(18, 18, 18)
+            .addComponent(priorityLowRadioButton)
+            .addGap(18, 18, 18)
+            .addComponent(priorityMediumRadioButton)
+            .addGap(18, 18, 18)
+            .addComponent(priorityHighRadioButton)
+            .addContainerGap(117, Short.MAX_VALUE))
+         .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE)
          .addGroup(jPanel5Layout.createSequentialGroup()
             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-         .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE)
+         .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE)
       );
       jPanel5Layout.setVerticalGroup(
          jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,11 +249,19 @@ public class GuiFrame extends javax.swing.JFrame {
             .addComponent(jLabel2)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+               .addComponent(jLabel5)
+               .addComponent(priorityLowRadioButton)
+               .addComponent(priorityMediumRadioButton)
+               .addComponent(priorityHighRadioButton))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                .addComponent(jButton1))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE))
       );
 
       javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -189,7 +279,7 @@ public class GuiFrame extends javax.swing.JFrame {
          .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
       );
 
-      jLabel3.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+      jLabel3.setFont(new java.awt.Font("Comic Sans MS", 1, 14));
       jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       jLabel3.setText("Your Queue");
 
@@ -197,23 +287,31 @@ public class GuiFrame extends javax.swing.JFrame {
 
       jButton3.setText("Deliver by Priority");
 
-      jList3.setModel(new javax.swing.AbstractListModel() {
-         String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-         public int getSize() { return strings.length; }
-         public Object getElementAt(int i) { return strings[i]; }
-      });
-      jScrollPane3.setViewportView(jList3);
+      waitingQueueList.setCellRenderer(new CustomListRenderer());
+      waitingQueueListModel = new DefaultListModel();
+      waitingQueueList.setModel(waitingQueueListModel);
+      jScrollPane3.setViewportView(waitingQueueList);
+
+      waitingQueueDisplayRadioGroup.add(normalOrderRadioButton);
+      normalOrderRadioButton.setText("Show in Normal Order");
+
+      waitingQueueDisplayRadioGroup.add(prioirtyOrderRadioButton);
+      prioirtyOrderRadioButton.setText("Show by Priority");
 
       javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
       jPanel6.setLayout(jPanel6Layout);
       jPanel6Layout.setHorizontalGroup(
          jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-         .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+         .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+               .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+               .addComponent(normalOrderRadioButton))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-         .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+               .addComponent(prioirtyOrderRadioButton)
+               .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
+         .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
       );
       jPanel6Layout.setVerticalGroup(
          jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,11 +321,15 @@ public class GuiFrame extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                .addComponent(jButton2)
                .addComponent(jButton3))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+               .addComponent(normalOrderRadioButton)
+               .addComponent(prioirtyOrderRadioButton))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE))
       );
 
-      jLabel4.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+      jLabel4.setFont(new java.awt.Font("Comic Sans MS", 1, 14));
       jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       jLabel4.setText("Movies at Home");
 
@@ -301,19 +403,401 @@ public class GuiFrame extends javax.swing.JFrame {
        // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void sortByTitleRadioButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_sortByTitleRadioButtonActionPerformed
+    {//GEN-HEADEREND:event_sortByTitleRadioButtonActionPerformed
+         libraryListModel.clear();
+         Movie[] movieList = backEndManager.getMoviesListedByTitle();
+         for (int i = 0; i < movieList.length; i++)
+       {
+            libraryListModel.add(i, movieList[i]);
+       }
+    }//GEN-LAST:event_sortByTitleRadioButtonActionPerformed
+
+    private void sortByDirectorRadioButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_sortByDirectorRadioButtonActionPerformed
+    {//GEN-HEADEREND:event_sortByDirectorRadioButtonActionPerformed
+         libraryListModel.clear();
+         Movie[] movieList = backEndManager.getMoviesListedByDirector();
+         for (int i = 0; i < movieList.length; i++)
+       {
+            libraryListModel.add(i, movieList[i]);
+       }
+    }//GEN-LAST:event_sortByDirectorRadioButtonActionPerformed
+
+    private void sortByActorRadioButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_sortByActorRadioButtonActionPerformed
+    {//GEN-HEADEREND:event_sortByActorRadioButtonActionPerformed
+         libraryListModel.clear();
+         Movie[] movieList = backEndManager.getMoviesListedByMainActor();
+         for (int i = 0; i < movieList.length; i++)
+       {
+            libraryListModel.add(i, movieList[i]);
+       }
+    }//GEN-LAST:event_sortByActorRadioButtonActionPerformed
+
+    private void sortByGenreRadioButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_sortByGenreRadioButtonActionPerformed
+    {//GEN-HEADEREND:event_sortByGenreRadioButtonActionPerformed
+         libraryListModel.clear();
+         Movie[] movieList = backEndManager.getMoviesListedByGenre();
+         for (int i = 0; i < movieList.length; i++)
+       {
+            libraryListModel.add(i, movieList[i]);
+       }
+    }//GEN-LAST:event_sortByGenreRadioButtonActionPerformed
+
+    private void libraryListMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_libraryListMouseClicked
+    {//GEN-HEADEREND:event_libraryListMouseClicked
+       JList list = (JList)evt.getSource();
+        if (evt.getClickCount() == 2){
+            int index = list.locationToIndex(evt.getPoint());
+            Movie movieToBeAdded;
+         if (sortByTitleRadioButton.isSelected() ){
+            Movie[] moviesByTitle = backEndManager.getMoviesListedByTitle();
+            movieToBeAdded = moviesByTitle[index];
+
+            if(priorityLowRadioButton.isSelected()){
+               backEndManager.addToMovieQueue(movieToBeAdded, 1);
+               if (normalOrderRadioButton.isSelected()){
+                  //This displays the data change
+                  waitingQueueListModel.clear();
+                  Movie[] waitingQueueArray = backEndManager.getWaitingQueue();
+
+                  for(int i = 0; i < waitingQueueArray.length; i++)
+                  {
+                     waitingQueueListModel.add(i, waitingQueueArray[i]);
+                  }
+               }
+               else if (prioirtyOrderRadioButton.isSelected()){
+                  //This displays the data change
+                  waitingQueueListModel.clear();
+                  Movie[] waitingQueueArray = backEndManager.getWaitingQueueByPriority();
+
+                  for(int i = 0; i < waitingQueueArray.length; i++)
+                  {
+                     waitingQueueListModel.add(i, waitingQueueArray[i]);
+                  }
+               }
+            }
+            else if(priorityMediumRadioButton.isSelected()){
+               backEndManager.addToMovieQueue(movieToBeAdded, 2);
+               if (normalOrderRadioButton.isSelected()){
+                  //This displays the data change
+                  waitingQueueListModel.clear();
+                  Movie[] waitingQueueArray = backEndManager.getWaitingQueue();
+
+                  for (Movie movie : waitingQueueArray)
+               {
+                  System.err.println(movie);
+               }
+               for(int i = 0; i < waitingQueueArray.length; i++)
+               {
+
+                  waitingQueueListModel.add(i, waitingQueueArray[i]);
+
+               }
+               }
+               else if (prioirtyOrderRadioButton.isSelected()){
+                  //This displays the data change
+                  waitingQueueListModel.clear();
+                  Movie[] waitingQueueArray = backEndManager.getWaitingQueueByPriority();
+
+                  for(int i = 0; i < waitingQueueArray.length; i++)
+                  {
+                     waitingQueueListModel.add(i, waitingQueueArray[i]);
+                  }
+               }
+            }
+             else if(priorityHighRadioButton.isSelected()){
+               backEndManager.addToMovieQueue(movieToBeAdded, 3);
+               if (normalOrderRadioButton.isSelected()){
+                  //This displays the data change
+                  waitingQueueListModel.clear();
+                  Movie[] waitingQueueArray = backEndManager.getWaitingQueue();
+
+                  for(int i = 0; i < waitingQueueArray.length; i++)
+                  {
+                     waitingQueueListModel.add(i, waitingQueueArray[i]);
+                  }
+               }
+               else if (prioirtyOrderRadioButton.isSelected()){
+                  //This displays the data change
+                  waitingQueueListModel.clear();
+                  Movie[] waitingQueueArray = backEndManager.getWaitingQueueByPriority();
+
+                  for(int i = 0; i < waitingQueueArray.length; i++)
+                  {
+                     waitingQueueListModel.add(i, waitingQueueArray[i]);
+                  }
+               }
+
+            }
+            }
+            else if(sortByActorRadioButton.isSelected())
+            {
+               Movie[] moviesByActor = backEndManager.getMoviesListedByMainActor();
+               movieToBeAdded = moviesByActor[index];
+
+               if(priorityLowRadioButton.isSelected()){
+                  backEndManager.addToMovieQueue(movieToBeAdded, 1);
+                  if (normalOrderRadioButton.isSelected()){
+                  //This displays the data change
+                  waitingQueueListModel.clear();
+                  Movie[] waitingQueueArray = backEndManager.getWaitingQueue();
+
+                  for(int i = 0; i < waitingQueueArray.length; i++)
+                  {
+                     waitingQueueListModel.add(i, waitingQueueArray[i]);
+                  }
+               }
+               else if (prioirtyOrderRadioButton.isSelected()){
+                  //This displays the data change
+                  waitingQueueListModel.clear();
+                  Movie[] waitingQueueArray = backEndManager.getWaitingQueueByPriority();
+
+                  for(int i = 0; i < waitingQueueArray.length; i++)
+                  {
+                     waitingQueueListModel.add(i, waitingQueueArray[i]);
+                  }
+               }
+               }
+               else if(priorityMediumRadioButton.isSelected()){
+                  backEndManager.addToMovieQueue(movieToBeAdded, 2);
+                  if (normalOrderRadioButton.isSelected()){
+                  //This displays the data change
+                  waitingQueueListModel.clear();
+                  Movie[] waitingQueueArray = backEndManager.getWaitingQueue();
+
+                  for(int i = 0; i < waitingQueueArray.length; i++)
+                  {
+                     waitingQueueListModel.add(i, waitingQueueArray[i]);
+                  }
+               }
+               else if (prioirtyOrderRadioButton.isSelected()){
+                  //This displays the data change
+                  waitingQueueListModel.clear();
+                  Movie[] waitingQueueArray = backEndManager.getWaitingQueueByPriority();
+
+                  for(int i = 0; i < waitingQueueArray.length; i++)
+                  {
+                     waitingQueueListModel.add(i, waitingQueueArray[i]);
+                  }
+               }
+               }
+               else if(priorityHighRadioButton.isSelected()){
+                  backEndManager.addToMovieQueue(movieToBeAdded, 3);
+                  if (normalOrderRadioButton.isSelected()){
+                  //This displays the data change
+                  waitingQueueListModel.clear();
+                  Movie[] waitingQueueArray = backEndManager.getWaitingQueue();
+
+                  for(int i = 0; i < waitingQueueArray.length; i++)
+                  {
+                     waitingQueueListModel.add(i, waitingQueueArray[i]);
+                  }
+               }
+               else if (prioirtyOrderRadioButton.isSelected()){
+                  //This displays the data change
+                  waitingQueueListModel.clear();
+                  Movie[] waitingQueueArray = backEndManager.getWaitingQueueByPriority();
+
+                  for(int i = 0; i < waitingQueueArray.length; i++)
+                  {
+                     waitingQueueListModel.add(i, waitingQueueArray[i]);
+                  }
+               }
+
+               }
+            }
+            else if(sortByDirectorRadioButton.isSelected())
+            {
+               Movie[] moviesByDirector = backEndManager.getMoviesListedByDirector();
+               movieToBeAdded = moviesByDirector[index];
+
+               if(priorityLowRadioButton.isSelected()){
+                  backEndManager.addToMovieQueue(movieToBeAdded, 1);
+                  if (normalOrderRadioButton.isSelected()){
+                  //This displays the data change
+                  waitingQueueListModel.clear();
+                  Movie[] waitingQueueArray = backEndManager.getWaitingQueue();
+
+                  for(int i = 0; i < waitingQueueArray.length; i++)
+                  {
+                     waitingQueueListModel.add(i, waitingQueueArray[i]);
+                  }
+               }
+               else if (prioirtyOrderRadioButton.isSelected()){
+                  //This displays the data change
+                  waitingQueueListModel.clear();
+                  Movie[] waitingQueueArray = backEndManager.getWaitingQueueByPriority();
+
+                  for(int i = 0; i < waitingQueueArray.length; i++)
+                  {
+                     waitingQueueListModel.add(i, waitingQueueArray[i]);
+                  }
+               }
+
+               }
+               else if(priorityMediumRadioButton.isSelected()){
+                  backEndManager.addToMovieQueue(movieToBeAdded, 2);
+                   if (normalOrderRadioButton.isSelected()){
+                  //This displays the data change
+                  waitingQueueListModel.clear();
+                  Movie[] waitingQueueArray = backEndManager.getWaitingQueue();
+
+                  for(int i = 0; i < waitingQueueArray.length; i++)
+                  {
+                     waitingQueueListModel.add(i, waitingQueueArray[i]);
+                  }
+               }
+               else if (prioirtyOrderRadioButton.isSelected()){
+                  //This displays the data change
+                  waitingQueueListModel.clear();
+                  Movie[] waitingQueueArray = backEndManager.getWaitingQueueByPriority();
+
+                  for(int i = 0; i < waitingQueueArray.length; i++)
+                  {
+                     waitingQueueListModel.add(i, waitingQueueArray[i]);
+                  }
+               }
+               }
+                else if(priorityHighRadioButton.isSelected()){
+                  backEndManager.addToMovieQueue(movieToBeAdded, 3);
+                  if (normalOrderRadioButton.isSelected()){
+                  //This displays the data change
+                  waitingQueueListModel.clear();
+                  Movie[] waitingQueueArray = backEndManager.getWaitingQueue();
+
+                  for(int i = 0; i < waitingQueueArray.length; i++)
+                  {
+                     waitingQueueListModel.add(i, waitingQueueArray[i]);
+                  }
+               }
+               else if (prioirtyOrderRadioButton.isSelected()){
+                  //This displays the data change
+                  waitingQueueListModel.clear();
+                  Movie[] waitingQueueArray = backEndManager.getWaitingQueueByPriority();
+
+                  for(int i = 0; i < waitingQueueArray.length; i++)
+                  {
+                     waitingQueueListModel.add(i, waitingQueueArray[i]);
+                  }
+               }
+               }
+            }
+            else if(sortByGenreRadioButton.isSelected())
+            {
+               Movie[] moviesByGenre = backEndManager.getMoviesListedByGenre();
+               movieToBeAdded = moviesByGenre[index];
+
+               if(priorityLowRadioButton.isSelected()){
+                  backEndManager.addToMovieQueue(movieToBeAdded, 1);
+                   if (normalOrderRadioButton.isSelected()){
+                  //This displays the data change
+                  waitingQueueListModel.clear();
+                  Movie[] waitingQueueArray = backEndManager.getWaitingQueue();
+
+                  for(int i = 0; i < waitingQueueArray.length; i++)
+                  {
+                     waitingQueueListModel.add(i, waitingQueueArray[i]);
+                  }
+               }
+               else if (prioirtyOrderRadioButton.isSelected()){
+                  //This displays the data change
+                  waitingQueueListModel.clear();
+                  Movie[] waitingQueueArray = backEndManager.getWaitingQueueByPriority();
+
+                  for(int i = 0; i < waitingQueueArray.length; i++)
+                  {
+                     waitingQueueListModel.add(i, waitingQueueArray[i]);
+                  }
+               }
+               }
+               else if(priorityMediumRadioButton.isSelected()){
+                  backEndManager.addToMovieQueue(movieToBeAdded, 2);
+                   if (normalOrderRadioButton.isSelected()){
+                  //This displays the data change
+                  waitingQueueListModel.clear();
+                  Movie[] waitingQueueArray = backEndManager.getWaitingQueue();
+
+                  for(int i = 0; i < waitingQueueArray.length; i++)
+                  {
+                     waitingQueueListModel.add(i, waitingQueueArray[i]);
+                  }
+               }
+               else if (prioirtyOrderRadioButton.isSelected()){
+                  //This displays the data change
+                  waitingQueueListModel.clear();
+                  Movie[] waitingQueueArray = backEndManager.getWaitingQueueByPriority();
+
+                  for(int i = 0; i < waitingQueueArray.length; i++)
+                  {
+                     waitingQueueListModel.add(i, waitingQueueArray[i]);
+                  }
+               }
+               }
+                else if(priorityHighRadioButton.isSelected()){
+                  backEndManager.addToMovieQueue(movieToBeAdded, 3);
+                   //This displays the data change
+                  if (normalOrderRadioButton.isSelected()){
+                  //This displays the data change
+                  waitingQueueListModel.clear();
+                  Movie[] waitingQueueArray = backEndManager.getWaitingQueue();
+
+                  for(int i = 0; i < waitingQueueArray.length; i++)
+                  {
+                     waitingQueueListModel.add(i, waitingQueueArray[i]);
+                  }
+               }
+               else if (prioirtyOrderRadioButton.isSelected()){
+                  //This displays the data change
+                  waitingQueueListModel.clear();
+                  Movie[] waitingQueueArray = backEndManager.getWaitingQueueByPriority();
+
+                  for(int i = 0; i < waitingQueueArray.length; i++)
+                  {
+                     waitingQueueListModel.add(i, waitingQueueArray[i]);
+                  }
+               }
+               }
+            }
+
+
+        }
+        
+
+    }//GEN-LAST:event_libraryListMouseClicked
+
+    private void priorityLowRadioButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_priorityLowRadioButtonActionPerformed
+    {//GEN-HEADEREND:event_priorityLowRadioButtonActionPerformed
+       // TODO add your handling code here:
+    }//GEN-LAST:event_priorityLowRadioButtonActionPerformed
+
+    private void priorityMediumRadioButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_priorityMediumRadioButtonActionPerformed
+    {//GEN-HEADEREND:event_priorityMediumRadioButtonActionPerformed
+       // TODO add your handling code here:
+    }//GEN-LAST:event_priorityMediumRadioButtonActionPerformed
+
     /**
     * @param args the command line arguments
     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GuiFrame().setVisible(true);
+            try
+            {
+               new GuiFrame().setVisible(true);
+            }
+            catch (IOException ex)
+            {
+               Logger.getLogger(GuiFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            catch (ClassNotFoundException ex)
+            {
+               Logger.getLogger(GuiFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
             }
         });
     }
 
    // Variables declaration - do not modify//GEN-BEGIN:variables
-   private javax.swing.ButtonGroup buttonGroup1;
    private javax.swing.JButton jButton1;
    private javax.swing.JButton jButton2;
    private javax.swing.JButton jButton3;
@@ -323,9 +807,8 @@ public class GuiFrame extends javax.swing.JFrame {
    private javax.swing.JLabel jLabel2;
    private javax.swing.JLabel jLabel3;
    private javax.swing.JLabel jLabel4;
-   private javax.swing.JList jList1;
+   private javax.swing.JLabel jLabel5;
    private javax.swing.JList jList2;
-   private javax.swing.JList jList3;
    private javax.swing.JList jList4;
    private javax.swing.JPanel jPanel1;
    private javax.swing.JPanel jPanel2;
@@ -334,15 +817,26 @@ public class GuiFrame extends javax.swing.JFrame {
    private javax.swing.JPanel jPanel5;
    private javax.swing.JPanel jPanel6;
    private javax.swing.JPanel jPanel7;
-   private javax.swing.JRadioButton jRadioButton1;
-   private javax.swing.JRadioButton jRadioButton2;
-   private javax.swing.JRadioButton jRadioButton3;
-   private javax.swing.JRadioButton jRadioButton4;
    private javax.swing.JScrollPane jScrollPane1;
    private javax.swing.JScrollPane jScrollPane2;
    private javax.swing.JScrollPane jScrollPane3;
    private javax.swing.JScrollPane jScrollPane4;
+   private javax.swing.JSeparator jSeparator1;
    private javax.swing.JTextField jTextField1;
+   private javax.swing.JList libraryList;
+   private javax.swing.ButtonGroup librarySortRadioGroup;
+   private javax.swing.JRadioButton normalOrderRadioButton;
+   private javax.swing.JRadioButton prioirtyOrderRadioButton;
+   private javax.swing.ButtonGroup priorityButtonGroup;
+   private javax.swing.JRadioButton priorityHighRadioButton;
+   private javax.swing.JRadioButton priorityLowRadioButton;
+   private javax.swing.JRadioButton priorityMediumRadioButton;
+   private javax.swing.JRadioButton sortByActorRadioButton;
+   private javax.swing.JRadioButton sortByDirectorRadioButton;
+   private javax.swing.JRadioButton sortByGenreRadioButton;
+   private javax.swing.JRadioButton sortByTitleRadioButton;
+   private javax.swing.ButtonGroup waitingQueueDisplayRadioGroup;
+   private javax.swing.JList waitingQueueList;
    // End of variables declaration//GEN-END:variables
 
 }

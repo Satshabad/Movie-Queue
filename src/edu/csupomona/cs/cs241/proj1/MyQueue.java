@@ -20,7 +20,7 @@ import java.io.Serializable;
  *
  * @param <E> The type of {@link java.lang.Object} to be used in this queue
  */
-public class MyQueue<E> implements Queue<E>, Serializable
+public class MyQueue<E extends Serializable> implements  Serializable, Queue<E>
 {
   
 
@@ -32,7 +32,7 @@ public class MyQueue<E> implements Queue<E>, Serializable
    /**
     * The array to hold the queue elements
     */
-   private Object array[];
+   private E array[];
    
    /**
     * The size of the the array
@@ -42,31 +42,35 @@ public class MyQueue<E> implements Queue<E>, Serializable
    /**
     * Points to the last element of the queue 
     */
-   private int tail = 0;
+   private int tail;
    
    /**
     * Points to the first element of the queue
     */
-   private int head = 0;
+   private int head;
    
-   private int size = 0;
+   private int size;
    
    
    /**
     * Constructs the Queue with a specific size
     * 
-    * @param size the size of the queue to be made
+    * @param capacity the size of the queue to be made
     */
    @SuppressWarnings("unchecked")
-   public MyQueue(int size){
+   public MyQueue(int capacity){
       // Due to indexing problem the first spot in the queue is never filled, 
       // so we just increase the users size by one so the user never notices
-      size = size + 1;
-      array = (E[]) new Object[size];
-      this.capacity = size;
+      capacity = capacity + 1;
+      array = (E[]) new Serializable[capacity];
+      this.capacity = capacity;
+      tail = 0;
+      head = 0;
+      size = 0;
+      
    }
    
-   public MyQueue(MyQueue<Movie> q)
+   public MyQueue(MyQueue<E> q)
    {
       this.array = q.array;
       this.capacity = q.capacity;
@@ -143,7 +147,7 @@ public class MyQueue<E> implements Queue<E>, Serializable
    private void increaseQueueSize()
    {
       @SuppressWarnings("unchecked")
-      Object theNewArray[] = (E[]) new Object[(int) (capacity*2)];
+      E theNewArray[] = (E[]) new Serializable[(int) (capacity*2)];
       capacity = capacity*2;
       head = 0;
       int i;

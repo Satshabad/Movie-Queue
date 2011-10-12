@@ -24,7 +24,7 @@ public class Movie implements Serializable
     * 
     */
    private static final long serialVersionUID = 6214120954635819543L;
-   private String name;
+   private String title;
    private String genre;
    private String actorOne;
    private String actorTwo;
@@ -43,7 +43,7 @@ public class Movie implements Serializable
     */
    Movie(String name, String genre, String actorOne,
          String actorTwo, String actorThree, String director){
-      this.name = name;
+      this.title = name;
       this.genre = genre;
       this.actorOne = actorOne;
       this.actorTwo = actorTwo;
@@ -56,9 +56,9 @@ public class Movie implements Serializable
     * 
     * @return name of the movie
     */
-   public String getName()
+   public String getTitle()
    {
-      return name;
+      return title;
    }
  
    /**
@@ -114,9 +114,9 @@ public class Movie implements Serializable
     * @see java.lang.Object#toString()
     */
    public String toString(){
-      return ""+ name +"\n" 
-               + "Director: "+director + "\n"
-               +"Actors: " + actorOne + ", " + actorTwo + ", " + actorThree + "\n"
+      return ""+  title +", \n" 
+               + "Director: "+director + ", \n"
+               + "Actors: " + actorOne + ", " + actorTwo + ", " + actorThree + ", \n"
                + "Genre: " + genre + "\n";
       
    }

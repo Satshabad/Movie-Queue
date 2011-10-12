@@ -47,7 +47,6 @@ public class MovieLibrary
    MovieLibrary(){
       FileManager fm = new FileManager();
       movieList = fm.getMoviesFromFile();
-      
       numberOfMovies = movieList.length;
       
       titleList = new StringPointerPair[numberOfMovies];
@@ -84,7 +83,7 @@ public class MovieLibrary
        for (int i = 0, j = 0; i < movieList.length; i++, j +=3)
       {
          Movie m = movieList[i];
-         titleList[i] = new StringPointerPair(m.getName(), m);
+         titleList[i] = new StringPointerPair(m.getTitle(), m);
          genreList[i] = new StringPointerPair(m.getGenre(), m);
          actorList[j] = new StringPointerPair(m.getActorOne(), m);
          actorList[j+1] = new StringPointerPair(m.getActorTwo(), m);

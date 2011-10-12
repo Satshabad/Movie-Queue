@@ -14,24 +14,26 @@ public class MovieSystemManager
    private MovieQueue theMovieQueue;
    private MovieLibrary theMovieLibrary;
    private final int NUM_OF_PRIORITIES = 3;
-   private boolean priorityMode; 
    
    public MovieSystemManager() throws IOException, ClassNotFoundException
    {
       this.theMovieLibrary = new MovieLibrary();
       this.theMovieQueue = new MovieQueue(theMovieLibrary.getNumberOfMovies(), NUM_OF_PRIORITIES);
-      priorityMode = false;
    }
    
    public void addToMovieQueue(Movie m, int priority)
    {
-      if (priorityMode) {theMovieQueue.addMovietoWaiting(m, priority);}
-      else theMovieQueue.addMovietoWaiting(m, 2);
+            theMovieQueue.addMovietoWaiting(m, priority);
    }
    
+   public void deliverMovieByPrioirity(){
+         theMovieQueue.sendMovieHomeByPriority();
+
+   }
+
    public void deliverMovie(){
-      if (priorityMode){theMovieQueue.sendMovieHomeByPriority();}
-      else {theMovieQueue.sendMovieHome();}
+
+      theMovieQueue.sendMovieHome();
    }
    
    public Movie returnMovie(){
@@ -46,8 +48,9 @@ public class MovieSystemManager
    {
       switch (c)
          {
+            case 'p':
+               return theMovieQueue.displayWaitingMoviesByPriority();
             case 'w':
-               if (priorityMode){return theMovieQueue.displayWaitingMoviesByPriority();}
                return theMovieQueue.displayWaitingMovies();
             case 'h':
                return theMovieQueue.displayMoviesAtHome();
@@ -67,36 +70,30 @@ public class MovieSystemManager
    public Movie[] getWaitingQueue(){
       return getMoviesForDisplay('w');
    }
+
+   public Movie[] getWaitingQueueByPriority(){
+      return getMoviesForDisplay('p');
+   }
    
    public Movie[] getatHomeQueue(){
       return getMoviesForDisplay('h');
    }
    
-   public Movie[] moviesListedByTitle(){
+   public Movie[] getMoviesListedByTitle(){
       return getMoviesForDisplay('t');
    }
    
-   public Movie[] moviesListedByDirector(){
+   public Movie[] getMoviesListedByDirector(){
       return getMoviesForDisplay('d');
    }
    
-   public Movie[] moviesListedByGenre(){
+   public Movie[] getMoviesListedByGenre(){
       return getMoviesForDisplay('g');
    }
    
-   public Movie[] moviesListedByMainActor(){
+   public Movie[] getMoviesListedByMainActor(){
       return getMoviesForDisplay('m');
-   }
-   
-   /**
-    * Set the state of the queue management, FIFO or priority mode
-    * 
-    * @param priorityMode {@code true} for priority mode and {@code false} for FIFO mode
-    */
-   public void setPriorityMode(boolean priorityMode)
-   {
-      this.priorityMode = priorityMode;
-   }    
+   }  
    
    public boolean exit(int n)  
    {
@@ -111,6 +108,7 @@ public class MovieSystemManager
       System.exit(0);
       return true;
    }
+
    
    
 }

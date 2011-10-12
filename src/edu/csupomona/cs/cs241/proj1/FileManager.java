@@ -61,7 +61,6 @@ public class FileManager
       }
       // Increments this again for the last unread line in the file
       numOfLines++;
-      
       // this closes the scanner so that it can opened again and read from the top
       scan.close();
       
@@ -116,7 +115,7 @@ public class FileManager
       }
       PrintWriter printToFile = new PrintWriter(movieFileWriter);
       printToFile.print("\n");
-      printToFile.print(m.getName()+ "\n");
+      printToFile.print(m.getTitle()+ "\n");
       printToFile.print(m.getGenre()+ "\n");
       printToFile.print(m.getActorOne()+ "\n");
       printToFile.print(m.getActorTwo()+ "\n");
