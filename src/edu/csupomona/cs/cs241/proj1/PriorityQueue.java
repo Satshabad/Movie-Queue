@@ -99,6 +99,7 @@ public class PriorityQueue<E extends Serializable> implements Serializable
     */
    public void enqueue(E item, int priority)
    {
+      
       if (item == null){return;}
       // Makes sure that the priority given is in bounds of set priority, if not changes it
       if (priority  > array.length ) {priority = array.length;}
@@ -110,6 +111,7 @@ public class PriorityQueue<E extends Serializable> implements Serializable
       array[priority - 1].enqueue(wrapper);
       normalQueue.enqueue(wrapper);
       size++;
+
 
    }
 
@@ -185,12 +187,14 @@ public class PriorityQueue<E extends Serializable> implements Serializable
     * @return the item at the front of the queue
     */
    public E dequeue(){
+      
       if (isEmpty()){return null;}
       
       // Here it takes the item to be dequeued and returned and dumps out element into a 
       // temporary stack until it finds a match then also dequeues the match from 
       // the sister data set and returns the item to the caller
       QueueItemShell<E> temp = normalQueue.dequeue();
+      
       Stack<QueueItemShell<E>> tempStack = new Stack<QueueItemShell<E>>();
       QueueItemShell<E> compareTemp;
       int pri = temp.getPriority();
@@ -203,11 +207,10 @@ public class PriorityQueue<E extends Serializable> implements Serializable
                normalQueue.enqueue(tempStack.pop());
             }
             size--;
-            return compareTemp.getItem();
+            return temp.getItem();
          }
          tempStack.push(compareTemp);
       }
-      System.out.println("here");
       return null;
       
    }

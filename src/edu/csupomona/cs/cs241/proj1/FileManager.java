@@ -162,6 +162,8 @@ public class FileManager
       ObjectInputStream theObjectInputStream = new ObjectInputStream(theFileInputStream);
       @SuppressWarnings("unchecked")
       PriorityQueue<Movie> p = (PriorityQueue<Movie>) theObjectInputStream.readObject();
+      theObjectInputStream.close();
+      theFileInputStream.close();
       return p;
    }
    
@@ -201,6 +203,8 @@ public class FileManager
       ObjectInputStream theObjectInputStream = new ObjectInputStream(theFileInputStream);
       @SuppressWarnings("unchecked")
       MyQueue<Movie> p = (MyQueue<Movie>) theObjectInputStream.readObject();
+      theObjectInputStream.close();
+      theFileInputStream.close();
       return p;
    }
    

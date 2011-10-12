@@ -161,9 +161,23 @@ public class MovieLibrary
       int j = 0;
       for (int i = 0; i < array.length; i++)
       {
-         if(contains(target, array[i].getTheField())){instances[j++] = array[i].getTheMovie();}
+         if(contains(target, array[i].getTheField())){
+            instances[j++] = array[i].getTheMovie();
+         }
       }
-      return instances;
+      int i = 0;
+      while (instances[i] != null){
+         i++;
+      }
+       Movie[]instancesResize = new Movie[i];
+
+       for (int k = 0; k < instancesResize.length; k++)
+      {
+         instancesResize[k] = instances[k];
+
+      }
+
+      return instancesResize;
    }
    
    /**
@@ -205,7 +219,7 @@ public class MovieLibrary
    {
       if (containedIn == null || target == null) {return false;}
       
-      if (containedIn.indexOf(target) < 0){ return false;}
+      if (containedIn.toLowerCase().indexOf(target.toLowerCase()) < 0){ return false;}
       
       return true;
    }

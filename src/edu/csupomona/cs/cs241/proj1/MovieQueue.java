@@ -101,11 +101,13 @@ public class MovieQueue
        */
       public Movie[] displayWaitingMovies()
       {
+         
          PriorityQueue<Movie> cloneOfP = new PriorityQueue<Movie>(waitingQueue);
          Movie[] movieList = new Movie[cloneOfP.getSize()];
 
          int i = 0;
          while(!cloneOfP.isEmpty()){
+            System.out.println();
             movieList[i] = cloneOfP.dequeue();
             i++;        
          }

@@ -89,7 +89,7 @@ public class MyQueue<E extends Serializable> implements  Serializable, Queue<E>
    public void enqueue(E item){
       if (isFull()){
          increaseQueueSize();
-      }   
+         }
       tail = (tail + 1) % capacity;
       array[tail] = item;
       size++;

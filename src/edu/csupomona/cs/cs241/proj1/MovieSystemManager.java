@@ -23,7 +23,9 @@ public class MovieSystemManager
    
    public void addToMovieQueue(Movie m, int priority)
    {
-            theMovieQueue.addMovietoWaiting(m, priority);
+            
+      theMovieQueue.addMovietoWaiting(m, priority);
+
    }
    
    public void deliverMovieByPrioirity(){
@@ -107,6 +109,31 @@ public class MovieSystemManager
       }
       System.exit(0);
       return true;
+   }
+
+   public Movie[] searchByTitle(String target)
+   {
+      return theMovieLibrary.searchBy('t', target);
+   }
+
+   public Movie[] searchByActor(String target)
+   {
+      return theMovieLibrary.searchBy('a', target);
+   }
+
+   public Movie[] searchByDirector(String target)
+   {
+      return theMovieLibrary.searchBy('d', target);
+   }
+
+   public Movie[] searchByGenre(String target)
+   {
+      return theMovieLibrary.searchBy('g', target);
+   }
+
+   public void sendMovieBack()
+   {
+      theMovieQueue.returnMovie();
    }
 
    

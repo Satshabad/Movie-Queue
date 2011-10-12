@@ -25,8 +25,10 @@ public class GuiFrame extends javax.swing.JFrame {
     
     private DefaultListModel libraryListModel;
     private DefaultListModel waitingQueueListModel;
+    private DefaultListModel searchListModel;
     private MovieSystemManager backEndManager;
-    int kk = 0;
+    private DefaultListModel atHomeListModel;
+
 
    /** Creates new form MovieQueueUI */
     public GuiFrame() throws IOException, ClassNotFoundException {
@@ -62,11 +64,11 @@ public class GuiFrame extends javax.swing.JFrame {
       libraryList = new javax.swing.JList();
       jPanel5 = new javax.swing.JPanel();
       jLabel2 = new javax.swing.JLabel();
-      jComboBox1 = new javax.swing.JComboBox();
-      jTextField1 = new javax.swing.JTextField();
-      jButton1 = new javax.swing.JButton();
+      searchByBox = new javax.swing.JComboBox();
+      searchTextField = new javax.swing.JTextField();
+      searchButton = new javax.swing.JButton();
       jScrollPane2 = new javax.swing.JScrollPane();
-      jList2 = new javax.swing.JList();
+      searchList = new javax.swing.JList();
       jLabel5 = new javax.swing.JLabel();
       priorityLowRadioButton = new javax.swing.JRadioButton();
       priorityMediumRadioButton = new javax.swing.JRadioButton();
@@ -75,17 +77,17 @@ public class GuiFrame extends javax.swing.JFrame {
       jPanel2 = new javax.swing.JPanel();
       jPanel6 = new javax.swing.JPanel();
       jLabel3 = new javax.swing.JLabel();
-      jButton2 = new javax.swing.JButton();
-      jButton3 = new javax.swing.JButton();
+      deliverButton = new javax.swing.JButton();
+      deliverByPriorityButton = new javax.swing.JButton();
       jScrollPane3 = new javax.swing.JScrollPane();
       waitingQueueList = new javax.swing.JList();
       normalOrderRadioButton = new javax.swing.JRadioButton();
       prioirtyOrderRadioButton = new javax.swing.JRadioButton();
       jPanel7 = new javax.swing.JPanel();
       jLabel4 = new javax.swing.JLabel();
-      jButton4 = new javax.swing.JButton();
+      sendBackButton = new javax.swing.JButton();
       jScrollPane4 = new javax.swing.JScrollPane();
-      jList4 = new javax.swing.JList();
+      atHomeList = new javax.swing.JList();
 
       setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -187,16 +189,40 @@ public class GuiFrame extends javax.swing.JFrame {
       jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       jLabel2.setText("Search Library");
 
-      jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Title", "Actor", "Director", "Genre" }));
-
-      jButton1.setText("Search");
-
-      jList2.setModel(new javax.swing.AbstractListModel() {
-         String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-         public int getSize() { return strings.length; }
-         public Object getElementAt(int i) { return strings[i]; }
+      searchByBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Title", "Actor", "Director", "Genre" }));
+      searchByBox.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            searchByBoxActionPerformed(evt);
+         }
       });
-      jScrollPane2.setViewportView(jList2);
+
+      searchTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+         public void keyPressed(java.awt.event.KeyEvent evt) {
+            searchTextFieldKeyPressed(evt);
+         }
+      });
+
+      searchButton.setText("Search");
+      searchButton.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            searchButtonActionPerformed(evt);
+         }
+      });
+      searchButton.addKeyListener(new java.awt.event.KeyAdapter() {
+         public void keyPressed(java.awt.event.KeyEvent evt) {
+            searchButtonKeyPressed(evt);
+         }
+      });
+
+      searchList.setCellRenderer(new CustomListRenderer());
+      searchListModel = new DefaultListModel();
+      searchList.setModel(searchListModel);
+      searchList.addMouseListener(new java.awt.event.MouseAdapter() {
+         public void mouseClicked(java.awt.event.MouseEvent evt) {
+            searchListMouseClicked(evt);
+         }
+      });
+      jScrollPane2.setViewportView(searchList);
 
       jLabel5.setText("Add by Priority:");
 
@@ -236,11 +262,11 @@ public class GuiFrame extends javax.swing.JFrame {
             .addContainerGap(117, Short.MAX_VALUE))
          .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE)
          .addGroup(jPanel5Layout.createSequentialGroup()
-            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(searchByBox, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+            .addComponent(searchTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
          .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE)
       );
       jPanel5Layout.setVerticalGroup(
@@ -257,9 +283,9 @@ public class GuiFrame extends javax.swing.JFrame {
             .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-               .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-               .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-               .addComponent(jButton1))
+               .addComponent(searchByBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+               .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+               .addComponent(searchButton))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE))
       );
@@ -283,9 +309,24 @@ public class GuiFrame extends javax.swing.JFrame {
       jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       jLabel3.setText("Your Queue");
 
-      jButton2.setText("Deliver");
+      deliverButton.setText("Deliver");
+      deliverButton.addMouseListener(new java.awt.event.MouseAdapter() {
+         public void mouseClicked(java.awt.event.MouseEvent evt) {
+            deliverButtonMouseClicked(evt);
+         }
+      });
+      deliverButton.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            deliverButtonActionPerformed(evt);
+         }
+      });
 
-      jButton3.setText("Deliver by Priority");
+      deliverByPriorityButton.setText("Deliver by Priority");
+      deliverByPriorityButton.addMouseListener(new java.awt.event.MouseAdapter() {
+         public void mouseClicked(java.awt.event.MouseEvent evt) {
+            deliverByPriorityButtonMouseClicked(evt);
+         }
+      });
 
       waitingQueueList.setCellRenderer(new CustomListRenderer());
       waitingQueueListModel = new DefaultListModel();
@@ -297,6 +338,11 @@ public class GuiFrame extends javax.swing.JFrame {
 
       waitingQueueDisplayRadioGroup.add(prioirtyOrderRadioButton);
       prioirtyOrderRadioButton.setText("Show by Priority");
+      prioirtyOrderRadioButton.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            prioirtyOrderRadioButtonActionPerformed(evt);
+         }
+      });
 
       javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
       jPanel6.setLayout(jPanel6Layout);
@@ -305,12 +351,12 @@ public class GuiFrame extends javax.swing.JFrame {
          .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-               .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+               .addComponent(deliverButton, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
                .addComponent(normalOrderRadioButton))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                .addComponent(prioirtyOrderRadioButton)
-               .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
+               .addComponent(deliverByPriorityButton, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
          .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
       );
       jPanel6Layout.setVerticalGroup(
@@ -319,8 +365,8 @@ public class GuiFrame extends javax.swing.JFrame {
             .addComponent(jLabel3)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-               .addComponent(jButton2)
-               .addComponent(jButton3))
+               .addComponent(deliverButton)
+               .addComponent(deliverByPriorityButton))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                .addComponent(normalOrderRadioButton)
@@ -333,26 +379,29 @@ public class GuiFrame extends javax.swing.JFrame {
       jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       jLabel4.setText("Movies at Home");
 
-      jButton4.setText("Send Home");
-      jButton4.addActionListener(new java.awt.event.ActionListener() {
+      sendBackButton.setText("Send Back");
+      sendBackButton.addMouseListener(new java.awt.event.MouseAdapter() {
+         public void mouseClicked(java.awt.event.MouseEvent evt) {
+            sendBackButtonMouseClicked(evt);
+         }
+      });
+      sendBackButton.addActionListener(new java.awt.event.ActionListener() {
          public void actionPerformed(java.awt.event.ActionEvent evt) {
-            jButton4ActionPerformed(evt);
+            sendBackButtonActionPerformed(evt);
          }
       });
 
-      jList4.setModel(new javax.swing.AbstractListModel() {
-         String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-         public int getSize() { return strings.length; }
-         public Object getElementAt(int i) { return strings[i]; }
-      });
-      jScrollPane4.setViewportView(jList4);
+      atHomeList.setCellRenderer(new CustomListRenderer());
+      atHomeListModel = new DefaultListModel();
+      atHomeList.setModel(atHomeListModel);
+      jScrollPane4.setViewportView(atHomeList);
 
       javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
       jPanel7.setLayout(jPanel7Layout);
       jPanel7Layout.setHorizontalGroup(
          jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
          .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
-         .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+         .addComponent(sendBackButton, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
          .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
       );
       jPanel7Layout.setVerticalGroup(
@@ -360,7 +409,7 @@ public class GuiFrame extends javax.swing.JFrame {
          .addGroup(jPanel7Layout.createSequentialGroup()
             .addComponent(jLabel4)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jButton4)
+            .addComponent(sendBackButton)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE))
       );
@@ -398,10 +447,10 @@ public class GuiFrame extends javax.swing.JFrame {
       pack();
    }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton4ActionPerformed
-    {//GEN-HEADEREND:event_jButton4ActionPerformed
+    private void sendBackButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_sendBackButtonActionPerformed
+    {//GEN-HEADEREND:event_sendBackButtonActionPerformed
        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_sendBackButtonActionPerformed
 
     private void sortByTitleRadioButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_sortByTitleRadioButtonActionPerformed
     {//GEN-HEADEREND:event_sortByTitleRadioButtonActionPerformed
@@ -483,10 +532,10 @@ public class GuiFrame extends javax.swing.JFrame {
                   waitingQueueListModel.clear();
                   Movie[] waitingQueueArray = backEndManager.getWaitingQueue();
 
-                  for (Movie movie : waitingQueueArray)
-               {
-                  System.err.println(movie);
-               }
+//                  for (Movie movie : waitingQueueArray)
+//               {
+//                  System.err.println(movie);
+//               }
                for(int i = 0; i < waitingQueueArray.length; i++)
                {
 
@@ -775,6 +824,163 @@ public class GuiFrame extends javax.swing.JFrame {
        // TODO add your handling code here:
     }//GEN-LAST:event_priorityMediumRadioButtonActionPerformed
 
+    private void searchByBoxActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_searchByBoxActionPerformed
+    {//GEN-HEADEREND:event_searchByBoxActionPerformed
+       // TODO add your handling code here:
+    }//GEN-LAST:event_searchByBoxActionPerformed
+
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_searchButtonActionPerformed
+    {//GEN-HEADEREND:event_searchButtonActionPerformed
+       String target = searchTextField.getText();
+       if (target.equalsIgnoreCase("")){return;}
+       
+       Movie[] searchResults;
+       if (searchByBox.getSelectedItem().toString().equals("Title")){
+          searchResults = backEndManager.searchByTitle(target);
+       }
+       else if (searchByBox.getSelectedItem().toString().equals("Actor"))
+       {
+          searchResults = backEndManager.searchByActor(target);
+       }
+       else if (searchByBox.getSelectedItem().toString().equals("Director"))
+       {
+         searchResults = backEndManager.searchByDirector(target);
+       }
+       else if (searchByBox.getSelectedItem().toString().equals("Genre"))
+       {
+         searchResults = backEndManager.searchByGenre(target);
+       }else{
+          searchResults = null;
+       }
+
+       searchListModel.clear();
+
+       for (int i = 0; i < searchResults.length; i++)
+       {
+          searchListModel.add(i, searchResults[i]);
+       }
+
+    }//GEN-LAST:event_searchButtonActionPerformed
+
+    private void searchListMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_searchListMouseClicked
+    {//GEN-HEADEREND:event_searchListMouseClicked
+         JList list = (JList)evt.getSource();
+        if (evt.getClickCount() == 2){
+            int index = list.locationToIndex(evt.getPoint());
+            int pri;
+            if (priorityLowRadioButton.isSelected()){pri = 1;}
+            else if (priorityMediumRadioButton.isSelected()){pri = 2;}
+            else{pri = 3;}
+            if (!searchListModel.isEmpty()){
+               backEndManager.addToMovieQueue((Movie)searchListModel.get(index), pri);
+               if(normalOrderRadioButton.isSelected()){
+                  waitingQueueListModel.clear();
+
+                  Movie[] waitingList = backEndManager.getWaitingQueue();
+
+                  for (int i = 0; i < waitingList.length; i++)
+                  {
+                     waitingQueueListModel.add(i, waitingList[i]);
+                  }
+               }
+            }
+        }
+        
+       
+    }//GEN-LAST:event_searchListMouseClicked
+
+    private void searchButtonKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_searchButtonKeyPressed
+    {//GEN-HEADEREND:event_searchButtonKeyPressed
+
+    }//GEN-LAST:event_searchButtonKeyPressed
+
+    private void searchTextFieldKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_searchTextFieldKeyPressed
+    {//GEN-HEADEREND:event_searchTextFieldKeyPressed
+       if(evt.getKeyChar() == '\n')
+       {
+          searchButtonActionPerformed(null);
+       }
+    }//GEN-LAST:event_searchTextFieldKeyPressed
+
+    private void prioirtyOrderRadioButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_prioirtyOrderRadioButtonActionPerformed
+    {//GEN-HEADEREND:event_prioirtyOrderRadioButtonActionPerformed
+       waitingQueueListModel.clear();
+       Movie[] movieList = backEndManager.getWaitingQueueByPriority();
+
+
+       for (int i = 0; i < movieList.length; i++)
+       {
+            System.out.println(movieList[i]);
+            waitingQueueListModel.add(i, movieList[i]);
+       }
+    }//GEN-LAST:event_prioirtyOrderRadioButtonActionPerformed
+
+    private void deliverButtonMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_deliverButtonMouseClicked
+    {//GEN-HEADEREND:event_deliverButtonMouseClicked
+       if (waitingQueueListModel.isEmpty()){return;}
+
+       backEndManager.deliverMovie();
+       atHomeListModel.clear();
+       waitingQueueListModel.clear();
+       Movie[] waitList = backEndManager.getWaitingQueue();
+       Movie[] homeList = backEndManager.getatHomeQueue();
+
+       for (Movie movie : waitList)
+       {
+          System.out.println(movie);
+       }
+
+       for (int i = 0; i < homeList.length; i++)
+       {
+            atHomeListModel.add(i, homeList[i]);
+       }
+
+       for (int i = 0; i < waitList.length; i++)
+       {
+            waitingQueueListModel.add(i, waitList[i]);
+       }
+    }//GEN-LAST:event_deliverButtonMouseClicked
+
+    private void deliverButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_deliverButtonActionPerformed
+    {//GEN-HEADEREND:event_deliverButtonActionPerformed
+       // TODO add your handling code here:
+    }//GEN-LAST:event_deliverButtonActionPerformed
+
+    private void deliverByPriorityButtonMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_deliverByPriorityButtonMouseClicked
+    {//GEN-HEADEREND:event_deliverByPriorityButtonMouseClicked
+       if (waitingQueueListModel.isEmpty()){return;}
+
+       backEndManager.deliverMovieByPrioirity();
+       atHomeListModel.clear();
+       waitingQueueListModel.clear();
+       Movie[] waitList = backEndManager.getWaitingQueue();
+       Movie[] homeList = backEndManager.getatHomeQueue();
+
+       for (int i = 0; i < homeList.length; i++)
+       {
+            atHomeListModel.add(i, homeList[i]);
+       }
+
+       for (int i = 0; i < waitList.length; i++)
+       {
+            waitingQueueListModel.add(i, waitList[i]);
+       }
+    }//GEN-LAST:event_deliverByPriorityButtonMouseClicked
+
+    private void sendBackButtonMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_sendBackButtonMouseClicked
+    {//GEN-HEADEREND:event_sendBackButtonMouseClicked
+          if (waitingQueueListModel.isEmpty()){return;}
+
+       backEndManager.sendMovieBack();
+       atHomeListModel.clear();
+       Movie[] homeList = backEndManager.getatHomeQueue();
+
+       for (int i = 0; i < homeList.length; i++)
+       {
+            atHomeListModel.add(i, homeList[i]);
+       }
+    }//GEN-LAST:event_sendBackButtonMouseClicked
+
     /**
     * @param args the command line arguments
     */
@@ -798,18 +1004,14 @@ public class GuiFrame extends javax.swing.JFrame {
     }
 
    // Variables declaration - do not modify//GEN-BEGIN:variables
-   private javax.swing.JButton jButton1;
-   private javax.swing.JButton jButton2;
-   private javax.swing.JButton jButton3;
-   private javax.swing.JButton jButton4;
-   private javax.swing.JComboBox jComboBox1;
+   private javax.swing.JList atHomeList;
+   private javax.swing.JButton deliverButton;
+   private javax.swing.JButton deliverByPriorityButton;
    private javax.swing.JLabel jLabel1;
    private javax.swing.JLabel jLabel2;
    private javax.swing.JLabel jLabel3;
    private javax.swing.JLabel jLabel4;
    private javax.swing.JLabel jLabel5;
-   private javax.swing.JList jList2;
-   private javax.swing.JList jList4;
    private javax.swing.JPanel jPanel1;
    private javax.swing.JPanel jPanel2;
    private javax.swing.JPanel jPanel3;
@@ -822,7 +1024,6 @@ public class GuiFrame extends javax.swing.JFrame {
    private javax.swing.JScrollPane jScrollPane3;
    private javax.swing.JScrollPane jScrollPane4;
    private javax.swing.JSeparator jSeparator1;
-   private javax.swing.JTextField jTextField1;
    private javax.swing.JList libraryList;
    private javax.swing.ButtonGroup librarySortRadioGroup;
    private javax.swing.JRadioButton normalOrderRadioButton;
@@ -831,6 +1032,11 @@ public class GuiFrame extends javax.swing.JFrame {
    private javax.swing.JRadioButton priorityHighRadioButton;
    private javax.swing.JRadioButton priorityLowRadioButton;
    private javax.swing.JRadioButton priorityMediumRadioButton;
+   private javax.swing.JButton searchButton;
+   private javax.swing.JComboBox searchByBox;
+   private javax.swing.JList searchList;
+   private javax.swing.JTextField searchTextField;
+   private javax.swing.JButton sendBackButton;
    private javax.swing.JRadioButton sortByActorRadioButton;
    private javax.swing.JRadioButton sortByDirectorRadioButton;
    private javax.swing.JRadioButton sortByGenreRadioButton;
