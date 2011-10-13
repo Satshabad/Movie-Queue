@@ -107,7 +107,6 @@ public class MovieQueue
 
          int i = 0;
          while(!cloneOfP.isEmpty()){
-            System.out.println();
             movieList[i] = cloneOfP.dequeue();
             i++;        
          }

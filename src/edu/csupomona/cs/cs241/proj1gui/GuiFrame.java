@@ -60,8 +60,12 @@ public class GuiFrame extends javax.swing.JFrame {
       sortByDirectorRadioButton = new javax.swing.JRadioButton();
       sortByActorRadioButton = new javax.swing.JRadioButton();
       sortByTitleRadioButton = new javax.swing.JRadioButton();
+      priorityLowRadioButton = new javax.swing.JRadioButton();
+      priorityMediumRadioButton = new javax.swing.JRadioButton();
+      priorityHighRadioButton = new javax.swing.JRadioButton();
       jScrollPane1 = new javax.swing.JScrollPane();
       libraryList = new javax.swing.JList();
+      jLabel5 = new javax.swing.JLabel();
       jPanel5 = new javax.swing.JPanel();
       jLabel2 = new javax.swing.JLabel();
       searchByBox = new javax.swing.JComboBox();
@@ -69,10 +73,6 @@ public class GuiFrame extends javax.swing.JFrame {
       searchButton = new javax.swing.JButton();
       jScrollPane2 = new javax.swing.JScrollPane();
       searchList = new javax.swing.JList();
-      jLabel5 = new javax.swing.JLabel();
-      priorityLowRadioButton = new javax.swing.JRadioButton();
-      priorityMediumRadioButton = new javax.swing.JRadioButton();
-      priorityHighRadioButton = new javax.swing.JRadioButton();
       jSeparator1 = new javax.swing.JSeparator();
       jPanel2 = new javax.swing.JPanel();
       jPanel6 = new javax.swing.JPanel();
@@ -89,9 +89,14 @@ public class GuiFrame extends javax.swing.JFrame {
       jScrollPane4 = new javax.swing.JScrollPane();
       atHomeList = new javax.swing.JList();
 
-      setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+      setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+      addWindowListener(new java.awt.event.WindowAdapter() {
+         public void windowClosed(java.awt.event.WindowEvent evt) {
+            formWindowClosed(evt);
+         }
+      });
 
-      jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 14));
+      jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
       jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       jLabel1.setText("MovieLibrary");
 
@@ -131,6 +136,25 @@ public class GuiFrame extends javax.swing.JFrame {
          }
       });
 
+      priorityButtonGroup.add(priorityLowRadioButton);
+      priorityLowRadioButton.setText("LOW");
+      priorityLowRadioButton.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            priorityLowRadioButtonActionPerformed(evt);
+         }
+      });
+
+      priorityButtonGroup.add(priorityMediumRadioButton);
+      priorityMediumRadioButton.setText("MEDIUM");
+      priorityMediumRadioButton.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            priorityMediumRadioButtonActionPerformed(evt);
+         }
+      });
+
+      priorityButtonGroup.add(priorityHighRadioButton);
+      priorityHighRadioButton.setText("HIGH");
+
       javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
       jPanel4.setLayout(jPanel4Layout);
       jPanel4Layout.setHorizontalGroup(
@@ -141,16 +165,26 @@ public class GuiFrame extends javax.swing.JFrame {
                .addComponent(sortByTitleRadioButton))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-               .addComponent(sortByDirectorRadioButton)
+               .addGroup(jPanel4Layout.createSequentialGroup()
+                  .addComponent(sortByDirectorRadioButton)
+                  .addGap(18, 18, 18)
+                  .addComponent(priorityLowRadioButton)
+                  .addGap(18, 18, 18)
+                  .addComponent(priorityMediumRadioButton)
+                  .addGap(18, 18, 18)
+                  .addComponent(priorityHighRadioButton))
                .addComponent(sortByGenreRadioButton))
-            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addContainerGap(9, Short.MAX_VALUE))
       );
       jPanel4Layout.setVerticalGroup(
          jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
          .addGroup(jPanel4Layout.createSequentialGroup()
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                .addComponent(sortByTitleRadioButton)
-               .addComponent(sortByDirectorRadioButton))
+               .addComponent(sortByDirectorRadioButton)
+               .addComponent(priorityLowRadioButton)
+               .addComponent(priorityMediumRadioButton)
+               .addComponent(priorityHighRadioButton))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                .addComponent(sortByActorRadioButton)
@@ -167,25 +201,35 @@ public class GuiFrame extends javax.swing.JFrame {
       });
       jScrollPane1.setViewportView(libraryList);
 
+      jLabel5.setText("Add by Priority:");
+
       javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
       jPanel3.setLayout(jPanel3Layout);
       jPanel3Layout.setHorizontalGroup(
          jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+         .addGroup(jPanel3Layout.createSequentialGroup()
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jLabel5)
+            .addGap(66, 66, 66))
          .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
       );
       jPanel3Layout.setVerticalGroup(
          jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
          .addGroup(jPanel3Layout.createSequentialGroup()
-            .addComponent(jLabel1)
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+               .addComponent(jLabel1)
+               .addGroup(jPanel3Layout.createSequentialGroup()
+                  .addContainerGap()
+                  .addComponent(jLabel5)))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 436, Short.MAX_VALUE))
       );
 
-      jLabel2.setFont(new java.awt.Font("Comic Sans MS", 1, 14));
+      jLabel2.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
       jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       jLabel2.setText("Search Library");
 
@@ -224,62 +268,25 @@ public class GuiFrame extends javax.swing.JFrame {
       });
       jScrollPane2.setViewportView(searchList);
 
-      jLabel5.setText("Add by Priority:");
-
-      priorityButtonGroup.add(priorityLowRadioButton);
-      priorityLowRadioButton.setText("LOW");
-      priorityLowRadioButton.addActionListener(new java.awt.event.ActionListener() {
-         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            priorityLowRadioButtonActionPerformed(evt);
-         }
-      });
-
-      priorityButtonGroup.add(priorityMediumRadioButton);
-      priorityMediumRadioButton.setText("MEDIUM");
-      priorityMediumRadioButton.addActionListener(new java.awt.event.ActionListener() {
-         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            priorityMediumRadioButtonActionPerformed(evt);
-         }
-      });
-
-      priorityButtonGroup.add(priorityHighRadioButton);
-      priorityHighRadioButton.setText("HIGH");
-
       javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
       jPanel5.setLayout(jPanel5Layout);
       jPanel5Layout.setHorizontalGroup(
          jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE)
-         .addGroup(jPanel5Layout.createSequentialGroup()
-            .addContainerGap()
-            .addComponent(jLabel5)
-            .addGap(18, 18, 18)
-            .addComponent(priorityLowRadioButton)
-            .addGap(18, 18, 18)
-            .addComponent(priorityMediumRadioButton)
-            .addGap(18, 18, 18)
-            .addComponent(priorityHighRadioButton)
-            .addContainerGap(117, Short.MAX_VALUE))
-         .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE)
+         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
+         .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
          .addGroup(jPanel5Layout.createSequentialGroup()
             .addComponent(searchByBox, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(searchTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+            .addComponent(searchTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-         .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE)
+         .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
       );
       jPanel5Layout.setVerticalGroup(
          jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
          .addGroup(jPanel5Layout.createSequentialGroup()
             .addComponent(jLabel2)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-               .addComponent(jLabel5)
-               .addComponent(priorityLowRadioButton)
-               .addComponent(priorityMediumRadioButton)
-               .addComponent(priorityHighRadioButton))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGap(27, 27, 27)
             .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -287,7 +294,7 @@ public class GuiFrame extends javax.swing.JFrame {
                .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                .addComponent(searchButton))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE))
       );
 
       javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -295,14 +302,15 @@ public class GuiFrame extends javax.swing.JFrame {
       jPanel1Layout.setHorizontalGroup(
          jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
          .addGroup(jPanel1Layout.createSequentialGroup()
-            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addContainerGap())
       );
       jPanel1Layout.setVerticalGroup(
          jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
          .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
       );
 
       jLabel3.setFont(new java.awt.Font("Comic Sans MS", 1, 14));
@@ -377,7 +385,7 @@ public class GuiFrame extends javax.swing.JFrame {
                .addComponent(normalOrderRadioButton)
                .addComponent(priorityOrderRadioButton))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE))
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE))
       );
 
       jLabel4.setFont(new java.awt.Font("Comic Sans MS", 1, 14));
@@ -416,7 +424,7 @@ public class GuiFrame extends javax.swing.JFrame {
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(sendBackButton)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE))
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE))
       );
 
       javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -689,13 +697,11 @@ public class GuiFrame extends javax.swing.JFrame {
        backEndManager.deliverMovie();
        atHomeListModel.clear();
        waitingQueueListModel.clear();
-       Movie[] waitList = backEndManager.getWaitingQueue();
+       Movie[] waitList;
+       if(normalOrderRadioButton.isSelected()){waitList = backEndManager.getWaitingQueue();}
+       else{waitList = backEndManager.getWaitingQueueByPriority();}
        Movie[] homeList = backEndManager.getatHomeQueue();
 
-       for (Movie movie : waitList)
-       {
-          System.out.println(movie);
-       }
 
        for (int i = 0; i < homeList.length; i++)
        {
@@ -712,26 +718,38 @@ public class GuiFrame extends javax.swing.JFrame {
     {//GEN-HEADEREND:event_deliverButtonActionPerformed
        // TODO add your handling code here:
     }//GEN-LAST:event_deliverButtonActionPerformed
-
+    
+    private void updateWaitListView(){
+       
+       waitingQueueListModel.clear();
+       Movie[] waitList;
+       if(normalOrderRadioButton.isSelected()){waitList = backEndManager.getWaitingQueue();}
+       else{waitList = backEndManager.getWaitingQueueByPriority();}
+       for (int i = 0; i < waitList.length; i++)
+       {
+            waitingQueueListModel.add(i, waitList[i]);
+       }
+    }
+    
+    private void updateHomeListView(){
+       atHomeListModel.clear();
+       Movie[] homeList = backEndManager.getatHomeQueue();
+       for (int i = 0; i < homeList.length; i++)
+       {
+            atHomeListModel.add(i, homeList[i]);
+       }
+    }
+    
     private void deliverByPriorityButtonMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_deliverByPriorityButtonMouseClicked
     {//GEN-HEADEREND:event_deliverByPriorityButtonMouseClicked
        if (waitingQueueListModel.isEmpty()){return;}
 
        backEndManager.deliverMovieByPrioirity();
-       atHomeListModel.clear();
-       waitingQueueListModel.clear();
-       Movie[] waitList = backEndManager.getWaitingQueue();
-       Movie[] homeList = backEndManager.getatHomeQueue();
+       updateHomeListView();
+       updateWaitListView();
+       
 
-       for (int i = 0; i < homeList.length; i++)
-       {
-            atHomeListModel.add(i, homeList[i]);
-       }
-
-       for (int i = 0; i < waitList.length; i++)
-       {
-            waitingQueueListModel.add(i, waitList[i]);
-       }
+      
     }//GEN-LAST:event_deliverByPriorityButtonMouseClicked
 
     private void sendBackButtonMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_sendBackButtonMouseClicked
@@ -759,6 +777,11 @@ public class GuiFrame extends javax.swing.JFrame {
             waitingQueueListModel.add(i, movieList[i]);
        }
     }//GEN-LAST:event_normalOrderRadioButtonMouseClicked
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowClosed
+    {//GEN-HEADEREND:event_formWindowClosed
+       System.out.println("here");
+    }//GEN-LAST:event_formWindowClosed
 
     /**
     * @param args the command line arguments

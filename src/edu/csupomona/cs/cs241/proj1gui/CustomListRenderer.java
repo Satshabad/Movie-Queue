@@ -25,7 +25,7 @@ public class CustomListRenderer implements ListCellRenderer {
         boolean isSelected, boolean cellHasFocus) {
 
         Movie theMovie = (Movie) value;
-        JTextArea renderer = new JTextArea(6,10);
+        JTextArea renderer = new JTextArea(7,10);
         renderer.setWrapStyleWord(true);
         renderer.setLineWrap(true);
         renderer.addMouseListener(null);

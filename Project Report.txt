@@ -2,6 +2,14 @@ Description
 
 Approach
 
+	Overall: I programmed this software bottom up because I knew we needed to use Queues, PrioirtyQueues, Movies, and Heap sort.
+	So I started with implementing those objects fully, testing along the way and creating modular code. After the main building 
+	blocks were done I started to abstract them with layer upon layer of classes that would piece together each part of the program
+	so that each class knows nothing of the object it held, only the functions it is allowed to call. I tried to complete the back 
+	end of the program in full before I started on the GUI so I could make it flexible enough to adapt to any GUI that i decided to 
+	use. Eventually I went with a swing GUI but it would be easy to replace that with a text based UI instead. THats why I didn't write
+	a text based UI, I knew that if I needed to at the last minute it would be doable.
+
 	Queue and MyQueue: I wanted to make my queues as simple as possible to implement so I 
 	could get started on the bigger project so I implemented it as an unbounded circular array.
 	I let the caller specify the number of expected elements to cut down on queue expanding run time.
@@ -27,7 +35,11 @@ Approach
 	look at the MovieQueue class you can see how simple it is. it push all logic to the work horse of the queues.
 	the methods in MovieQueue directly relate to the function of the end program but are completely decoupled from 
 	any view. There are methods for displaying the queues that turn the queues into array form for simplicity in the GUI.
-	The caller is expected to call the display methods right after enqueueing or dequeueing elements
+	The caller is expected to call the display methods right after enqueueing or dequeueing elements. I needed to implement 
+	a deep copier class in order to correctly display the queues as a series of arrays, so I used a static method called copy 
+	and instead of recursivly reaching into the object and copyied every single queue, object, array, value, and field, I decided
+	to serialize the whole thing and then deserialize it which creates and exact copy of the object. It was also convient becuase 
+	my objects mostly all implement serialize already.
 	
 	FileManager: I decided to create one place to have methods that deal with files, this is it. This class helps keep 
 	the tedious file writing and reading from the main parts of the program and it ensures that that any files opened 
@@ -55,6 +67,22 @@ Approach
 	for actors and once for everything else. All of the sort and search methods return an array of Movies so the caller never knows about the 
 	internal shellclass that wraps the movie and tag. I plan for my UI to be a series of constantly refreshing displays of Movie arrays, that is why
 	I return an array of Movies.
+	
+	MovieSystemManager: I wanted to have one top class to abstract all user functions so that implementing any GUI would be flexible and easy. MovieSysytemManager
+	takes care of making sure that all functions are handled through one class. The MSM contains the movie library and the queue system, and has functions
+	for searching that library and enqueuing and dequeueing movies. All data is held in the back end and the MSM relays that data using arrays that represnt 
+	the queues and libraries that way the GUI has no way of directly modifying the data in the back end which could potentially lead to data corruption.
+	This complete separation from data and UI gives the software the flexibility to implement multiple UI even at the same time while having none interfere
+	with each other. 
+	
+	GUI: I tryed to use a swing plugin for eclipse but gave up soon after I tried the netbeans gui builder. The netbeans gui builder was simple and easy to use and
+	hook up my functions with the buttons and displays. I tryed to make my UI as flexible and intuitive as possible. there are 4 displays(search, library, waiting 
+    queue, and home queue). The user all ways must add a priority to the movie they add but may ignore it when getting the movie sent to them by clicking deliver 
+    instead of deliver by priority. My program assumes a pay to play buisness model so it allows the user to add the same movie infinite amount of times because 
+    every time they add a movie they pay for it and eventually if they add it enough the company using the software will make more dvd's for this person. 
+	
+	Movie: My Movie object consists of a Title, Director, Genre, and three actors. It is serializeable.
+	
 	
 
 Test Cases
