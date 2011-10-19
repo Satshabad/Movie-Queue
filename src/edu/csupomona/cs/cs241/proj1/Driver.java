@@ -18,7 +18,6 @@
 
 package edu.csupomona.cs.cs241.proj1;
 
-import java.io.IOException;
 
 import edu.csupomona.cs.cs241.proj1gui.GuiFrame;
 

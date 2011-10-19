@@ -125,7 +125,6 @@ public class MyQueue<E extends Serializable> implements Serializable, Queue<E> {
             return null;
         }
         head = (head + 1) % capacity;
-        @SuppressWarnings("unchecked")
         E temp = (E) array[head];
         size--;
         return temp;
