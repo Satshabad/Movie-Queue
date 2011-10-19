@@ -38,13 +38,15 @@ public class MovieSystemManager
       theMovieQueue.sendMovieHome();
    }
    
-   public Movie returnMovie(){
+   public Movie returnMovie()
+   {
       return theMovieQueue.returnMovie();
    }
-   
+
    /**
     * @param c
-    * @return the list of movies in correct order or null if input was not {@code w} {@code h} {@code t} {@code d} {@code g} or {@code m}
+    * @return the list of movies in correct order or null if input was not
+    *         {@code w} {@code h} {@code t} {@code d} {@code g} or {@code m}
     */
    private Movie[] getMoviesForDisplay(char c)
    {

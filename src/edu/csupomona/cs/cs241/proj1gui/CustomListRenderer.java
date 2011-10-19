@@ -29,7 +29,8 @@ public class CustomListRenderer implements ListCellRenderer {
         renderer.setWrapStyleWord(true);
         renderer.setLineWrap(true);
         renderer.addMouseListener(null);
-        renderer.append(theMovie.getTitle() +"\n");
+         renderer.append(theMovie.getTitle() +"\n");
+      
         renderer.append("Director: " +theMovie.getDirector() +"\n");
         renderer.append("Actors: " + theMovie.getActorOne() +", "
                         + theMovie.getActorTwo() + ", "

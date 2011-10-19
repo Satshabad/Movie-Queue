@@ -10,11 +10,14 @@
  */
 
 package edu.csupomona.cs.cs241.proj1gui;
+import java.awt.event.WindowListener;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import edu.csupomona.cs.cs241.proj1.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JList;
 /**
  *
@@ -37,6 +40,18 @@ public class GuiFrame extends javax.swing.JFrame {
        priorityMediumRadioButton.doClick();
        sortByTitleRadioButton.doClick();
        normalOrderRadioButton.setSelected(true);
+       updateQueueViews();
+       this.addWindowListener(new WindowAdapter() {
+
+          public void windowClosing(WindowEvent evt) {
+             backEndManager.exit(0);
+
+
+            }
+
+
+
+       });
     }
    
 
@@ -89,14 +104,14 @@ public class GuiFrame extends javax.swing.JFrame {
       jScrollPane4 = new javax.swing.JScrollPane();
       atHomeList = new javax.swing.JList();
 
-      setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+      setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
       addWindowListener(new java.awt.event.WindowAdapter() {
          public void windowClosed(java.awt.event.WindowEvent evt) {
             formWindowClosed(evt);
          }
       });
 
-      jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+      jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 14));
       jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       jLabel1.setText("MovieLibrary");
 
@@ -229,7 +244,7 @@ public class GuiFrame extends javax.swing.JFrame {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 436, Short.MAX_VALUE))
       );
 
-      jLabel2.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+      jLabel2.setFont(new java.awt.Font("Comic Sans MS", 1, 14));
       jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       jLabel2.setText("Search Library");
 
@@ -680,14 +695,9 @@ public class GuiFrame extends javax.swing.JFrame {
 
     private void priorityOrderRadioButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_priorityOrderRadioButtonActionPerformed
     {//GEN-HEADEREND:event_priorityOrderRadioButtonActionPerformed
-       waitingQueueListModel.clear();
-       Movie[] movieList = backEndManager.getWaitingQueueByPriority();
-
-
-       for (int i = 0; i < movieList.length; i++)
-       {
-            waitingQueueListModel.add(i, movieList[i]);
-       }
+       priorityOrderRadioButton.setSelected(true);
+       normalOrderRadioButton.setSelected(false);
+       updateQueueViews();
     }//GEN-LAST:event_priorityOrderRadioButtonActionPerformed
 
     private void deliverButtonMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_deliverButtonMouseClicked
@@ -695,58 +705,38 @@ public class GuiFrame extends javax.swing.JFrame {
        if (waitingQueueListModel.isEmpty()){return;}
 
        backEndManager.deliverMovie();
-       atHomeListModel.clear();
-       waitingQueueListModel.clear();
-       Movie[] waitList;
-       if(normalOrderRadioButton.isSelected()){waitList = backEndManager.getWaitingQueue();}
-       else{waitList = backEndManager.getWaitingQueueByPriority();}
-       Movie[] homeList = backEndManager.getatHomeQueue();
-
-
-       for (int i = 0; i < homeList.length; i++)
-       {
-            atHomeListModel.add(i, homeList[i]);
-       }
-
-       for (int i = 0; i < waitList.length; i++)
-       {
-            waitingQueueListModel.add(i, waitList[i]);
-       }
+       updateQueueViews();
     }//GEN-LAST:event_deliverButtonMouseClicked
 
     private void deliverButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_deliverButtonActionPerformed
     {//GEN-HEADEREND:event_deliverButtonActionPerformed
        // TODO add your handling code here:
     }//GEN-LAST:event_deliverButtonActionPerformed
-    
-    private void updateWaitListView(){
-       
+
+    private void updateQueueViews(){
+
+       atHomeListModel.clear();
        waitingQueueListModel.clear();
        Movie[] waitList;
        if(normalOrderRadioButton.isSelected()){waitList = backEndManager.getWaitingQueue();}
        else{waitList = backEndManager.getWaitingQueueByPriority();}
+       Movie[] homeList = backEndManager.getatHomeQueue();
        for (int i = 0; i < waitList.length; i++)
        {
             waitingQueueListModel.add(i, waitList[i]);
        }
-    }
-    
-    private void updateHomeListView(){
-       atHomeListModel.clear();
-       Movie[] homeList = backEndManager.getatHomeQueue();
        for (int i = 0; i < homeList.length; i++)
        {
             atHomeListModel.add(i, homeList[i]);
        }
     }
-    
+
     private void deliverByPriorityButtonMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_deliverByPriorityButtonMouseClicked
     {//GEN-HEADEREND:event_deliverByPriorityButtonMouseClicked
        if (waitingQueueListModel.isEmpty()){return;}
 
        backEndManager.deliverMovieByPrioirity();
-       updateHomeListView();
-       updateWaitListView();
+       updateQueueViews();
        
 
       
@@ -757,31 +747,24 @@ public class GuiFrame extends javax.swing.JFrame {
           if (atHomeListModel.isEmpty()){return;}
 
        backEndManager.sendMovieBack();
-       atHomeListModel.clear();
-       Movie[] homeList = backEndManager.getatHomeQueue();
-
-       for (int i = 0; i < homeList.length; i++)
-       {
-            atHomeListModel.add(i, homeList[i]);
-       }
+       updateQueueViews();
     }//GEN-LAST:event_sendBackButtonMouseClicked
 
     private void normalOrderRadioButtonMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_normalOrderRadioButtonMouseClicked
     {//GEN-HEADEREND:event_normalOrderRadioButtonMouseClicked
-       waitingQueueListModel.clear();
-       Movie[] movieList = backEndManager.getWaitingQueue();
-
-
-       for (int i = 0; i < movieList.length; i++)
-       {
-            waitingQueueListModel.add(i, movieList[i]);
-       }
+       normalOrderRadioButton.setSelected(true);
+       priorityOrderRadioButton.setSelected(false);
+       updateQueueViews();
     }//GEN-LAST:event_normalOrderRadioButtonMouseClicked
 
     private void formWindowClosed(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowClosed
     {//GEN-HEADEREND:event_formWindowClosed
        System.out.println("here");
     }//GEN-LAST:event_formWindowClosed
+
+
+
+
 
     /**
     * @param args the command line arguments
