@@ -10,6 +10,8 @@
  */
 
 package edu.csupomona.cs.cs241.proj1gui;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,6 +39,15 @@ public class GuiFrame extends javax.swing.JFrame {
        priorityMediumRadioButton.doClick();
        sortByTitleRadioButton.doClick();
        normalOrderRadioButton.setSelected(true);
+       
+       this.addWindowListener(new WindowAdapter() {
+
+           public void windowClosing(WindowEvent evt) {
+               backEndManager.exit(0);
+
+           }
+       });
+
     }
    
 
