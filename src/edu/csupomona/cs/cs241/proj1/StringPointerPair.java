@@ -4,42 +4,74 @@
 package edu.csupomona.cs.cs241.proj1;
 
 /**
+ * This class is used to hold {@link Movie} attributes and links to their
+ * respective {@link Movie}.
+ * 
  * @author Satshabad
- *
+ * 
  */
-public class StringPointerPair implements Comparable<StringPointerPair>
-{
-   private String theField;
-   private Movie theMovie;
-   
-   public StringPointerPair(String s, Movie m)
-   {
-      theField = s;
-      theMovie = m;
-   }
+public class StringPointerPair implements Comparable<StringPointerPair> {
+    /**
+     * The movie's attribute
+     */
+    private String theField;
 
-   /**
-    * @return the theField
-    */
-   public String getTheField()
-   {
-      return theField;
-   }
+    /**
+     * The attribute's Movie
+     */
+    private Movie theMovie;
 
-   /**
-    * @return the theMovie
-    */
-   public Movie getTheMovie()
-   {
-      return theMovie;
-   }
+    /**
+     * This creates an instance of this class with the passed fields
+     * 
+     * @param s
+     *            the {@link Movie}'s attribute (e.g. title)
+     * @param m
+     *            a reference to the attribute's correct movie
+     */
+    public StringPointerPair(String s, Movie m) {
+        theField = s;
+        theMovie = m;
+    }
 
-   @Override
-   public int compareTo(StringPointerPair o)
-   {
-      if (theField.equalsIgnoreCase(o.getTheField())){return 0;}
-      if (theField.compareToIgnoreCase(getTheField()) > 0){return 1;}
-      if (theField.compareToIgnoreCase(o.getTheField()) < 0){return -1;}
-      return 0;
-   }
+    /**
+     * Gets the Movie's attribute
+     * 
+     * @pre
+     * @post
+     * @return the attribute
+     */
+    public String getTheField() {
+        return theField;
+    }
+
+    /**
+     * Gets a reference to the Movie
+     * 
+     * @pre
+     * @post
+     * @return the theMovie
+     */
+    public Movie getTheMovie() {
+        return theMovie;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Comparable#compareTo(java.lang.Object)
+     */
+    @Override
+    public int compareTo(StringPointerPair o) {
+        if (theField.equalsIgnoreCase(o.getTheField())) {
+            return 0;
+        }
+        if (theField.compareToIgnoreCase(getTheField()) > 0) {
+            return 1;
+        }
+        if (theField.compareToIgnoreCase(o.getTheField()) < 0) {
+            return -1;
+        }
+        return 0;
+    }
 }
