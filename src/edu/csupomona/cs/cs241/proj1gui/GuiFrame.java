@@ -39,7 +39,8 @@ public class GuiFrame extends javax.swing.JFrame {
        priorityMediumRadioButton.doClick();
        sortByTitleRadioButton.doClick();
        normalOrderRadioButton.setSelected(true);
-       
+       updateHomeListView();
+       updateWaitListView();
        this.addWindowListener(new WindowAdapter() {
 
            public void windowClosing(WindowEvent evt) {
