@@ -4,10 +4,18 @@
  *
  * Programming Assignment 1
  *
- * This assignment is to create a netflix like movie queue and give it added functionality
- *
+ * This assignment is to create a netflix like movie
+ * 
+ * queue by which the user can sort search a
+ * library of movies as well as add movies to
+ * their queue by priority rather than just
+ * FIFO order. They may freely switch
+ * between FIFO and priority order. The
+ * Queues are persistent and the library is extensible.
+ * 
  * Satshabad Khalsa  
  */
+
 package edu.csupomona.cs.cs241.proj1;
 
 import java.io.IOException;
