@@ -1,4 +1,4 @@
-Description
+
 
 Approach
 
@@ -6,8 +6,8 @@ Approach
 	So I started with implementing those objects fully, testing along the way and creating modular code. After the main building 
 	blocks were done I started to abstract them with layer upon layer of classes that would piece together each part of the program
 	so that each class knows nothing of the object it held, only the functions it is allowed to call. I tried to complete the back 
-	end of the program in full before I started on the GUI so I could make it flexible enough to adapt to any GUI that i decided to 
-	use. Eventually I went with a swing GUI but it would be easy to replace that with a text based UI instead. THats why I didn't write
+	end of the program in full before I started on the GUI so I could make it flexible enough to adapt to any GUI that I decided to 
+	use. Eventually I went with a swing GUI but it would be easy to replace that with a text based UI instead. That's why I didn't write
 	a text based UI, I knew that if I needed to at the last minute it would be doable.
 
 	Queue and MyQueue: I wanted to make my queues as simple as possible to implement so I 
@@ -23,7 +23,7 @@ Approach
 	in both memory space and time (to keep persistent data in two separate places every time an element 
 	is dequeued, either by priority mode or by normal mode, the element in a queue must be dequeued and 
 	compared then pushed onto a stack one by one until a match is found) but my method is modular and 
-	does not violate the rule of demeter (no objects reach way into other objects they didn't create 
+	does not violate the rule of Demeter (no objects reach way into other objects they didn't create 
 	to call methods that have nothing to do with them). With my PriorityQueue switching between priority 
 	and normal mode is seamless. It's just a different view of the same data. I realize I probably could 
 	have made a regular Priority Queue and used it in this class in combo with a normal queue but having 
@@ -31,19 +31,19 @@ Approach
 	of dumping all the elements out looking for the right one, we already know which sub-queue the element is 
 	in and can start looking directly there.
 	
-	MovieQueue: I wanted the higher level functions of this project to be as simple as possible. if you take a 
-	look at the MovieQueue class you can see how simple it is. it push all logic to the work horse of the queues.
+	MovieQueue: I wanted the higher level functions of this project to be as simple as possible. If you take a 
+	look at the MovieQueue class you can see how simple it is. It push all logic to the work horse of the queues.
 	the methods in MovieQueue directly relate to the function of the end program but are completely decoupled from 
 	any view. There are methods for displaying the queues that turn the queues into array form for simplicity in the GUI.
 	The caller is expected to call the display methods right after enqueueing or dequeueing elements. I needed to implement 
 	a deep copier class in order to correctly display the queues as a series of arrays, so I used a static method called copy 
-	and instead of recursivly reaching into the object and copyied every single queue, object, array, value, and field, I decided
-	to serialize the whole thing and then deserialize it which creates and exact copy of the object. It was also convient becuase 
+	and instead of recursively reaching into the object and copied every single queue, object, array, value, and field, I decided
+	to serialize the whole thing and then deserialize it which creates and exact copy of the object. It was also convenient because 
 	my objects mostly all implement serialize already.
 	
 	FileManager: I decided to create one place to have methods that deal with files, this is it. This class helps keep 
 	the tedious file writing and reading from the main parts of the program and it ensures that that any files opened 
-	will be closed. All saved states of objects also go through here to make it easier to keep persistent data. also having
+	will be closed. All saved states of objects also go through here to make it easier to keep persistent data. Also having
 	one place that writes to files keeps the files from being corrupted. I decided to add the persistent data functionality 
 	through Serializable. For simplicity's sake I have created very specific methods for saving the exact thing I want to save 
 	rather than adhering to more modular code. This allows the upper classes that use this to know nothing of file names and such 
@@ -57,29 +57,29 @@ Approach
 	It's heap sort, it's pretty awesome in and of it's self. I could not implement the fast version. :(
 	
 	MovieLibrary: It might be a little heavy but the MovieLibray contains the list of all movies AND the methods involving the searching 
-	of them. The uniqueness of my project is that i abstracted the search feature by making a new class called StringPointerPair which 
-	has member variables a String and a pointer to it's relevant movie. for instance the directorList contains an array of StringPointerPairs
+	of them. The uniqueness of my project is that I abstracted the search feature by making a new class called StringPointerPair which 
+	has member variables a String and a pointer to it's relevant movie. For instance the directorList contains an array of StringPointerPairs
 	which all contain as a field the name of the director and a link to the movie they directed. I did this at first so I could search for 
 	actors and bring up all the movies they had stared in at once instead of just one by putting on StringPointerPair instance for each actor 
 	credit in all the movies in one array and then search that list for the actor, that way when several instances of the actors name came up it
 	meant that each of the instances pointed to different movies. After a bit of though though I figured to do this will all relevant tags 
-	(actor, director genre ect) that way i could abstract the search function and make it generic instead of having to repeat it once just 
+	(actor, director genre etc) that way I could abstract the search function and make it generic instead of having to repeat it once just 
 	for actors and once for everything else. All of the sort and search methods return an array of Movies so the caller never knows about the 
 	internal shellclass that wraps the movie and tag. I plan for my UI to be a series of constantly refreshing displays of Movie arrays, that is why
 	I return an array of Movies.
 	
 	MovieSystemManager: I wanted to have one top class to abstract all user functions so that implementing any GUI would be flexible and easy. MovieSysytemManager
 	takes care of making sure that all functions are handled through one class. The MSM contains the movie library and the queue system, and has functions
-	for searching that library and enqueuing and dequeueing movies. All data is held in the back end and the MSM relays that data using arrays that represnt 
+	for searching that library and enqueuing and dequeueing movies. All data is held in the back end and the MSM relays that data using arrays that represent 
 	the queues and libraries that way the GUI has no way of directly modifying the data in the back end which could potentially lead to data corruption.
 	This complete separation from data and UI gives the software the flexibility to implement multiple UI even at the same time while having none interfere
 	with each other. 
 	
-	GUI: I tryed to use a swing plugin for eclipse but gave up soon after I tried the netbeans gui builder. The netbeans gui builder was simple and easy to use and
-	hook up my functions with the buttons and displays. I tryed to make my UI as flexible and intuitive as possible. there are 4 displays(search, library, waiting 
+	GUI: I tried to use a swing plugin for eclipse but gave up soon after I tried the netbeans GUI builder. The netbeans GUI builder was simple and easy to use and
+	hook up my functions with the buttons and displays. I tried to make my UI as flexible and intuitive as possible. There are 4 displays(search, library, waiting 
     queue, and home queue). The user all ways must add a priority to the movie they add but may ignore it when getting the movie sent to them by clicking deliver 
-    instead of deliver by priority. My program assumes a pay to play buisness model so it allows the user to add the same movie infinite amount of times because 
-    every time they add a movie they pay for it and eventually if they add it enough the company using the software will make more dvd's for this person. 
+    instead of deliver by priority. My program assumes a pay to play business model so it allows the user to add the same movie infinite amount of times because 
+    every time they add a movie they pay for it and eventually if they add it enough the company using the software will make more DVD's for this person. 
 	
 	Movie: My Movie object consists of a Title, Director, Genre, and three actors. It is serializeable.
 	
@@ -116,7 +116,7 @@ Key: Working As Expected = WAE
 				     10/08/2010. WAE.
 				    
 			Case 2: tested dequeue by priority operation,
-					tried to dequeue an empty queue, null was returned. filled up a queue and removed
+					tried to dequeue an empty queue, null was returned. Filled up a queue and removed
 					all elements, then tried to remove one more, null was returned. Added elements of 
 					different priorities in different orders, when dequeued all elements came out in 
 					order of priority and then by FIFO style. 10/06/2011 WAE.
@@ -128,11 +128,11 @@ Key: Working As Expected = WAE
 			Case 4: tested dequeue normal mode,
 					tried to dequeue an empty queue, null was returned. 10/06/2011. WAE.
 					
-			Case 5. tested enqueue by priority and dequeue normally,
+			Case 5. Tested enqueue by priority and dequeue normally,
 					enqueued several elements by varying priorities and then dequeued normally
 					all elements came out in order stored regardless of priority. 10/06/2011. WAE
 					
-			Case 6. tested enqueue with no priority and then enqueued by priority and dequeued by priority,
+			Case 6. Tested enqueue with no priority and then enqueued by priority and dequeued by priority,
 					enqueued several elements by priority and also without a specified priority then 
 					dequeued them all by priority. They call came out in correct order. 10/06/2011. WAE.
 				
@@ -150,7 +150,165 @@ Key: Working As Expected = WAE
 			Case 3: tested save and retrieve methods,
 					created a queue and saved it, ended the program, opened the queue and appended it.
 					10/07/2011. WAE.
+			
+			
+	USE CASES
+	
+	
+		1. User opens program for the first time.
+			expected: program opens and show movie list. Pass.
+			
+		2. User searches for full string match of title.
+			expected: target movie appears in search results box. Passed
+			
+		3. User searches for full string match of actor.
+			expected: target movie appears in search results box. Passed
+			
+		4. User searches for full string match of director.
+			expected: target movie appears in search results box. Passed
+			
+		5. User searches for full string match of genre.
+			expected: target movie appears in search results box. Passed
 					
-					
+		6. User searches for partial string of any attribute.
+			expected: all movies in which the attribute searched by contain 
+			the string appear in the search result box. Passed
+			
+		7. User searches for an empty string.
+			expected: Search box list is unchanged. Passed
+			
+		8. User clicks the "Sort by Title" button.
+			expected: All the movies in the Movie Library list are sorted 
+			alphabetically by title. Passed
+			
+		9. User clicks the "Sort by Main Actor" button.
+			expected: All the movies in the Movie Library list are sorted 
+			alphabetically by main actor. Passed
+			
+		10. User clicks the "Sort by Director" button.
+			expected: All the movies in the Movie Library list are sorted 
+			alphabetically by director. Passed
+			
+		11. User clicks the "Sort by Genre" button.
+			expected: All the movies in the Movie Library list are sorted 
+			alphabetically by genre. Passed
+			
+		12. User double clicks on movie search result with medium priority selected.
+			expected: Movie is added to Movie Queue list. Passed
+			
+		13. User double clicks on movie search result with low priority selected.
+			expected: Movie is added to Movie Queue list. Passed
+			
+		14. User double clicks on movie search result with high priority selected.
+			expected: Movie is added to Movie Queue list. Passed
+		
+		15. User double clicks on movie search result after already adding one movie at any priority
+			expected: Movie is added to Movie Queue list. Passed
+			
+		16. User clicks "Low Priority" button.
+			expected: "Low Priority" button is selected. Passed
+			
+		17. User clicks "Medium Priority" button.
+			expected: "Medium Priority" button is selected. Passed
+			
+		18. User clicks "High Priority" button.
+			expected: "High Priority" button is selected. Passed
+			
+		19. User double clicks on movie in library with medium priority selected.
+			expected: Movie is added to Movie Queue list. Passed
+			
+		20. User double clicks on movie in library with low priority selected.
+			expected: Movie is added to Movie Queue list. Passed
+			
+		21. User double clicks on movie in library with high priority selected.
+			expected: Movie is added to Movie Queue list. Passed
+		
+		22. User double clicks on movie in library after already adding one movie at any priority
+			expected: Movie is added to Movie Queue list. Passed
+			
+		23. User adds movies at all medium priority and sorts by priority
+			expected: No change displayed. Passed
+			
+		24. User adds movies at all low priority and sorts by priority
+			expected: No change displayed. Passed
+		
+		25. User adds movies at all high priority and sorts by priority
+			expected: No change displayed. Passed
+			
+		26. User adds several movies all at same priority and clicks deliver until all movies are delivered.
+			expected: movies disappear from the movie queue and appear in the home queue in the order they 
+			were originally added. Passed
+			
+		27. User clicks "deliver" button when there are no movies in the Queue.
+			expected: no change. Passed
+		
+		28. User clicks "deliver by priority" button when there are no movies in the Queue.
+			expected: no change. Passed
+			
+		29. User adds movies of varying priorities while "Normal Order" button is selected.
+			expected: movies are displayed in the order they are added. Passed
+			
+		30. User adds movies of varying priorities while "Priority Order" button is selected.
+			expected: movies are displayed in the in the order of priority 
+			(high on top, low on bottom). Passed
+			
+		31. User add movies of varying priorities while "Normal Order" button is selected 
+			and then the "Priority Order" button is selected.
+			expected: Queue changes display to show movies by priority. Passed
+			
+		32. User add movies of varying priorities while "Priority Order" button is selected 
+			and then the "Normal Order" button is selected.
+			expected: Queue changes display to show movies by FIFO order. Passed
+			
+		33. User adds movies all of the same priority when "Normal Order" is selected, then clicks "Priority Order"
+			expected: No change in display. Passed
+		
+		34. User adds movies all of the same priority when "Priority Order" is selected, then clicks "Normal Order"
+			expected: No change in display. Passed
+			
+		35. User adds movies of varying priority while "Priority Order" is selected then clicks "deliver By Priority" 
+			as many times as there are movies in the queue
+			expected: All movies disappear from the Queue in the the order of their priority
+		    and appear in the home queue. Passed
+		    
+		36. User adds 3 movies of different priorities with "Priority Order" selected then add one more of any priority
+			expected: the new movie is added behind the other movie of the same priority but above 
+			movies of lower priorities. Passed
+			
+		37. User adds movies of varying priority while "Normal Order" is selected then clicks "deliver By Priority" 
+			as many times as there are movies in the queue
+			expected: All movies disappear from the Queue in the the order of their priority
+		    and appear in the home queue. Passed
+		    
+		38. User adds movies of varying priority while "Priority Order" is selected then clicks "deliver" 
+			as many times as there are movies in the queue
+			expected: All movies disappear from the Queue in FIFO order
+		    and appear in the home queue. Passed
+		
+		39. User clicks "Send Home" button when there are no movies in the home queue
+			expected: no change. Passed
 
-Conclusions
+		40. User clicks "Send Home" button as many time as there are movies in the home queue.
+			expected: movies disappear from the home queue. Passed
+
+Conclusions/Lessons learned
+
+	One thing that was very a big lesson in this project was that if I take the bottom up approach 
+	to developing it can work out, but once I'm done I never want to go back and fix anything or 
+	find any problems. I avoided the big bang approach but even with modular testing put the parts 
+	together can create unexpected errors and then I have to go back and fix all the little things 
+	in each place, which I problematic as the project gets large. Everything in the real world is 
+	designed top bottom, people don't create office chairs for the skyscraper before the building is built.
+	Next time I will definitely attempt to develop top bottom instead. Another lesson I learned is that 
+	debugging can be a pretty difficult as the project gets larger and if ever something is created carelessly
+	or no documented right away the motivation to go back and fix it is almost zero. I also learned the importance 
+	of not only having source control but also making commits small and often that way if I have to go back I don't
+    Lose a ton of work. I finishing commenting and doing some refracting for about 2 hours and then when I tried to
+    Run it It wouldn't, so I had to revert and lost all my changes. That was 2 hours lost and another hour to 
+    do it all over again. I have learned how extremely time consuming it is to work on a major project like this. 
+    I must have spent at least 20 hours on the coding alone, not to mention all the time I spent thinking and 
+    dreaming about how to solve the problem. I now better understand the processes of software development and 
+    how it relates to the data structures that we have been learning about.
+
+
+
