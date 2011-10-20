@@ -18,3 +18,5 @@ Director
 make sure there is only exactly one new line after each movie 
 especially at the end of the file.
 
+The .git repository is made available if you would like to see 
+how the project developed.
