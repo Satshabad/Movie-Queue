@@ -290,6 +290,9 @@ Key: Working As Expected = WAE
 
 		40. User clicks "Send Home" button as many time as there are movies in the home queue.
 			expected: movies disappear from the home queue. Passed
+			
+		41. User adds extra movies to the file movies.txt in the format specified
+			expected: new movies appear in library and act as normal. Passed
 
 Conclusions/Lessons learned
 
