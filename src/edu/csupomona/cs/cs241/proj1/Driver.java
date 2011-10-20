@@ -19,7 +19,6 @@
 package edu.csupomona.cs.cs241.proj1;
 
 
-import edu.csupomona.cs.cs241.proj1gui.GuiFrame;
 
 /**
  * This class executes the GUI which executes the program.
